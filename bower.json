@@ -1,0 +1,23 @@
+{
+  "name": "bower install",
+  "version": "1.0",
+  "homepage": "api.dev",
+  "description": "weather station",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.5",
+    "bootstrap-sass-official": "3.3.4",
+    "angular-ui-router": "^0.2.18",
+    "satellizer": "^0.14.0"
+  },
+  "exportsOverride": {},
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

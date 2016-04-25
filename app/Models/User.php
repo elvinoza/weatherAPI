@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'update_time_min'
     ];
 
     /**
@@ -23,4 +23,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Many to Many relation
+     *
+     * @return Illuminate\Database\Eloquent\Relations\belongToMany
+     */
+    public function posts()
+    {
+        return $this->belongsToMany('App\Models\Station');
+    }
 }

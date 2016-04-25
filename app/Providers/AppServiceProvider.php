@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\StationRepository;
+use App\Services\StationService;
+use App\Models\Station;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+//        $this->app->bind('App\Services\StationService', function($app){
+//            return new StationService($app->make('App\Repositories\StationRepository'));
+//        });
     }
 
     /**
@@ -23,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //$this->app->bind('App\Repositories\IStationRepository', 'App\Repositories\StationRepository');
+//        $this->app->bind('App\Services\StationService', function($app){
+//            return new StationService($app->make('App\Repositories\StationRepository'));
+//        });
+
+        //$this->app->bind('App\Repositories\IStationRepository', 'App\Repositories\StationRepository');
     }
 }
