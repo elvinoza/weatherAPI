@@ -13,16 +13,21 @@ class UserController extends Controller
     public function __construct(UserService $userService)
     {
         $this->middleware('jwt.auth', ['except' => ['authenticate']]);
-        $this->stationService = $userService;
+        $this->userService = $userService;
     }
 
     public function getUser($id)
     {
-        return $this->stationService->getUser($id);
+        return $this->userService->getUser($id);
     }
 
     public function updateUser($id, UpdateUserRequest $request)
     {
-        return $this->stationService->update($id, $request);
+        return $this->userService->update($id, $request);
+    }
+
+    public function getUserStations($id)
+    {
+        return $this->userService->getUserStations($id);
     }
 }

@@ -7,6 +7,8 @@ use App\Models\User;
 interface IUserService
 {
     function getUser($id);
+    function update($user_id, $data);
+    function getUserStations($id);
 }
 
 class UserService implements IUserService
@@ -31,5 +33,11 @@ class UserService implements IUserService
         $user->update_time_min = $data->update_time_min;
         $user->save();
         return $user;
+    }
+
+    public function getUserStations($id)
+    {
+        $user = $this->user->find($id);
+        return $user->stations;
     }
 }

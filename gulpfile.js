@@ -10,7 +10,7 @@ var paths = {
         'public/app/Controllers/AuthController.js',
         'public/app/Controllers/UserController.js',
         'public/app/Controllers/UserDetailsController.js',
-        'public/app/Controllers/StationController.js',
+        'public/app/Controllers/UserStationsController.js',
         'public/app/Services/ApiService.js'
     ]
 };
@@ -37,12 +37,13 @@ gulp.task('scripts', function(){
         'resources/lib/angular/angular.js',
         'resources/lib/angular-ui-router/release/angular-ui-router.js',
         'resources/lib/satellizer/satellizer.js',
+        'resources/lib/angular-flash/dist/angular-flash.js',
         'public/app/app.js',
         'public/app/Services/ApiService.js',
         'public/app/Controllers/AuthController.js',
         'public/app/Controllers/UserController.js',
         'public/app/Controllers/UserDetailsController.js',
-        'public/app/Controllers/StationController.js'
+        'public/app/Controllers/UserStationsController.js'
         ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('public/js'));

@@ -29,8 +29,8 @@ class User extends Authenticatable
      *
      * @return Illuminate\Database\Eloquent\Relations\belongToMany
      */
-    public function posts()
+    public function stations()
     {
-        return $this->belongsToMany('App\Models\Station');
+        return $this->hasMany('App\Models\Station');
     }
 }

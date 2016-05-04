@@ -8,7 +8,8 @@
     "angular": "^1.5.5",
     "bootstrap-sass-official": "3.3.4",
     "angular-ui-router": "^0.2.18",
-    "satellizer": "^0.14.0"
+    "satellizer": "^0.14.0",
+    "angular-flash": "^0.1.14"
   },
   "exportsOverride": {},
   "main": "",
@@ -19,5 +20,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "resolutions": {
+    "angular": "^1.5.5"
+  }
 }

@@ -2,25 +2,29 @@
 
 namespace App\Services;
 
-use App\Repositories\IStationRepository;
-use App\Repositories\StationRepository;
+use App\Models\Station;
 
-class StationService {
-    /**
-     * The StationRepository instance.
-     *
-     * @var App\Repositories\StationRepository
-     */
-    protected $stationRepository;
+interface IStationInterface
+{
+    function getUserStations($id);
+    function getStation($id);
+}
 
-    private $asd;
+class StationService implements IStationInterface{
 
-    public function __constructor(StationRepository $stationRepository){
-        $this->stationRepository = $stationRepository;
+    protected $station;
+
+    public function __constructor(Station $station){
+        $this->station = $station;
     }
 
-    public function kuku()
+    public function getUserStations($id)
     {
-        return dump($this->stationRepository->index());
+        return $this->station->where('user_id', $id);
+    }
+
+    public function getStation($id)
+    {
+        return $this->station->find($id);
     }
 }

@@ -7,12 +7,9 @@
         .controller('AuthController', AuthController);
 
 
-    function AuthController($auth, $state, $http, $rootScope) {
+    function AuthController($auth, $state, $http, $rootScope, flash) {
 
         var vm = this;
-
-        vm.loginError = false;
-        vm.loginErrorText;
 
         vm.login = function() {
 
@@ -29,8 +26,7 @@
 
                 // Handle errors
             }, function(error) {
-                vm.loginError = true;
-                vm.loginErrorText = error.data.error;
+                flash.error = error.data.error;
 
                 // Because we returned the $http.get request in the $auth.login
                 // promise, we can chain the next promise to the end here

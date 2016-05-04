@@ -10,16 +10,16 @@
 
         var baseURL = '/api/';
 
-        this.getStations = function(){
-            return $http.get(baseURL + 'allStations/');
-        };
-
         this.getUser = function(id){
             return $http.get(baseURL + 'user/' + id);
-        }
+        };
 
         this.updateUser = function(user){
             return $http.post(baseURL + 'user/' + user.id, user, { headers: { 'Accept': 'Application/json' }});
-        }
+        };
+
+        this.getUserStations = function(id){
+            return $http.get(baseURL + 'user/stations/' + id);
+        };
     }
 })();

@@ -60,8 +60,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-center">
-                            <li><a ng-class="{ active: isActive('/') }" href="index.html">Home</a></li>
-                            <li><a ng-class="{ active: isActive('/') }" href="about.html">About</a></li>
+                            <li ng-if="authenticated"><a ui-sref-active="active" ui-sref="user">Home</a></li>
+                            <li ng-if="authenticated"><a ui-sref-active="active" ui-sref="userStations({ id: currentUser.id })">Stations</a></li>
                             <li><a href="codes.html">Codes</a></li>
                             <li><a href="index.html">Services</a></li>
                             <li><a href="contact.html">Contact</a></li>

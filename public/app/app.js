@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('app', ['ui.router', 'satellizer'])
+        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive'])
         .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
 
 
@@ -30,10 +30,10 @@
                     templateUrl: '../Views/UserViews/Details.html',
                     controller: 'UserDetailsController as userDetails'
                 })
-                .state('stations', {
-                    url: '/stations',
-                    templateUrl: '../Views/Station.html',
-                    controller: 'StationController as station'
+                .state('userStations', {
+                    url: '/user/stations/:id',
+                    templateUrl: '../Views/StationViews/UserStations.html',
+                    controller: 'UserStationsController as station'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
