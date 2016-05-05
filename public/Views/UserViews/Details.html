@@ -13,12 +13,6 @@
                 <span ng-show="myForm.email.$error.email">Not a valid e-mail address</span>
             </div>
 
-            <div class="form-group">
-                <label>Update time</label>
-                <input type="number" name="time" class="form-control" placeholder="Update time" ng-model="user.update_time_min" required>
-                <span ng-show="myForm.time.$error.number">Not integer</span>
-            </div>
-
             <button class="btn btn-primary" ng-click="userDetails.update()">Update</button>
         </form>
     </div>

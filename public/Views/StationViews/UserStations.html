@@ -1,11 +1,49 @@
-<div class="col-sm-6 col-sm-offset-3">
-    <div class="well">
-        <h3>Stations</h3>
-        <ul class="list-group" ng-if="station.stations">
-            <li class="list-group-item" ng-repeat="station in station.stations">
-                <h4>{{station.name}}</h4>
-                <h5>{{station.email}}</h5>
-            </li>
-        </ul>
-    </div>
+<div class="bs-example" >
+    <h3>Stations</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Update time</th>
+                <th>Created at</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(index, station) in station.stations">
+                <th scope="row">{{index + 1}}</th>
+                <td><a ui-sref="editStation({ id: station.id })">{{ station.name }}</a></td>
+                <td>{{ station.location}}</td>
+                <td>{{ station.update_time}}</td>
+                <td>{{ station.created_at}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="col-sm-12">-->
+    <!--<div class="well">-->
+        <!--<h3>Stations</h3>-->
+        <!--<ul class="list-group" ng-if="station.stations">-->
+            <!--<li class="list-group-item" ng-repeat="station in station.stations">-->
+                <!--<h4>{{station.name}}</h4>-->
+                <!--<h5>{{station.email}}</h5>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</div>-->

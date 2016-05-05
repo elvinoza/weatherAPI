@@ -25,5 +25,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('user/{id}', 'UserController@getUser');
         Route::post('user/{id}', 'UserController@updateUser');
         Route::get('user/stations/{id}', 'UserController@getUserStations');
+        Route::get('station/{id}', 'StationController@getStation');
+        Route::post('station', 'StationController@updateStation');
     });
 });

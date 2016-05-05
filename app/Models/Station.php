@@ -18,7 +18,7 @@ class Station extends Model {
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'location', 'update_time',
+        'name', 'location', 'update_time',
     ];
 
     /**

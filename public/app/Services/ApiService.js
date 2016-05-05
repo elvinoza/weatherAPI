@@ -21,5 +21,13 @@
         this.getUserStations = function(id){
             return $http.get(baseURL + 'user/stations/' + id);
         };
+
+        this.getStation = function(id){
+            return $http.get(baseURL + 'station/' + id);
+        };
+
+        this.updateStation = function(station){
+            return $http.post(baseURL + 'station/', station, { headers: { 'Accept': 'Application/json' }});
+        }
     }
 })();

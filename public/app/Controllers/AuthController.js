@@ -27,7 +27,6 @@
                 // Handle errors
             }, function(error) {
                 flash.error = error.data.error;
-
                 // Because we returned the $http.get request in the $auth.login
                 // promise, we can chain the next promise to the end here
             }).then(function(response) {

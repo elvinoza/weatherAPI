@@ -30,7 +30,6 @@ class UserService implements IUserService
         $user = $this->user->find($user_id);
         $user->name = $data->name;
         $user->email = $data->email;
-        $user->update_time_min = $data->update_time_min;
         $user->save();
         return $user;
     }
@@ -38,6 +37,8 @@ class UserService implements IUserService
     public function getUserStations($id)
     {
         $user = $this->user->find($id);
-        return $user->stations;
+        if ($user != null)
+            return $user->stations;
+        else return emptyArray();
     }
 }
