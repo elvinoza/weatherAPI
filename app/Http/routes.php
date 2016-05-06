@@ -27,5 +27,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('user/stations/{id}', 'UserController@getUserStations');
         Route::get('station/{id}', 'StationController@getStation');
         Route::post('station', 'StationController@updateStation');
+        Route::post('station/create', 'StationController@createStation');
     });
 });

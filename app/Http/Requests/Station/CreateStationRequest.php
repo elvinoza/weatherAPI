@@ -1,6 +1,8 @@
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\Station;
 
-class UpdateStationRequest extends Request {
+use App\Http\Requests\Request;
+
+class CreateStationRequest extends Request {
 
     /**
      * Get the validation rules that apply to the request.
@@ -10,7 +12,7 @@ class UpdateStationRequest extends Request {
     public function rules()
     {
         return [
-            'name' => 'required|min:3|unique:stations,name,' . $this->input('id'),
+            'name' => 'required|min:3|unique:stations,name',
             'location' => 'max:255',
             'update_time' => 'required|integer'
         ];

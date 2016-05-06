@@ -12,6 +12,7 @@ var paths = {
         'public/app/Controllers/UserDetailsController.js',
         'public/app/Controllers/UserStationsController.js',
         'public/app/Controllers/EditStationController.js',
+        'public/app/Controllers/CreateStationController.js',
         'public/app/Services/ApiService.js'
     ]
 };
@@ -47,7 +48,8 @@ gulp.task('scripts', function(){
         'public/app/Controllers/UserController.js',
         'public/app/Controllers/UserDetailsController.js',
         'public/app/Controllers/UserStationsController.js',
-        'public/app/Controllers/EditStationController.js'
+        'public/app/Controllers/EditStationController.js',
+        'public/app/Controllers/CreateStationController.js'
         ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('public/js'));

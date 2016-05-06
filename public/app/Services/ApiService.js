@@ -28,6 +28,10 @@
 
         this.updateStation = function(station){
             return $http.post(baseURL + 'station/', station, { headers: { 'Accept': 'Application/json' }});
-        }
+        };
+
+        this.createStation = function(station){
+            return $http.post(baseURL + 'station/create', station, { headers: { 'Accept': 'Application/json' }});
+        };
     }
 })();

@@ -9,6 +9,7 @@ interface IStationInterface
     function getUserStations($id);
     function getStation($id);
     function updateStation($station);
+    function createStation($station);
 }
 
 class StationService implements IStationInterface
@@ -33,6 +34,17 @@ class StationService implements IStationInterface
     public function updateStation($data)
     {
         $station = $this->station->find($data->id);
+        $station->name = $data->name;
+        $station->location = $data->location;
+        $station->update_time = $data->update_time;
+        $station->save();
+        return $station;
+    }
+
+    public function createStation($data)
+    {
+        $station = new Station();
+        $station->user_id = $data->user_id;
         $station->name = $data->name;
         $station->location = $data->location;
         $station->update_time = $data->update_time;

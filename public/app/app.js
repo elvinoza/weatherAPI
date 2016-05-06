@@ -33,12 +33,17 @@
                 .state('userStations', {
                     url: '/user/stations/:id',
                     templateUrl: '../Views/StationViews/UserStations.html',
-                    controller: 'UserStationsController as station'
+                    controller: 'UserStationsController as userStations'
                 })
                 .state('editStation', {
                     url: '/station/edit/:id',
                     templateUrl: '../Views/StationViews/EditStation.html',
                     controller: 'EditStationController as editStation'
+                })
+                .state('createStation', {
+                    url: '/station/create',
+                    templateUrl: '../Views/StationViews/CreateStation.html',
+                    controller: 'CreateStationController as createStation'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {

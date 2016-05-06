@@ -1,0 +1,30 @@
+<div>
+    <div>
+        <h2>Create Station</h2>
+        <form name="myForm">
+
+            <div flash-alert active-class="in" class="alert fade">
+                <strong class="alert-heading">Boo!</strong>
+                <span class="alert-message">{{flash.message}}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" ng-model="station.name">
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input name="Location" class="form-control" placeholder="email" ng-model="station.location">
+            </div>
+
+            <div class="form-group">
+                <label>Update time</label>
+                <input type="number" name="time" class="form-control" placeholder="Update time" ng-model="station.update_time" required>
+                <span ng-show="myForm.time.$error.number">Not integer</span>
+            </div>
+
+            <button class="btn btn-primary" ng-click="createStation.create()">Create</button>
+        </form>
+    </div>
+</div>
