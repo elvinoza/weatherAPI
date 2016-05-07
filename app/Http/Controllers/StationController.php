@@ -34,4 +34,9 @@ class StationController extends Controller
     {
         return $this->stationService->updateStation($request);
     }
+
+    public function delete($id)
+    {
+        return $this->stationService->delete($id);
+    }
 }
