@@ -11,6 +11,7 @@ interface IStationInterface
     function updateStation($station);
     function createStation($station);
     function delete($id);
+    function getStationWeathers($id);
 }
 
 class StationService implements IStationInterface
@@ -59,5 +60,11 @@ class StationService implements IStationInterface
         $station->isValid = false;
         $station->save();
         return $station;
+    }
+
+    public function getStationWeathers($id)
+    {
+        $station = $this->station->find($id);
+        return $station->weathers;
     }
 }

@@ -33,5 +33,9 @@
         this.createStation = function(station){
             return $http.post(baseURL + 'station/create', station, { headers: { 'Accept': 'Application/json' }});
         };
+
+        this.getStationWeathers = function(id){
+            return $http.get(baseURL + 'station/weathers/' + id);
+        };
     }
 })();

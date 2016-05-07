@@ -39,4 +39,9 @@ class StationController extends Controller
     {
         return $this->stationService->delete($id);
     }
+
+    public function getWeathers($id)
+    {
+        return $this->stationService->getStationWeathers($id);
+    }
 }

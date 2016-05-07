@@ -44,7 +44,12 @@
                     url: '/station/create',
                     templateUrl: '../Views/StationViews/CreateStation.html',
                     controller: 'CreateStationController as createStation'
-                });
+                })
+                .state('stationWeathers', {
+                    url: '/station/weathers/:id',
+                    templateUrl: '../Views/WeathersViews/StationWeathers.html',
+                    controller: 'StationWeathersController as stationWeathers'
+                })
 
             function redirectWhenLoggedOut($q, $injector) {
 

@@ -9,6 +9,7 @@
                 <th>Location</th>
                 <th>Update time</th>
                 <th>Created at</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,33 +19,8 @@
                 <td>{{ station.location}}</td>
                 <td>{{ station.update_time}}</td>
                 <td>{{ station.created_at}}</td>
+                <td><a ui-sref="stationWeathers({ id: station.id })">Weathers</a></td>
             </tr>
         </tbody>
     </table>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<div class="col-sm-12">-->
-    <!--<div class="well">-->
-        <!--<h3>Stations</h3>-->
-        <!--<ul class="list-group" ng-if="station.stations">-->
-            <!--<li class="list-group-item" ng-repeat="station in station.stations">-->
-                <!--<h4>{{station.name}}</h4>-->
-                <!--<h5>{{station.email}}</h5>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
-<!--</div>-->

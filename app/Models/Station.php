@@ -31,4 +31,9 @@ class Station extends Model {
     {
         return $this->belongsTo("App\Models\User");
     }
+
+    public function weathers()
+    {
+        return $this->hasMany('App\Models\Weather');
+    }
 }

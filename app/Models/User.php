@@ -24,11 +24,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * Many to Many relation
-     *
-     * @return Illuminate\Database\Eloquent\Relations\belongToMany
-     */
+
     public function stations()
     {
         return $this->hasMany('App\Models\Station');
