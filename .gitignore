@@ -7,5 +7,4 @@ Homestead.json
 bower_components/*
 node_modules/*
 resources/lib/*
-/public/js/all.js
 .env
