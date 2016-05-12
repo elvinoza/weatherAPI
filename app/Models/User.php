@@ -24,7 +24,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function stations()
     {
         return $this->hasMany('App\Models\Station');

@@ -30,4 +30,9 @@ class UserController extends Controller
     {
         return $this->userService->getUserStations($id);
     }
+
+    public function getUserStationsLastData($id)
+    {
+        return $this->userService->getUserStationsLastData($id);
+    }
 }

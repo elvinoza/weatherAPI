@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use DB;
 use App\Models\User;
 
 interface IUserService
@@ -9,6 +10,7 @@ interface IUserService
     function getUser($id);
     function update($user_id, $data);
     function getUserStations($id);
+    function getUserStationsLastData($id);
 }
 
 class UserService implements IUserService
@@ -40,5 +42,22 @@ class UserService implements IUserService
         if ($user != null)
             return $user->stations;
         else return emptyArray();
+    }
+
+    public function getUserStationsLastData($id)
+    {
+        $user = $this->user->find($id);
+
+        if($user != null){
+            $data = DB::table('stations')
+                ->join('weathers', function($join){
+                    $join->on('weathers.station_id', '=', 'stations.id')
+                        ->on('weathers.id', '=', DB::raw('(select id from weathers where station_id = stations.id order by created_at DESC LIMIT 1)'));
+                })
+                ->where('stations.user_id', '=', $user->id)
+                ->get();
+            return $data;
+        }
+        else return null;
     }
 }
