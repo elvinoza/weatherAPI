@@ -30,5 +30,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('station', 'StationController@updateStation');
         Route::post('station/create', 'StationController@createStation');
         Route::get('station/weathers/{id}', 'StationController@getWeathers');
+        Route::get('weather/{id}', 'WeatherController@getWeather');
     });
 });
