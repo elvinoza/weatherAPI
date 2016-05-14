@@ -1,7 +1,6 @@
 <?php namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\Request;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UpdateUserRequest extends Request {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\UpdateUserRequest;
 use App\Http\Requests\Auth\ChangeUserPasswordRequest;
+use App\Http\Requests\Auth\CreateUserRequest;
 use App\Services\UserService;
 
 
@@ -13,8 +14,13 @@ class UserController extends Controller
 
     public function __construct(UserService $userService)
     {
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        $this->middleware('jwt.auth', ['except' => ['createUser']]);
         $this->userService = $userService;
+    }
+
+    public function createUser(CreateUserRequest $request)
+    {
+        return $this->userService->createUser($request);
     }
 
     public function getUser($id)

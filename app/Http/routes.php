@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('authenticate', 'AuthenticateController@authenticate');
         Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
         Route::get('user/{id}', 'UserController@getUser');
+        Route::post('createuser', 'UserController@createUser');
         Route::post('user/{id}', 'UserController@updateUser');
         Route::post('password', 'UserController@changeUserPassword');
         Route::get('user/stations/{id}', 'UserController@getUserStations');

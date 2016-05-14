@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 interface IUserService
 {
+    function createUser($data);
     function getUser($id);
     function update($user_id, $data);
     function changeUserPassword($data);
@@ -22,6 +23,15 @@ class UserService implements IUserService
     public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    public function createUser($data)
+    {
+        $user = new User();
+        $user->name = $data->name;
+        $user->email = $data->email;
+        $user->password = bcrypt($data->password);
+        $user->save();
     }
 
     public function getUser($id)
