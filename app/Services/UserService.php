@@ -4,11 +4,13 @@ namespace App\Services;
 
 use DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 interface IUserService
 {
     function getUser($id);
     function update($user_id, $data);
+    function changeUserPassword($data);
     function getUserStations($id);
     function getUserStationsLastData($id);
 }
@@ -36,6 +38,22 @@ class UserService implements IUserService
         return $user;
     }
 
+    public function changeUserPassword($data)
+    {
+        $user = $this->user->find($data->user_id);
+        if($user != null){
+            if(Hash::check($data->current_password, $user->password))
+            {
+                $user->password = bcrypt($data->new_password);
+                $user->save();
+            }
+            else {
+                return response(['current_password' => 'Blogai nurodytas dabartinis slaptažodis.'], 422);
+            }
+        }
+        return null;
+    }
+
     public function getUserStations($id)
     {
         $user = $this->user->find($id);
@@ -58,6 +76,6 @@ class UserService implements IUserService
                 ->get();
             return $data;
         }
-        else return null;
+        return null;
     }
 }

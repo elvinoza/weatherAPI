@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\UpdateUserRequest;
+use App\Http\Requests\Auth\ChangeUserPasswordRequest;
 use App\Services\UserService;
 
 
@@ -24,6 +25,11 @@ class UserController extends Controller
     public function updateUser($id, UpdateUserRequest $request)
     {
         return $this->userService->update($id, $request);
+    }
+
+    public function changeUserPassword(ChangeUserPasswordRequest $request)
+    {
+        return $this->userService->changeUserPassword($request);
     }
 
     public function getUserStations($id)
