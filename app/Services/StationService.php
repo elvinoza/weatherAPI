@@ -50,6 +50,7 @@ class StationService implements IStationInterface
         $station->name = $data->name;
         $station->location = $data->location;
         $station->update_time = $data->update_time;
+        $station->appKey = $this->generateAppKey();
         $station->save();
         return $station;
     }
@@ -66,5 +67,29 @@ class StationService implements IStationInterface
     {
         $station = $this->station->find($id);
         return $station->weathers;
+    }
+
+    private function generateAppKey()
+    {
+        $app_key = "";
+        $api_credentials = true;
+        while ($api_credentials){
+            $app_key = $this->generateRandomString(32);
+            if(is_null($this->station->where('app_key', '=', $app_key))){
+                $api_credentials = true;
+            }
+            else $api_credentials = false;
+        }
+        return $app_key;
+    }
+
+    private function generateRandomString($length){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
