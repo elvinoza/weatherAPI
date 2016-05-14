@@ -58,7 +58,7 @@ class UserService implements IUserService
     {
         $user = $this->user->find($id);
         if ($user != null)
-            return $user->stations;
+            return $user->stations->where('isValid', 1);
         else return emptyArray();
     }
 
