@@ -50,7 +50,7 @@ class StationService implements IStationInterface
         $station->name = $data->name;
         $station->location = $data->location;
         $station->update_time = $data->update_time;
-        $station->appKey = $this->generateAppKey();
+        $station->app_key = $this->generateAppKey();
         $station->save();
         return $station;
     }
