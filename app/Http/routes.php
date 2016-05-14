@@ -35,4 +35,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('station/weathers/{id}', 'StationController@getWeathers');
         Route::get('weather/{id}', 'WeatherController@getWeather');
     });
+
+});
+
+Route::group(['prefix' => 'stationAPI'], function()
+{
+    Route::post('create', 'ApiStationController@createWeather');
 });
