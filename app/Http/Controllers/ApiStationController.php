@@ -18,7 +18,7 @@ class ApiStationController extends Controller
     }
 
     public function createWeather(CreateWeatherRequest $request){
-        $this->weatherService->createWeather($request);
+        return $this->weatherService->createWeather($request);
     }
 
     public function getStationUpdateTime($id)

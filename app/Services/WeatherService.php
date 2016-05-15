@@ -29,8 +29,6 @@ class WeatherService implements IWeatherService
 
     public function createWeather($data)
     {
-
-
         $weather = new Weather();
         $weather->station_id = $data->station_id;
         $weather->temperature = $data->temperature;
@@ -42,6 +40,6 @@ class WeatherService implements IWeatherService
         $weather->wind_direction = $data->wind_direction;
         $weather->rain = $data->rain;
         $weather->save();
-
+        return response(['success' => true], 200);
     }
 }
