@@ -73,7 +73,7 @@ class StationService implements IStationInterface
     public function getStationUpdateTime($id)
     {
         $station = $this->station->find($id);
-        return $station->update_time;
+        return response(['time' => $station->update_time], 200);
     }
 
     private function generateAppKey()
