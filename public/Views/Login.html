@@ -1,19 +1,16 @@
-<div>
-    <div flash-alert active-class="in" class="alert fade">
-        <strong class="alert-heading">Boo!</strong>
-        <span class="alert-message">{{flash.message}}</span>
-    </div>
-
+<md-content layout-padding>
     <div>
         <h2>Login</h2>
-        <form>
-            <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email" ng-model="auth.email">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" ng-model="auth.password">
-            </div>
-            <button class="btn btn-primary" ng-click="auth.login()">Submit</button>
+        <form name="userForm">
+            <md-input-container class="md-block">
+                <label>Email</label>
+                <input type="email" ng-model="auth.email">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input type="password" ng-model="auth.password">
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="auth.login()">Login</md-button>
         </form>
     </div>
-</div>
+</md-content>

@@ -41,7 +41,10 @@ gulp.task('scripts', function(){
         'resources/lib/angular-ui-router/release/angular-ui-router.js',
         'resources/lib/satellizer/satellizer.js',
         'resources/lib/angular-flash/dist/angular-flash.js',
-        //'resources/lib/angular-material/angular-material.js',
+        'resources/lib/angular-aria/angular-aria.js',
+        'resources/lib/angular-animate/angular-animate.js',
+        'resources/lib/angular-material/angular-material.js',
+
         //'resources/lib/angular-material-data-table/dist/md-data-table.js',
         'public/app/app.js',
         'public/app/Services/ApiService.js',
@@ -52,13 +55,15 @@ gulp.task('scripts', function(){
         'public/app/Controllers/EditStationController.js',
         'public/app/Controllers/CreateStationController.js',
         'public/app/Controllers/StationWeathersController.js'
-        ])
+    ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('css', function() {
-    gulp.src('resources/css//style.scss')
+    gulp.src(['resources/css/style.scss',
+        'resources/lib/angular-material/angular-material.scss'
+    ])
         .pipe(sass())
         .pipe(gulp.dest('public/css'));
 });

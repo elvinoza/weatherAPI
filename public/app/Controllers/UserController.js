@@ -52,7 +52,7 @@
                 // Remove the current user info from rootscope
                 $rootScope.currentUser = null;
             });
-        }
+        };
     }
 
 })();

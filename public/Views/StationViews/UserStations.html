@@ -1,5 +1,14 @@
 <div class="bs-example" >
     <h3>Stations</h3>
+
+    <md-fab-speed-dial md-open="true" md-direction="right down" ng-class="md-fling">
+        <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-warn">
+                <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+            </md-button>
+        </md-fab-trigger>
+    </md-fab-speed-dial>
+
     <button class="btn btn-primary" ng-click="userStations.create()">Create</button>
     <table class="table table-hover">
         <thead>
