@@ -67,7 +67,7 @@ class StationService implements IStationInterface
     public function getStationWeathers($id)
     {
         $station = $this->station->find($id);
-        return $station->weathers;
+        return $station->weathers()->orderBy('created_at', 'DESC')->get();
     }
 
     public function getStationUpdateTime($id)
