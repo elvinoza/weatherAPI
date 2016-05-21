@@ -45,8 +45,7 @@ gulp.task('scripts', function(){
         'resources/lib/angular-animate/angular-animate.js',
         'resources/lib/angular-material/angular-material.js',
         'resources/lib/angular-loading-bar/src/loading-bar.js',
-
-        //'resources/lib/angular-material-data-table/dist/md-data-table.js',
+        'resources/lib/angular-material-data-table/dist/md-data-table.js',
         'public/app/app.js',
         'public/app/Services/ApiService.js',
         'public/app/Controllers/AuthController.js',

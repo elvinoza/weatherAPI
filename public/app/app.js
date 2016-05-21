@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar'])
+        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar', 'md.data.table'])
         .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
 
             $authProvider.loginUrl = '/api/authenticate';
