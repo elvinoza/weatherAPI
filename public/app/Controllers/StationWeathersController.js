@@ -10,6 +10,12 @@
 
         var vm = this;
 
+        $scope.query = {
+            order: 'name',
+            limit: 5,
+            page: 1
+        };
+
         vm.weathers;
 
         vm.getStationWeathers = function(id){

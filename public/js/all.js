@@ -68273,8 +68273,6 @@ function virtualPageSelect() {
 
     function UserStationsController($scope, $state, $stateParams, ApiService) {
 
-        $scope.selected = [];
-
         var vm = this;
 
         vm.stations;
@@ -68369,6 +68367,12 @@ function virtualPageSelect() {
     function StationWeathersController($scope, $state, $stateParams, ApiService) {
 
         var vm = this;
+
+        $scope.query = {
+            order: 'name',
+            limit: 5,
+            page: 1
+        };
 
         vm.weathers;
 

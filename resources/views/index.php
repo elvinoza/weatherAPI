@@ -33,9 +33,5 @@
             </div>
         </div>
         <ui-view></ui-view>
-
-        <md-bottom-sheet>
-            <div>MeteO</div>
-        </md-bottom-sheet>
     </body>
 </html>
