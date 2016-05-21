@@ -20,9 +20,9 @@
         <!-- //js -->
     </head>
     <body ng-cloak>
-        <div layout="row" layout-padding class="bg-primary nav-dark" layout-align="space-between center">
-            <div>
-                <md-button ui-sref="userStations({ id: currentUser.id })">Stations</md-button>
+        <div layout="row" layout-padding class="bg-blue-grey nav-dark" layout-align="space-between center">
+            <div ng-if="authenticated" >
+                <md-button class="md-ripple-size" ui-sref="userStations({ id: currentUser.id })">Stations</md-button>
             </div>
 
             <div class="nav-buttons">
@@ -30,9 +30,6 @@
                 <md-button ng-if="authenticated" class="md-raised md-warn" ng-click="logout()">Log Out</md-button>
             </div>
         </div>
-
-        <div class="container" ui-view>
-        </div>
-
+        <ui-view class="container"></ui-view>
     </body>
 </html>
