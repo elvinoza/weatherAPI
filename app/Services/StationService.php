@@ -11,7 +11,7 @@ interface IStationInterface
     function updateStation($station);
     function createStation($station);
     function delete($id);
-    function getStationWeathers($id);
+    function getStationWeathers($id, $count);
     function getStationUpdateTime($id);
 }
 
@@ -64,10 +64,14 @@ class StationService implements IStationInterface
         return $station;
     }
 
-    public function getStationWeathers($id)
+    public function getStationWeathers($id, $count)
     {
         $station = $this->station->find($id);
-        return $station->weathers()->orderBy('created_at', 'DESC')->get();
+        if($count == null) {
+            return $station->weathers()->orderBy('created_at', 'DESC')->get();
+        } else {
+            return $station->weathers()->orderBy('created_at', 'DESC')->take($count)->get();
+        }
     }
 
     public function getStationUpdateTime($id)
