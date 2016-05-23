@@ -68105,6 +68105,10 @@ function virtualPageSelect() {
         this.getLatestWeathers = function(id){
             return $http.get(baseURL + 'user/StationsLastData/' + id);
         };
+
+        this.deleteStation = function(id){
+            return $http.get(baseURL + 'station/delete/' + id);
+        };
     }
 })();
 (function() {
@@ -68258,7 +68262,7 @@ function virtualPageSelect() {
         .module('app')
         .controller('EditStationController', EditStationController);
 
-    function EditStationController($scope, $stateParams, ApiService, flash) {
+    function EditStationController($state, $scope, $rootScope, $stateParams, ApiService, flash) {
 
         var vm = this;
 
@@ -68281,9 +68285,17 @@ function virtualPageSelect() {
             });
         };
 
-        vm.getStation($stateParams.id);
-    }
+        vm.delete = function(id){
+            ApiService.deleteStation(id).success(function(data) {
+                $state.go('userStations', { id: $rootScope.currentUser.id});
+                //flash.success = "Station successful updated"
+            }).error(function(error) {
+                //flash.error = error;
+            });
+        };
 
+        vm.getStation($stateParams.id);
+    };
 })();
 (function() {
 

@@ -45,5 +45,9 @@
         this.getLatestWeathers = function(id){
             return $http.get(baseURL + 'user/StationsLastData/' + id);
         };
+
+        this.deleteStation = function(id){
+            return $http.get(baseURL + 'station/delete/' + id);
+        };
     }
 })();

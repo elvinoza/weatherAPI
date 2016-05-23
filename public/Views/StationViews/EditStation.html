@@ -18,7 +18,13 @@
                     <input ng-model="station.location">
                 </md-input-container>
 
-                <md-button class="md-raised md-primary" ng-click="editStation.update()">Update</md-button>
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-primary" ng-click="editStation.update()">Update</md-button>
+                </div>
+
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-warn" ng-click="editStation.delete(station.id)">Delete</md-button>
+                </div>
             </form>
         </div>
     </md-content>

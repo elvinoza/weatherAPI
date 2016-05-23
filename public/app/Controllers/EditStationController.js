@@ -6,7 +6,7 @@
         .module('app')
         .controller('EditStationController', EditStationController);
 
-    function EditStationController($scope, $stateParams, ApiService, flash) {
+    function EditStationController($state, $scope, $rootScope, $stateParams, ApiService, flash) {
 
         var vm = this;
 
@@ -29,7 +29,15 @@
             });
         };
 
-        vm.getStation($stateParams.id);
-    }
+        vm.delete = function(id){
+            ApiService.deleteStation(id).success(function(data) {
+                $state.go('userStations', { id: $rootScope.currentUser.id});
+                //flash.success = "Station successful updated"
+            }).error(function(error) {
+                //flash.error = error;
+            });
+        };
 
+        vm.getStation($stateParams.id);
+    };
 })();
