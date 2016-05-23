@@ -40,6 +40,10 @@
 
         this.register = function(user){
             return $http.post(baseURL + 'createuser', user, { headers: { 'Accept': 'Application/json' }});
-        }
+        };
+
+        this.getLatestWeathers = function(id){
+            return $http.get(baseURL + 'user/StationsLastData/' + id);
+        };
     }
 })();

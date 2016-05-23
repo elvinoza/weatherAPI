@@ -35,7 +35,7 @@
                 localStorage.setItem('user', user);
                 $rootScope.authenticated = true;
                 $rootScope.currentUser = response.data.user;
-                $state.go('user');
+                $state.go('latestData');
             });
         };
 

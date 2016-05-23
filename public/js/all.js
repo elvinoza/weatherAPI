@@ -67972,10 +67972,10 @@ function virtualPageSelect() {
                     templateUrl: '../Views/Login.html',
                     controller: 'AuthController as auth'
                 })
-                .state('user', {
-                    url: '/user',
-                    templateUrl: '../Views/User.html',
-                    controller: 'UserController as user'
+                .state('latestData', {
+                    url: '/latestData',
+                    templateUrl: '../Views/WeathersViews/LastWeathers.html',
+                    controller: 'LatestDataController as latestData'
                 })
                 .state('userDetails', {
                     url: '/user/:id',
@@ -68100,7 +68100,11 @@ function virtualPageSelect() {
 
         this.register = function(user){
             return $http.post(baseURL + 'createuser', user, { headers: { 'Accept': 'Application/json' }});
-        }
+        };
+
+        this.getLatestWeathers = function(id){
+            return $http.get(baseURL + 'user/StationsLastData/' + id);
+        };
     }
 })();
 (function() {
@@ -68140,7 +68144,7 @@ function virtualPageSelect() {
                 localStorage.setItem('user', user);
                 $rootScope.authenticated = true;
                 $rootScope.currentUser = response.data.user;
-                $state.go('user');
+                $state.go('latestData');
             });
         };
 
@@ -68162,57 +68166,23 @@ function virtualPageSelect() {
 
     angular
         .module('app')
-        .controller('UserController', UserController);
+        .controller('LatestDataController', LatestDataController);
 
-    function UserController($http, $auth, $state, $stateParams, $rootScope, ApiService) {
+    function LatestDataController($scope, $rootScope, $state, ApiService) {
 
-        var vm = this;
+        $scope.weathers = [];
 
-        vm.users;
-        vm.error;
-        vm.user;
+        $scope.getLatestData = function(){
 
-        vm.getUser = function(){
-            console.log($stateParams);
-            //ApiService.getUser(id).success(function(data) {
-            //    vm.user = data;
-            //}).error(function(error) {
-            //    vm.error = error;
-            //});
-        }
-
-        vm.getUsers = function() {
-
-            // This request will hit the index method in the AuthenticateController
-            // on the Laravel side and will return the list of users
-            $http.get('api/authenticate').success(function(users) {
-                vm.users = users;
+            ApiService.getLatestWeathers($rootScope.currentUser.id).success(function(data) {
+                $scope.weathers = data;
             }).error(function(error) {
-                vm.error = error;
-            });
-        }
 
-        vm.stations = function(){
-            $state.go('stations');
-        }
-
-        vm.logout = function() {
-
-            $auth.logout().then(function() {
-
-                // Remove the authenticated user from local storage
-                localStorage.removeItem('user');
-
-                // Flip authenticated to false so that we no longer
-                // show UI elements dependant on the user being logged in
-                $rootScope.authenticated = false;
-
-                // Remove the current user info from rootscope
-                $rootScope.currentUser = null;
             });
         };
-    }
 
+        $scope.getLatestData();
+    };
 })();
 (function() {
 

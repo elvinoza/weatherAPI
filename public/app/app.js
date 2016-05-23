@@ -15,10 +15,10 @@
                     templateUrl: '../Views/Login.html',
                     controller: 'AuthController as auth'
                 })
-                .state('user', {
-                    url: '/user',
-                    templateUrl: '../Views/User.html',
-                    controller: 'UserController as user'
+                .state('latestData', {
+                    url: '/latestData',
+                    templateUrl: '../Views/WeathersViews/LastWeathers.html',
+                    controller: 'LatestDataController as latestData'
                 })
                 .state('userDetails', {
                     url: '/user/:id',

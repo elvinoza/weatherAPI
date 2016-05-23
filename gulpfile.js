@@ -8,7 +8,7 @@ var paths = {
     scripts: [
         'public/app/app.js',
         'public/app/Controllers/AuthController.js',
-        'public/app/Controllers/UserController.js',
+        'public/app/Controllers/LatestDataController.js',
         'public/app/Controllers/UserDetailsController.js',
         'public/app/Controllers/UserStationsController.js',
         'public/app/Controllers/EditStationController.js',
@@ -49,7 +49,7 @@ gulp.task('scripts', function(){
         'public/app/app.js',
         'public/app/Services/ApiService.js',
         'public/app/Controllers/AuthController.js',
-        'public/app/Controllers/UserController.js',
+        'public/app/Controllers/LatestDataController.js',
         'public/app/Controllers/UserDetailsController.js',
         'public/app/Controllers/UserStationsController.js',
         'public/app/Controllers/EditStationController.js',

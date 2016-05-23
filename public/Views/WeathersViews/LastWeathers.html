@@ -1,0 +1,30 @@
+<md-content>
+    <div class="container">
+        <h3>Latest Stations Data</h3>
+        <br>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Pressure</th>
+                <th>Soil Temperature</th>
+                <th>Soil Humidity</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(index, weather) in weathers">
+                <th scope="row">{{index + 1}}</th>
+                <td>{{ weather.temperature }}</td>
+                <td>{{ weather.humidity }}</td>
+                <td>{{ weather.pressure }}</td>
+                <td>{{ weather.soil_temperature }}</td>
+                <td>{{ weather.soil_humidity }}</td>
+                <td>{{ weather.created_at }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</md-content>
