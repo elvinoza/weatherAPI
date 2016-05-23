@@ -37,5 +37,9 @@
         this.getStationWeathers = function(id){
             return $http.get(baseURL + 'station/weathers/' + id);
         };
+
+        this.register = function(user){
+            return $http.post(baseURL + 'createuser', user, { headers: { 'Accept': 'Application/json' }});
+        }
     }
 })();
