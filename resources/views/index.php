@@ -22,9 +22,9 @@
         <!-- //js -->
     </head>
     <body ng-cloak>
-        <div layout="row" layout-padding class="bg-blue-grey nav-dark" layout-align="space-between center">
+        <div layout="row" style="background-color: paleturquoise;" layout-padding class="bg-blue-grey nav-dark" layout-align="space-between center">
             <div ng-if="authenticated" >
-                <md-button class="md-ripple-size" ui-sref="userStations({ id: currentUser.id })">Stations</md-button>
+                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="userStations({ id: currentUser.id })">Stations</md-button>
             </div>
 
             <div class="nav-buttons">

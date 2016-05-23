@@ -10,9 +10,11 @@
 
         var vm = this;
 
+        $scope.limitOptions = [5, 10, 15, 20];
+
         $scope.query = {
             order: 'name',
-            limit: 5,
+            limit: 10,
             page: 1
         };
 

@@ -1,6 +1,5 @@
 <md-content laout="column" flex>
     <md-card>
-
         <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
             <div class="md-toolbar-tools">
                 <span>Station Weathers</span>
@@ -10,12 +9,6 @@
                 </md-button>
             </div>
         </md-toolbar>
-
-        <!--<md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">-->
-            <!--<div class="md-toolbar-tools">-->
-                <!--<span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>-->
-            <!--</div>-->
-        <!--</md-toolbar>-->
 
         <md-table-container>
             <table md-table  md-progress="promise">
@@ -27,64 +20,26 @@
                     <th md-column md-numeric md-order-by="pressure" md-desc><span>Pressure</span></th>
                     <th md-column md-numeric md-order-by="soil_temperature" md-desc><span>Soil Temeprature</span></th>
                     <th md-column md-numeric md-order-by="soil_humidity" md-desc><span>Soil Humidity</span></th>
+                    <th md-column md-numeric md-order-by="wind_speed" md-desc><span>Wind Speed</span></th>
+                    <th md-column md-numeric md-order-by="rain" md-desc><span>Rain</span></th>
                     <th md-column md-order-by="created_at" md-desc><span>Time</span></th>
-                    <!--<th md-column md-order-by="comment">-->
-                        <!--<md-icon>comments</md-icon>-->
-                        <!--<span>Comments</span>-->
-                    <!--</th>-->
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="weather" md-on-select="logItem" md-auto-select="options.autoSelect" ng-disabled="dessert.calories.value > 400" ng-repeat="(index, weather) in stationWeathers.weathers | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr md-row md-select="weather" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, weather) in stationWeathers.weathers | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{index + 1}}</td>
                     <td md-cell>{{weather.temperature | number: 2}}</td>
                     <td md-cell>{{weather.humidity | number: 2}}</td>
                     <td md-cell>{{weather.pressure | number: 2}}</td>
                     <td md-cell>{{weather.soil_temperature | number: 2}}</td>
                     <td md-cell>{{weather.soil_humidity | number: 2}}</td>
+                    <td md-cell>{{weather.wind_speed | number: 2}}</td>
+                    <td md-cell>{{weather.rain | number: 2}}</td>
                     <td md-cell>{{weather.created_at}}</td>
-                    <!--<td md-cell>{{dessert.carbs.value}}</td>-->
-                    <!--<td md-cell>{{dessert.protein.value | number: 2}}</td>-->
-                    <!--<td md-cell hide-gt-xs show-gt-md>{{dessert.sodium.value}}</td>-->
-                    <!--<td md-cell hide-gt-xs show-gt-lg>{{dessert.calcium.value}}%</td>-->
-                    <!--<td md-cell hide-gt-xs show-gt-lg>{{dessert.iron.value}}%</td>-->
-                    <!--<td md-cell ng-click="editComment($event, dessert)" ng-class="{'md-placeholder': !dessert.comment}">-->
-                        <!--{{dessert.comment || 'Add a comment'}}-->
-                    <!--</td>-->
                 </tr>
                 </tbody>
             </table>
         </md-table-container>
-
-        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{stationWeathers.weathers.count}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
+        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{stationWeathers.weathers.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
     </md-card>
 </md-content>
-
-
-
-
-
-
-<!--<div class="bs-example" >-->
-    <!--<h3>Station weathers</h3>-->
-    <!--<table class="table table-hover">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th>#</th>-->
-            <!--<th>Temperature</th>-->
-            <!--<th>Humidity</th>-->
-            <!--<th>Pressure</th>-->
-            <!--<th>Created at</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr ng-repeat="(index, weather) in stationWeathers.weathers">-->
-            <!--<th scope="row">{{index + 1}}</th>-->
-            <!--<td>{{ weather.temperature }}</td>-->
-            <!--<td>{{ weather.humidity}}</td>-->
-            <!--<td>{{ weather.pressure}}</td>-->
-            <!--<td>{{ weather.created_at}}</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-    <!--</table>-->
-<!--</div>-->

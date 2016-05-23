@@ -73,19 +73,14 @@
         .run(function($rootScope, $state, $auth) {
 
             $rootScope.$on('$stateChangeStart', function(event, toState) {
-
                 var user = JSON.parse(localStorage.getItem('user'));
 
                 if(user) {
-
                     $rootScope.authenticated = true;
-
                     $rootScope.currentUser = user;
 
                     if(toState.name === "auth") {
-
                         event.preventDefault();
-
                         $state.go('user');
                     }
                 }
@@ -94,17 +89,9 @@
             $rootScope.logout = function() {
 
                 $auth.logout().then(function() {
-
-                    // Remove the authenticated user from local storage
                     localStorage.removeItem('user');
-
-                    // Flip authenticated to false so that we no longer
-                    // show UI elements dependant on the user being logged in
                     $rootScope.authenticated = false;
-
-                    // Remove the current user info from rootscope
                     $rootScope.currentUser = null;
-
                     $state.go('auth');
                 });
             };
