@@ -11,7 +11,10 @@
                     <label>Email</label>
                     <input type="email" ng-model="user.email">
                 </md-input-container>
-                <md-button class="md-raised md-primary" ng-click="userDetails.update()">Update</md-button>
+
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-primary" ng-click="userDetails.update()">Update</md-button>
+                </div>
             </form>
         </div>
     </md-content>
@@ -32,7 +35,10 @@
                     <label>New Password Confirmation</label>
                     <input type="email" ng-model="">
                 </md-input-container>
-                <md-button class="md-raised md-primary" ng-click="userDetails.ChangePassword()">Change</md-button>
+
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-warn" ng-click="userDetails.ChangePassword()">Change</md-button>
+                </div>
             </form>
         </div>
     </md-content>
