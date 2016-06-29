@@ -88279,7 +88279,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             return $http.get(baseURL + 'station/delete/' + id);
         };
 
-        this.getStationWeathers = function(stationId, startDate, endDate){
+        this.getStationDataForChart = function(stationId, startDate, endDate){
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
     }
@@ -88546,7 +88546,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         $scope.endDate = new Date();
 
         $scope.loadChartData = function(){
-            ApiService.getStationWeathers($stateParams.id, $scope.startDate.toISOString().slice(0,10), $scope.endDate.toISOString().slice(0,10)).success(function(data) {
+            ApiService.getStationDataForChart($stateParams.id, $scope.startDate.toISOString().slice(0,10), $scope.endDate.toISOString().slice(0,10)).success(function(data) {
                 $scope.data = data;
                 //set data to chart
                 $scope.chartConfig.xAxis[0].categories = $scope.data.time;

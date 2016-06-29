@@ -50,7 +50,7 @@
             return $http.get(baseURL + 'station/delete/' + id);
         };
 
-        this.getStationWeathers = function(stationId, startDate, endDate){
+        this.getStationDataForChart = function(stationId, startDate, endDate){
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
     }

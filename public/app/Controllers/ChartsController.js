@@ -14,7 +14,7 @@
         $scope.endDate = new Date();
 
         $scope.loadChartData = function(){
-            ApiService.getStationWeathers($stateParams.id, $scope.startDate.toISOString().slice(0,10), $scope.endDate.toISOString().slice(0,10)).success(function(data) {
+            ApiService.getStationDataForChart($stateParams.id, $scope.startDate.toISOString().slice(0,10), $scope.endDate.toISOString().slice(0,10)).success(function(data) {
                 $scope.data = data;
                 //set data to chart
                 $scope.chartConfig.xAxis[0].categories = $scope.data.time;
