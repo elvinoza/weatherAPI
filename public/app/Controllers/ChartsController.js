@@ -21,6 +21,9 @@
                 $scope.chartConfig.series[1].data = $scope.data.rain;
                 $scope.chartConfig.series[2].data = $scope.data.pressure;
                 $scope.chartConfig.series[3].data = $scope.data.soil_temperature;
+                $scope.chartConfig.series[4].data = $scope.data.soil_humidity;
+                $scope.chartConfig.series[5].data = $scope.data.humidity;
+                $scope.chartConfig.series[6].data = $scope.data.wind_speed;
             }).error(function(error) {
 
             });
@@ -33,10 +36,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Average Monthly Weather Data for Tokyo'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: ''
             },
             xAxis: [{
                 categories: [],
@@ -100,7 +100,52 @@
                     style: {
                         color: Highcharts.getOptions().colors[3]
                     }
+                }
+            }, { // 5 yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Soil Humidity',
+                    style: {
+                        color: Highcharts.getOptions().colors[4]
+                    }
                 },
+                labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[4]
+                    }
+                },
+                opposite: true
+            }, { // 6 yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Humidity',
+                    style: {
+                        color: Highcharts.getOptions().colors[5]
+                    }
+                },
+                labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[5]
+                    }
+                },
+                opposite: true
+            }, { // 7 yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Wind Speed',
+                    style: {
+                        color: Highcharts.getOptions().colors[6]
+                    }
+                },
+                labels: {
+                    format: '{value} km/h',
+                    style: {
+                        color: Highcharts.getOptions().colors[6]
+                    }
+                },
+                opposite: true
             }],
             tooltip: {
                 shared: true
@@ -117,7 +162,7 @@
             series: [{
                 name: 'Temperature',
                 type: 'spline',
-                data: $scope.data.temperature,
+                data: [],
                 tooltip: {
                     valueSuffix: ' °C'
                 }
@@ -125,16 +170,15 @@
                 name: 'Rainfall',
                 type: 'spline',
                 yAxis: 1,
-                data: $scope.data.rain,
+                data: [],
                 tooltip: {
                     valueSuffix: ' mm'
                 }
-
             }, {
                 name: 'Pressure',
                 type: 'spline',
                 yAxis: 2,
-                data: $scope.data.pressure,
+                data: [],
                 marker: {
                     enabled: false
                 },
@@ -142,16 +186,38 @@
                 tooltip: {
                     valueSuffix: ' Pa'
                 }
-
             }, {
                 name: 'Soil temperature',
                 type: 'spline',
-                yAxis: 1,
+                yAxis: 3,
                 data: [],
                 tooltip: {
                     valueSuffix: ' °C'
                 }
-
+            }, {
+                name: 'Soil humidity',
+                type: 'spline',
+                yAxis: 4,
+                data: [],
+                tooltip: {
+                    valueSuffix: ' %'
+                }
+            }, {
+                name: 'Humidity',
+                type: 'spline',
+                yAxis: 5,
+                data: [],
+                tooltip: {
+                    valueSuffix: ' %'
+                }
+            }, {
+                name: 'Wind speed',
+                type: 'spline',
+                yAxis: 6,
+                data: [],
+                tooltip: {
+                    valueSuffix: ' km/h'
+                }
             }]
         };
     };

@@ -1,33 +1,32 @@
-<div class="container">
-    <md-content layout-padding>
-        <div layout-gt-xs="row">
-            <md-input-container>
-                <label>Hour</label>
-                <input ng-model="hour" type="number">
-            </md-input-container>
-            <md-datepicker ng-model="myDate" md-placeholder="Enter date">
-            </md-datepicker>
+<md-content layout-padding>
+    <div layout-gt-xs="row">
+        <md-input-container>
+            <label>Hour</label>
+            <input ng-model="hour" type="number">
+        </md-input-container>
+        <md-datepicker ng-model="myDate" md-placeholder="Enter date">
+        </md-datepicker>
 
+    </div>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button aria-label="Go Back">
+                Go Back
+            </md-button>
+            <h2>
+                <span>Chart</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More">
+                Learn More
+            </md-button>
+            <md-button class="md-fab md-mini" aria-label="Favorite">
+                <md-icon class="material-icons">favorite</md-icon>
+            </md-button>
         </div>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <md-button aria-label="Go Back">
-                    Go Back
-                </md-button>
-                <h2>
-                    <span>Chart</span>
-                </h2>
-                <span flex></span>
-                <md-button class="md-raised" aria-label="Learn More">
-                    Learn More
-                </md-button>
-                <md-button class="md-fab md-mini" aria-label="Favorite">
-                    <md-icon class="material-icons">favorite</md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
-        <highchart id="chart1" config="chartConfig" class="span10"></highchart>
-    </md-content>
-</div>
+    </md-toolbar>
+    <highchart id="chart1" config="chartConfig" class="span10"></highchart>
+</md-content>
+
 
 
