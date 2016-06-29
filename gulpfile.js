@@ -14,6 +14,7 @@ var paths = {
         'public/app/Controllers/EditStationController.js',
         'public/app/Controllers/CreateStationController.js',
         'public/app/Controllers/StationWeathersController.js',
+        'public/app/Controllers/ChartsController.js',
         'public/app/Services/ApiService.js'
     ]
 };
@@ -46,6 +47,8 @@ gulp.task('scripts', function(){
         'resources/lib/angular-material/angular-material.js',
         'resources/lib/angular-loading-bar/src/loading-bar.js',
         'resources/lib/angular-material-data-table/dist/md-data-table.js',
+        'resources/lib/highcharts/highcharts.src.js',
+        'resources/lib/highcharts-ng/dist/highcharts-ng.js',
         'public/app/app.js',
         'public/app/Services/ApiService.js',
         'public/app/Controllers/AuthController.js',
@@ -54,7 +57,8 @@ gulp.task('scripts', function(){
         'public/app/Controllers/UserStationsController.js',
         'public/app/Controllers/EditStationController.js',
         'public/app/Controllers/CreateStationController.js',
-        'public/app/Controllers/StationWeathersController.js'
+        'public/app/Controllers/StationWeathersController.js',
+        'public/app/Controllers/ChartsController.js'
     ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('public/js'));

@@ -49,5 +49,9 @@
         this.deleteStation = function(id){
             return $http.get(baseURL + 'station/delete/' + id);
         };
+
+        this.getStationWeathers = function(stationId, date){
+            return $http.get(baseURL + 'weathers?station_id=' + stationId + '&date=' + date);
+        };
     }
 })();

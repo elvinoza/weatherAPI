@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar', 'md.data.table'])
+        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng'])
         .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
 
             $authProvider.loginUrl = '/api/authenticate';
@@ -45,6 +45,11 @@
                     templateUrl: '../Views/WeathersViews/StationWeathers.html',
                     controller: 'StationWeathersController as stationWeathers'
                 })
+                .state('charts', {
+                    url: '/station/charts/:id',
+                    templateUrl: '../Views/WeathersViews/WeathersChart.html',
+                    controller: 'ChartsController as charts'
+                });
 
             function redirectWhenLoggedOut($q, $injector) {
 

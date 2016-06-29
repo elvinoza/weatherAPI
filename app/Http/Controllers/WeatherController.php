@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Weather\FilterWeathersRequest;
 use App\Services\WeatherService;
+use Illuminate\Http\Request;
 
 class WeatherController extends Controller
 {
@@ -17,5 +19,10 @@ class WeatherController extends Controller
     public function getWeather($id)
     {
         return $this->weatherService->getWeather($id);
+    }
+
+    public function getWeathers(FilterWeathersRequest $request)
+    {
+        return $this->weatherService->getWeathers($request);
     }
 }

@@ -12,7 +12,8 @@
     "angular-flash": "^0.1.14",
     "angular-material-data-table": "^0.10.9",
     "angular-loading-bar": "^0.9.0",
-    "material-design-icons": "^2.2.3"
+    "highcharts-ng": "^0.0.11",
+    "highcharts": "^4.2.5"
   },
   "exportsOverride": {},
   "main": "",
