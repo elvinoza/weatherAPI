@@ -10,10 +10,11 @@
 
         $scope.data = [];
         $scope.show = false;
+        $scope.startDate = new Date();
+        $scope.endDate = new Date();
 
-        $scope.buildChart = function(){
-
-            ApiService.getStationWeathers(1, '2016-05-15').success(function(data) {
+        $scope.loadChartData = function(){
+            ApiService.getStationWeathers($stateParams.id, $scope.startDate.toISOString().slice(0,10), $scope.endDate.toISOString().slice(0,10)).success(function(data) {
                 $scope.data = data;
                 //set data to chart
                 $scope.chartConfig.xAxis[0].categories = $scope.data.time;
@@ -25,11 +26,11 @@
                 $scope.chartConfig.series[5].data = $scope.data.humidity;
                 $scope.chartConfig.series[6].data = $scope.data.wind_speed;
             }).error(function(error) {
-
+                //TODO: handle error's
             });
         };
 
-        $scope.buildChart();
+        $scope.loadChartData();
 
         $scope.chartConfig = {
             chart: {

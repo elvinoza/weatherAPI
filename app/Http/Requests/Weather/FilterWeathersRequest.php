@@ -13,8 +13,8 @@ class FilterWeathersRequest extends Request {
     {
         return [
             'station_id' => 'required',
-            'date' => 'required',
-            'interval' => 'integer'
+            'startDate' => 'required',
+            'endDate' => 'required'
         ];
     }
 
@@ -40,8 +40,8 @@ class FilterWeathersRequest extends Request {
     public function messages(){
         return array(
             'station_id.required' => 'Station id is required.',
-            'date.required' => 'Date is required.',
-            'interval.integer' => 'Interval must be integer.'
+            'startDate.required' => 'Start date is required.',
+            'endDate.required' => 'End date is required.'
         );
     }
 }
