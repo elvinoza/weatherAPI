@@ -88546,7 +88546,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         $scope.endDate = new Date();
 
         $scope.loadChartData = function(){
-            ApiService.getStationDataForChart($stateParams.id, $scope.startDate.toISOString().slice(0,10), $scope.endDate.toISOString().slice(0,10)).success(function(data) {
+            var sDate = $scope.startDate.getFullYear() + '-' + ('0' + ($scope.startDate.getMonth() + 1)).slice(-2) + '-' + ('0' + $scope.startDate.getDate()).slice(-2);
+            var eDate = $scope.endDate.getFullYear() + '-' + ('0' + ($scope.endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + $scope.endDate.getDate()).slice(-2);
+            ApiService.getStationDataForChart($stateParams.id, sDate , eDate).success(function(data) {
+                console.log(data);
                 $scope.data = data;
                 //set data to chart
                 $scope.chartConfig.xAxis[0].categories = $scope.data.time;

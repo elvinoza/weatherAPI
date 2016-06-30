@@ -49,8 +49,7 @@ class WeatherService implements IWeatherService
     {
         $data = $this->weather
             ->where('station_id','=', $request->station_id)
-            ->where('created_at', '>', $request->startDate)
-            ->where('created_at', '<', $request->endDate)
+            ->whereBetween('created_at',[$request->startDate, $request->endDate])
             ->get();
 
         return [
