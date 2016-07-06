@@ -560,5 +560,19 @@ div.label {
   font-weight: bold;
 }
 
+label[for=chartRange]{
+  font-size: 12px;
+  color: rgba(255,255,255,0.87);
+}
+
+#chartDateRange {
+  padding-top: 20px;
+}
+
+input[name=chartRange] {
+  font-size: 12px;
+  color: rgba(255,255,255,0.87);
+}
+
 
 

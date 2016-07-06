@@ -1,22 +1,25 @@
 <md-content layout-padding>
-    <div layout-gt-xs="row">
-        <md-datepicker ng-model="startDate" ng-change="loadChartData()" md-placeholder="Enter date">
-        </md-datepicker>
-        <md-datepicker ng-model="endDate" ng-change="loadChartData()" md-placeholder="Enter date">
-        </md-datepicker>
-    </div>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button aria-label="Go Back">
-                Go Back
+            <div layout="row" id="chartDateRange">
+                <sm-range-picker-input
+                        fname="chartRange"
+                        label="Select data range"
+                        value="date"
+                        form="empForm"
+                        flex="100"
+                        is-required="{{true}}"
+                        format="YYYY-MM-DD"
+                        week-start-day="Monday">
+                </sm-range-picker-input>
+            </div>
+            <md-button ng-click="drawChart()" class="md-raised" aria-label="Go Back">
+                Draw Chart
             </md-button>
-            <h2>
-                <span>Chart</span>
-            </h2>
+            <!--<h2>-->
+                <!--<span>Chart</span>-->
+            <!--</h2>-->
             <span flex></span>
-            <md-button class="md-raised" aria-label="Learn More">
-                Learn More
-            </md-button>
             <md-button class="md-fab md-mini" aria-label="Favorite">
                 <md-icon class="material-icons">favorite</md-icon>
             </md-button>

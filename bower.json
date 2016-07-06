@@ -13,7 +13,8 @@
     "angular-material-data-table": "^0.10.9",
     "angular-loading-bar": "^0.9.0",
     "highcharts-ng": "^0.0.11",
-    "highcharts": "^4.2.5"
+    "highcharts": "^4.2.5",
+    "smDateTimeRangePicker": "^1.6.0"
   },
   "exportsOverride": {},
   "main": "",

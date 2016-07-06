@@ -49,6 +49,8 @@ gulp.task('scripts', function(){
         'resources/lib/angular-material-data-table/dist/md-data-table.js',
         'resources/lib/highcharts/highcharts.src.js',
         'resources/lib/highcharts-ng/dist/highcharts-ng.js',
+        'resources/lib/moment/moment.js',
+        'resources/lib/smDateTimeRangePicker/src/picker.js',
         'public/app/app.js',
         'public/app/Services/ApiService.js',
         'public/app/Controllers/AuthController.js',
@@ -66,9 +68,11 @@ gulp.task('scripts', function(){
 
 gulp.task('css', function() {
     gulp.src(['resources/css/style.scss',
-        'resources/lib/angular-material/angular-material.scss'
+        'resources/lib/angular-material/angular-material.scss',
+        'resources/lib/smDateTimeRangePicker/app/styles/*.scss'
     ])
         .pipe(sass())
+        .pipe(concat('style.css'))
         .pipe(gulp.dest('public/css'));
 });
 

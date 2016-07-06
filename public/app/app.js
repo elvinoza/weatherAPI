@@ -1,7 +1,8 @@
 (function() {
     'use strict';
     angular
-        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng'])
+        .module('app', ['ui.router', 'satellizer', 'angular-flash.service',
+            'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng', 'smDateTimeRangePicker'])
         .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
 
             $authProvider.loginUrl = '/api/authenticate';

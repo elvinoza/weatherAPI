@@ -9,15 +9,12 @@
     function ChartsController($scope, $state, $stateParams, ApiService, $timeout) {
 
         $scope.data = [];
-        $scope.show = false;
-        $scope.startDate = new Date();
-        $scope.endDate = new Date();
+        $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
 
-        $scope.loadChartData = function(){
-            var sDate = $scope.startDate.getFullYear() + '-' + ('0' + ($scope.startDate.getMonth() + 1)).slice(-2) + '-' + ('0' + $scope.startDate.getDate()).slice(-2);
-            var eDate = $scope.endDate.getFullYear() + '-' + ('0' + ($scope.endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + $scope.endDate.getDate()).slice(-2);
-            ApiService.getStationDataForChart($stateParams.id, sDate , eDate).success(function(data) {
-                console.log(data);
+        $scope.drawChart = function(){
+            var dates = $scope.date.split(/[ ,]+/);
+
+            ApiService.getStationDataForChart($stateParams.id, dates[0], dates[1]).success(function(data) {
                 $scope.data = data;
                 //set data to chart
                 $scope.chartConfig.xAxis[0].categories = $scope.data.time;
@@ -33,7 +30,7 @@
             });
         };
 
-        $scope.loadChartData();
+        $scope.drawChart();
 
         $scope.chartConfig = {
             chart: {
