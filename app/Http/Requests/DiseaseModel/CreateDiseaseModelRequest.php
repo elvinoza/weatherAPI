@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Station;
+namespace App\Http\Requests\DiseaseModels;
 
 use App\Http\Requests\Request;
 
-class CreateStationRequest extends Request {
+class CreateDiseaseModelRequest extends Request {
 
     /**
      * Get the validation rules that apply to the request.
@@ -14,9 +14,9 @@ class CreateStationRequest extends Request {
     public function rules()
     {
         return [
-            'name' => 'required|min:3|unique:stations,name',
-            'location' => 'required|max:255',
-            'update_time' => 'required|integer'
+            'name' => 'required|min:3|unique:disease_models,name',
+            'description' => 'required|max:255',
+            'user_id' => 'required|integer'
         ];
     }
 
@@ -44,10 +44,10 @@ class CreateStationRequest extends Request {
             'name.unique' => 'Station name must be unique.',
             'name.required' => 'Station name is required.',
             'name.min' => 'Station name must be more than 3 char.',
-            'location.required' => 'Station location is required.',
-            'location.max' => 'Station location is too long.',
-            'update_time.required' => 'Update time is required.',
-            'update_time.integer' => 'Update time must be integer.'
+            'description.required' => 'Description is required.',
+            'description.max' => 'Description is too long.',
+            'user_id.required' => 'User id is required.',
+            'user_id.integer' => 'User id must be integer.'
         );
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\DiseaseModelService;
+use App\Http\Requests\DiseaseModels\CreateDiseaseModelRequest;
 
 class DiseaseModelController extends Controller
 {
@@ -14,8 +15,12 @@ class DiseaseModelController extends Controller
         $this->diseaseModelService = $diseaseModelService;
     }
 
+    public function create(CreateDiseaseModelRequest $request)
+    {
+        return $this->diseaseModelService->create($request);
+    }
+
     public function change()
     {
-
     }
 }
