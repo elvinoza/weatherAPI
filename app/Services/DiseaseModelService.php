@@ -7,6 +7,7 @@ use App\Models\DiseaseModel;
 interface IDiseaseModelService
 {
     function create($request);
+    function getAllModels();
 }
 
 class DiseaseModelService implements IDiseaseModelService
@@ -26,5 +27,10 @@ class DiseaseModelService implements IDiseaseModelService
         $diseaseModel->user_id = $data->user_id;
         $diseaseModel->save();
         return $diseaseModel;
+    }
+
+    public function getAllModels()
+    {
+        return $this->diseaseModel->all();
     }
 }

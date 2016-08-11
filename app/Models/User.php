@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Station');
     }
+
+    public function diseaseModels()
+    {
+        return $this->hasMany('App\Models\DiseaseModel');
+    }
 }

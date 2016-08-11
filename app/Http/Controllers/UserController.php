@@ -47,4 +47,9 @@ class UserController extends Controller
     {
         return $this->userService->getUserStationsLastData($id);
     }
+
+    public function getUserDiseaseModels($id)
+    {
+        return $this->userService->getUserDiseaseModels($id);
+    }
 }

@@ -20,6 +20,11 @@ class DiseaseModelController extends Controller
         return $this->diseaseModelService->create($request);
     }
 
+    public function getAllModels()
+    {
+        return $this->diseaseModelService->getAllModels();
+    }
+
     public function change()
     {
     }

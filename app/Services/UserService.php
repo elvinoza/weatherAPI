@@ -14,6 +14,7 @@ interface IUserService
     function changeUserPassword($data);
     function getUserStations($id);
     function getUserStationsLastData($id);
+    function getUserDiseaseModels($id);
 }
 
 class UserService implements IUserService
@@ -32,6 +33,7 @@ class UserService implements IUserService
         $user->email = $data->email;
         $user->password = bcrypt($data->password);
         $user->save();
+        return $user;
     }
 
     public function getUser($id)
@@ -87,5 +89,13 @@ class UserService implements IUserService
             return $data;
         }
         return null;
+    }
+
+    public function getUserDiseaseModels($id)
+    {
+        $user = $this->user->find($id);
+        if ($user != null)
+            return $user->diseaseModels;
+        else return emptyArray();
     }
 }

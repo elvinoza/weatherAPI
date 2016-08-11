@@ -35,9 +35,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('station/weathers/{id}/{count?}', 'StationController@getWeathers');
         Route::get('weather/{id}', 'WeatherController@getWeather');
         Route::get('weathers', 'WeatherController@getWeathers');
-        
+
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
+        Route::post('user/models', 'UserController@getUserDiseaseModels');
+
     });
 
 });
