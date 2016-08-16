@@ -38,7 +38,8 @@ Route::group(['middleware' => ['web']], function () {
 
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
-        Route::post('user/models', 'UserController@getUserDiseaseModels');
+        Route::get('user/models/{id}', 'UserController@getUserDiseaseModels');
+        Route::get('disease/models', 'DiseaseModelController@getAllModels');
 
     });
 

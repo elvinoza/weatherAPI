@@ -93150,6 +93150,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                     url: '/station/charts/:id',
                     templateUrl: '../Views/WeathersViews/WeathersChart.html',
                     controller: 'ChartsController as charts'
+                })
+                .state('userModels', {
+                    url: '/user/disease_models/:id',
+                    templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
+                    controller: 'DiseaseModelController as diseaseModels'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -93261,6 +93266,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         this.getStationDataForChart = function(stationId, startDate, endDate){
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
+        };
+
+        this.getUserDiseaseModels = function(id){
+            return $http.get(baseURL + 'user/models/' + id);
         };
     }
 })();
@@ -93484,7 +93493,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('StationWeathersController', StationWeathersController);
 
-    function StationWeathersController($scope, $state, $stateParams, ApiService) {
+    function StationWeathersController($scope, $stateParams, ApiService) {
 
         var vm = this;
 
@@ -93510,6 +93519,36 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
     }
 })();
 
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('DiseaseModelController', DiseaseModelController);
+
+    function DiseaseModelController($scope, $stateParams, ApiService) {
+
+        var vm = this;
+
+        vm.models;
+
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
+        vm.getModels = function(id){
+            ApiService.getUserDiseaseModels(id).success(function(data) {
+                vm.models = data;
+            }).error(function(error) {
+            });
+        };
+
+        vm.getModels($stateParams.id);
+    }
+})();
 (function() {
 
     'use strict';

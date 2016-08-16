@@ -6,7 +6,7 @@
         .module('app')
         .controller('StationWeathersController', StationWeathersController);
 
-    function StationWeathersController($scope, $state, $stateParams, ApiService) {
+    function StationWeathersController($scope, $stateParams, ApiService) {
 
         var vm = this;
 

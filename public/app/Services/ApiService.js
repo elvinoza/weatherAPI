@@ -53,5 +53,9 @@
         this.getStationDataForChart = function(stationId, startDate, endDate){
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
+
+        this.getUserDiseaseModels = function(id){
+            return $http.get(baseURL + 'user/models/' + id);
+        };
     }
 })();

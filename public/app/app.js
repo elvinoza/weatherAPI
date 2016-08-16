@@ -50,6 +50,11 @@
                     url: '/station/charts/:id',
                     templateUrl: '../Views/WeathersViews/WeathersChart.html',
                     controller: 'ChartsController as charts'
+                })
+                .state('userModels', {
+                    url: '/user/disease_models/:id',
+                    templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
+                    controller: 'DiseaseModelController as diseaseModels'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
