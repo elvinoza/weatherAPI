@@ -1,0 +1,23 @@
+<div class="container">
+    <md-content layout-padding>
+        <h2 class="md-toolbar-tools center"><span>Create Disease Model</span></h2>
+        <div>
+            <form name="stationForm">
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Disease Model Name</label>
+                        <input ng-model="model.name">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Description</label>
+                        <input ng-model="model.description">
+                    </md-input-container>
+                </div>
+
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-primary" ng-click="createDiseaseModel.create()">Save</md-button>
+                </div>
+            </form>
+        </div>
+    </md-content>
+</div>

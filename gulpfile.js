@@ -15,7 +15,8 @@ var paths = {
         'public/app/Controllers/CreateStationController.js',
         'public/app/Controllers/StationWeathersController.js',
         'public/app/Controllers/ChartsController.js',
-        'public/app/Controllers/DiseaseModelController.js',
+        'public/app/Controllers/DiseaseModelsController.js',
+        'public/app/Controllers/CreateDiseaseModelController.js',
         'public/app/Services/ApiService.js'
     ]
 };
@@ -61,7 +62,8 @@ gulp.task('scripts', function(){
         'public/app/Controllers/EditStationController.js',
         'public/app/Controllers/CreateStationController.js',
         'public/app/Controllers/StationWeathersController.js',
-        'public/app/Controllers/DiseaseModelController.js',
+        'public/app/Controllers/DiseaseModelsController.js',
+        'public/app/Controllers/CreateDiseaseModelController.js',
         'public/app/Controllers/ChartsController.js'
     ])
         .pipe(concat('all.js'))

@@ -54,7 +54,12 @@
                 .state('userModels', {
                     url: '/user/disease_models/:id',
                     templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
-                    controller: 'DiseaseModelController as diseaseModels'
+                    controller: 'DiseaseModelsController as diseaseModels'
+                })
+                .state('createDiseaseModel', {
+                    url: '/disease/create',
+                    templateUrl: '../Views/DiseaseModelViews/CreateDiseaseModel.html',
+                    controller: 'CreateDiseaseModelController as createDiseaseModel'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {

@@ -93154,7 +93154,12 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                 .state('userModels', {
                     url: '/user/disease_models/:id',
                     templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
-                    controller: 'DiseaseModelController as diseaseModels'
+                    controller: 'DiseaseModelsController as diseaseModels'
+                })
+                .state('createDiseaseModel', {
+                    url: '/disease/create',
+                    templateUrl: '../Views/DiseaseModelViews/CreateDiseaseModel.html',
+                    controller: 'CreateDiseaseModelController as createDiseaseModel'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -93268,8 +93273,14 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
 
+        //Disease
+
         this.getUserDiseaseModels = function(id){
             return $http.get(baseURL + 'user/models/' + id);
+        };
+
+        this.createDiseaseModel = function(diseaseModel){
+            return $http.post(baseURL + 'disease/create', diseaseModel, { headers: { 'Accept': 'Application/json' }});
         };
     }
 })();
@@ -93525,9 +93536,9 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
     angular
         .module('app')
-        .controller('DiseaseModelController', DiseaseModelController);
+        .controller('DiseaseModelsController', DiseaseModelsController);
 
-    function DiseaseModelController($scope, $stateParams, ApiService) {
+    function DiseaseModelsController($state, $scope, $stateParams, ApiService) {
 
         var vm = this;
 
@@ -93543,10 +93554,40 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             ApiService.getUserDiseaseModels(id).success(function(data) {
                 vm.models = data;
             }).error(function(error) {
+
             });
         };
 
+        vm.create = function(){
+
+            $state.go('createDiseaseModel');
+        };
+
         vm.getModels($stateParams.id);
+    }
+})();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('CreateDiseaseModelController', CreateDiseaseModelController);
+
+    function CreateDiseaseModelController($rootScope, $scope, $state, flash, ApiService) {
+        var vm = this;
+        $scope.model = null;
+
+        vm.create = function(){
+            $scope.model.user_id = $rootScope.currentUser.id;
+            ApiService.createDiseaseModel($scope.model).success(function(data) {
+                $scope.model = data;
+                flash.success = "Station created";
+                $state.go('userModels', { id: data.user_id });
+            }).error(function(error) {
+                flash.error = error;
+            });
+        };
     }
 })();
 (function() {

@@ -54,8 +54,14 @@
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
 
+        //Disease
+
         this.getUserDiseaseModels = function(id){
             return $http.get(baseURL + 'user/models/' + id);
+        };
+
+        this.createDiseaseModel = function(diseaseModel){
+            return $http.post(baseURL + 'disease/create', diseaseModel, { headers: { 'Accept': 'Application/json' }});
         };
     }
 })();

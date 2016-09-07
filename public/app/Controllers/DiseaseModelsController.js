@@ -4,9 +4,9 @@
 
     angular
         .module('app')
-        .controller('DiseaseModelController', DiseaseModelController);
+        .controller('DiseaseModelsController', DiseaseModelsController);
 
-    function DiseaseModelController($scope, $stateParams, ApiService) {
+    function DiseaseModelsController($state, $scope, $stateParams, ApiService) {
 
         var vm = this;
 
@@ -22,7 +22,13 @@
             ApiService.getUserDiseaseModels(id).success(function(data) {
                 vm.models = data;
             }).error(function(error) {
+
             });
+        };
+
+        vm.create = function(){
+
+            $state.go('createDiseaseModel');
         };
 
         vm.getModels($stateParams.id);

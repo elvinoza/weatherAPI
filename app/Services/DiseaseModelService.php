@@ -23,7 +23,7 @@ class DiseaseModelService implements IDiseaseModelService
     {
         $diseaseModel = new DiseaseModel();
         $diseaseModel->name = $data->name;
-        $diseaseModel->location = $data->location;
+        $diseaseModel->description = $data->description;
         $diseaseModel->user_id = $data->user_id;
         $diseaseModel->save();
         return $diseaseModel;
