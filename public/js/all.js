@@ -93101,9 +93101,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 (function() {
     'use strict';
     angular
-        .module('app', ['ui.router', 'satellizer', 'angular-flash.service',
-            'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng', 'smDateTimeRangePicker'])
-        .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive',
+            'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng', 'smDateTimeRangePicker', 'directives'])
+        .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, $logProvider) {
+
+            $logProvider.debugEnabled(true);
 
             $authProvider.loginUrl = '/api/authenticate';
 
@@ -93273,6 +93275,12 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
 
+        //Clsf's
+
+        this.getClsfParams = function(){
+            return $http.get(baseURL + 'clsf/params');
+        };
+
         //Disease
 
         this.getUserDiseaseModels = function(id){
@@ -93283,6 +93291,48 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             return $http.post(baseURL + 'disease/create', diseaseModel, { headers: { 'Accept': 'Application/json' }});
         };
     }
+})();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('directives', [])
+        .directive('addconditionbutton', function() {
+            return {
+                restrict: "E",
+                template: "<md-button conditionview style='width: 100%' class='md-raised md-primary''>Add Condition</md-button>"
+            }
+        })
+        .directive('conditionview', function($templateRequest, $compile) {
+            return {
+                restrict: "E",
+
+                template: "<md-button ng-click='add()' conditionview style='width: 100%' class='md-raised md-primary''>Add Condition</md-button>",
+                link: function ($scope, $element, $templateCache, ApiService) {
+                    $templateCache.remove('../../Views/DiseaseModelViews/ConditionView.html');
+                    //$scope.count = 0;
+                    $scope.clsfWeatherParams = [];
+
+                    ApiService.getClsfParams().success(function(data) {
+                        $scope.clsfWeatherParams = data;
+                    });
+
+                    $scope.add = function() {
+                        $scope.count++;
+                        //var data = $templateCache.get('../../Views/DiseaseModelViews/ConditionView.html');
+                        //var templ = angular.element(data);
+                        //$element.append(templ);
+                        //$compile(templ)($scope);
+                        $templateRequest('../../Views/DiseaseModelViews/ConditionView.html').then(function(html){
+                            var template = angular.element(html);
+                            $element.append(template);
+                            $compile(template)($scope);
+                        });
+                    };
+                }
+            };
+        });
 })();
 (function() {
 
@@ -93575,15 +93625,56 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .controller('CreateDiseaseModelController', CreateDiseaseModelController);
 
     function CreateDiseaseModelController($rootScope, $scope, $state, flash, ApiService) {
-        var vm = this;
-        $scope.model = null;
 
-        vm.create = function(){
+        $scope.showConditionsForms = false
+        $scope.clsfWeatherParams = [];
+        $scope.model = null;
+        $scope.id = null;
+
+        $scope.conditions = [
+            {
+                disease_model_id: $scope.id,
+                clsf_weather_parameter: null,
+                start_range: null,
+                end_range: null,
+                constant: null,
+                operator: null,
+                time: null
+            }];
+
+        //$scope.count = 0;
+
+        $scope.getView = function(){
+            return '../../Views/DiseaseModelViews/ConditionView.html'
+        };
+
+        $scope.clsfWeatherParams = [];
+
+        ApiService.getClsfParams().success(function(data) {
+            $scope.clsfWeatherParams = data;
+        });
+
+        $scope.add = function(){
+            $scope.conditions.push({
+                disease_model_id: $scope.id,
+                clsf_weather_parameter: null,
+                start_range: null,
+                end_range: null,
+                constant: null,
+                operator: null,
+                time: null
+            });
+        };
+
+
+        $scope.create = function(){
             $scope.model.user_id = $rootScope.currentUser.id;
             ApiService.createDiseaseModel($scope.model).success(function(data) {
                 $scope.model = data;
-                flash.success = "Station created";
-                $state.go('userModels', { id: data.user_id });
+                flash.success = "Model created";
+
+                //vm.OpenCondition();
+                //$state.go('userModels', { id: data.user_id });
             }).error(function(error) {
                 flash.error = error;
             });

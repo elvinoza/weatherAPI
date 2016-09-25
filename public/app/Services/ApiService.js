@@ -54,6 +54,12 @@
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
 
+        //Clsf's
+
+        this.getClsfParams = function(){
+            return $http.get(baseURL + 'clsf/params');
+        };
+
         //Disease
 
         this.getUserDiseaseModels = function(id){

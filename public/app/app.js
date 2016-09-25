@@ -1,9 +1,11 @@
 (function() {
     'use strict';
     angular
-        .module('app', ['ui.router', 'satellizer', 'angular-flash.service',
-            'angular-flash.flash-alert-directive', 'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng', 'smDateTimeRangePicker'])
-        .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+        .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive',
+            'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng', 'smDateTimeRangePicker', 'directives'])
+        .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, $logProvider) {
+
+            $logProvider.debugEnabled(true);
 
             $authProvider.loginUrl = '/api/authenticate';
 

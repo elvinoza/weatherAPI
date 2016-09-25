@@ -1,6 +1,7 @@
+<!--<conditionview></conditionview>-->
 <div class="container">
     <md-content layout-padding>
-        <h2 class="md-toolbar-tools center"><span>Create Disease Model</span></h2>
+        <h2 class="md-toolbar-tools center"><span>Create Disease Model {{ model.id }}</span></h2>
         <div>
             <form name="stationForm">
                 <div layout-gt-sm="row">
@@ -15,9 +16,26 @@
                 </div>
 
                 <div layout="row" layout-align="center center" style="padding-top:20px;">
-                    <md-button style="width: 100%" class="md-raised md-primary" ng-click="createDiseaseModel.create()">Save</md-button>
+                    <md-button style="width: 100%" class="md-raised md-primary" ng-if="!model.id" ng-click="createDiseaseModel.create()">Save</md-button>
                 </div>
             </form>
         </div>
+
+        <div ng-if="model.id">
+            <div ng-repeat="condition in conditions" ng-include="getView()">
+                <!-- Dynamic section template used -->
+            </div>
+            <!--<addconditionbutton></addconditionbutton>-->
+            <!--<div id="space-for-conditions"></div>-->
+        </div>
+
     </md-content>
+</div>
+
+<div layout="row" layout-align="center center" style="padding-top:20px;">
+    <md-button style="width: 100%" class="md-raised md-primary" ng-if="!model.id" ng-click="add()">add</md-button>
+</div>
+
+<div ng-repeat="condition in conditions" ng-include="getView()">
+    <!-- Dynamic section template used -->
 </div>

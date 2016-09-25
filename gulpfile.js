@@ -7,6 +7,7 @@ var watch = require('gulp-watch');
 var paths = {
     scripts: [
         'public/app/app.js',
+        'public/app/Directives/Directives.js',
         'public/app/Controllers/AuthController.js',
         'public/app/Controllers/LatestDataController.js',
         'public/app/Controllers/UserDetailsController.js',
@@ -55,6 +56,7 @@ gulp.task('scripts', function(){
         'resources/lib/smDateTimeRangePicker/src/picker.js',
         'public/app/app.js',
         'public/app/Services/ApiService.js',
+        'public/app/Directives/Directives.js',
         'public/app/Controllers/AuthController.js',
         'public/app/Controllers/LatestDataController.js',
         'public/app/Controllers/UserDetailsController.js',
