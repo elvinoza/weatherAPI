@@ -8,6 +8,7 @@ interface IDiseaseModelService
 {
     function create($request);
     function getAllModels();
+    function getModelConditions($id);
 }
 
 class DiseaseModelService implements IDiseaseModelService
@@ -32,5 +33,13 @@ class DiseaseModelService implements IDiseaseModelService
     public function getAllModels()
     {
         return $this->diseaseModel->all();
+    }
+
+    public function getModelConditions($id)
+    {
+        $model = $this->diseaseModel->find($id);
+        if($model != null)
+            return $model->conditions();
+
     }
 }

@@ -6,31 +6,26 @@
         .module('app')
         .controller('CreateDiseaseModelController', CreateDiseaseModelController);
 
-    function CreateDiseaseModelController($rootScope, $scope, $state, flash, ApiService) {
+    function CreateDiseaseModelController($rootScope, $state, $scope, flash, ApiService) {
 
         $scope.showConditionsForms = false
         $scope.clsfWeatherParams = [];
         $scope.model = null;
-        $scope.id = null;
+        $scope.conditionNr = 1;
 
-        $scope.conditions = [
-            {
-                disease_model_id: $scope.id,
-                clsf_weather_parameter: null,
-                start_range: null,
-                end_range: null,
-                constant: null,
-                operator: null,
-                time: null
-            }];
+        $scope.operators = [{
+            value: true,
+            name: 'More than'
+        }, {
+            value: false,
+            name: 'Lest than'
+        }];
 
-        //$scope.count = 0;
+        $scope.conditions = [];
 
         $scope.getView = function(){
             return '../../Views/DiseaseModelViews/ConditionView.html'
         };
-
-        $scope.clsfWeatherParams = [];
 
         ApiService.getClsfParams().success(function(data) {
             $scope.clsfWeatherParams = data;
@@ -38,16 +33,18 @@
 
         $scope.add = function(){
             $scope.conditions.push({
-                disease_model_id: $scope.id,
+                id: $scope.conditionNr,
+                disease_model_id: $scope.model.id,
                 clsf_weather_parameter: null,
+                date_range: true,
                 start_range: null,
                 end_range: null,
                 constant: null,
                 operator: null,
-                time: null
+                time: null,
+                conditionNr: $scope.conditionNr++
             });
         };
-
 
         $scope.create = function(){
             $scope.model.user_id = $rootScope.currentUser.id;
@@ -55,11 +52,37 @@
                 $scope.model = data;
                 flash.success = "Model created";
 
-                //vm.OpenCondition();
-                //$state.go('userModels', { id: data.user_id });
+                $scope.conditions.push({
+                    id: $scope.conditionNr,
+                    disease_model_id: $scope.model.id,
+                    clsf_weather_parameter: null,
+                    date_range: true,
+                    start_range: null,
+                    end_range: null,
+                    constant: null,
+                    operator: null,
+                    time: null,
+                    conditionNr: $scope.conditionNr++
+                });
             }).error(function(error) {
                 flash.error = error;
             });
+        };
+
+        $scope.update = function(){
+            $scope.model.user_id = $rootScope.currentUser.id;
+            var cond = angular.toJson({ conditions: $scope.conditions });
+
+            ApiService.createDiseaseModelConditions(cond).success(function(data) {
+                $state.go('userModels', { id: $scope.model.user_id });
+            }).error(function(error) {
+                flash.error = error;
+            });
+        };
+
+        $scope.delete = function(condition){
+            $scope.conditions.splice($scope.conditions.indexOf(condition),1);
+            console.log($scope.conditions);
         };
     }
 })();

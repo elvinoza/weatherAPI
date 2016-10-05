@@ -15,27 +15,32 @@
                     </md-input-container>
                 </div>
 
-                <div layout="row" layout-align="center center" style="padding-top:20px;">
-                    <md-button style="width: 100%" class="md-raised md-primary" ng-if="!model.id" ng-click="createDiseaseModel.create()">Save</md-button>
+                <div ng-if="model.id">
+                    <div layout="row" layout-align="center center" style="padding-top:20px;">
+                        <md-button style="width: 100%" class="md-raised md-primary" ng-click="add()">Add New Condition</md-button>
+                    </div>
+
+                    <div ng-repeat="condition in conditions" ng-include="getView()">
+                    </div>
                 </div>
+
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-primary" ng-if="!model.id" ng-click="create()">Save</md-button>
+                </div>
+
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-primary" ng-if="model.id" ng-click="update()">Update</md-button>
+                </div>
+
             </form>
         </div>
 
-        <div ng-if="model.id">
-            <div ng-repeat="condition in conditions" ng-include="getView()">
-                <!-- Dynamic section template used -->
-            </div>
-            <!--<addconditionbutton></addconditionbutton>-->
-            <!--<div id="space-for-conditions"></div>-->
-        </div>
-
+        <!--<div ng-if="model.id">-->
+            <!--<div ng-repeat="condition in conditions" ng-include="getView()">-->
+                <!--&lt;!&ndash; Dynamic section template used &ndash;&gt;-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<addconditionbutton></addconditionbutton>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div id="space-for-conditions"></div>&ndash;&gt;-->
+        <!--</div>-->
     </md-content>
-</div>
-
-<div layout="row" layout-align="center center" style="padding-top:20px;">
-    <md-button style="width: 100%" class="md-raised md-primary" ng-if="!model.id" ng-click="add()">add</md-button>
-</div>
-
-<div ng-repeat="condition in conditions" ng-include="getView()">
-    <!-- Dynamic section template used -->
 </div>

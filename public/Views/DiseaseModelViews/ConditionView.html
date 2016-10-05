@@ -1,6 +1,56 @@
-<div>
-    <h2 class="md-toolbar-tools center"><span>Condition{{ count }}</span></h2>
-    <md-select ng-model="someModel" placeholder="Select a state">
-        <md-option ng-value="opt" ng-repeat="opt in clsfWeatherParams">{{ opt }}</md-option>
-    </md-select>
-</div>
+ <h2 class="md-toolbar-tools center"><span>Condition Nr. {{ condition.conditionNr }}</span></h2>
+
+ <md-content layout-padding>
+    <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Parameter</label>
+            <md-select ng-model="condition.clsf_weather_parameter" placeholder="Select a parameter">
+                <md-option ng-value="param.id" ng-repeat="param in clsfWeatherParams">{{ param.name }}</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <md-checkbox ng-model="condition.date_range" aria-label="Finished?">
+                Range ?
+            </md-checkbox>
+        </md-input-container>
+    </div>
+
+    <div layout-gt-xs="row" ng-if="condition.date_range">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>From</label>
+            <input numeric ng-model="condition.start_range">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>To</label>
+            <input numeric ng-model="condition.end_range">
+        </md-input-container>
+    </div>
+
+     <div layout-gt-xs="row" ng-if="!condition.date_range">
+         <md-input-container class="md-block" flex-gt-sm>
+             <label>Fixed</label>
+             <md-select ng-model="condition.operator" placeholder="Select Operator">
+                 <md-option ng-value="operator.value" ng-repeat="operator in operators">{{ operator.name }}</md-option>
+             </md-select>
+         </md-input-container>
+
+         <md-input-container class="md-block" flex-gt-sm>
+             <label>Fixed</label>
+             <input numeric ng-model="condition.constant">
+         </md-input-container>
+     </div>
+
+     <div layout-gt-xs="row">
+         <md-input-container class="md-block" flex-gt-sm>
+             <label>Interval In Hours</label>
+             <input numeric ng-model="condition.time">
+         </md-input-container>
+     </div>
+
+     <div layout="row" layout-align="center center" style="padding-top:20px;">
+         <md-button style="width: 100%" class="md-raised md-warn" ng-click="delete(condition)">Delete Condition</md-button>
+     </div>
+
+</md-content>

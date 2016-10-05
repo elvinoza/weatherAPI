@@ -38,6 +38,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
+        Route::post('disease/createConditions', 'DiseaseModelController@createConditions');
         Route::get('user/models/{id}', 'UserController@getUserDiseaseModels');
         Route::get('disease/models', 'DiseaseModelController@getAllModels');
         Route::get('clsf/params', 'ClsfController@getAllParameters');
