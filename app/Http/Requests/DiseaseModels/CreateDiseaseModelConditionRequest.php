@@ -67,21 +67,14 @@ class CreateDiseaseModelConditionRequest extends Request {
             'conditions.*.clsf_weather_parameter.integer' => 'clsf_weather_parameter must be integer.',
             'conditions.*.date_range.required' => 'date_range is required.',
             'conditions.*.date_range.boolean' => 'date_range must be boolean.',
-
-
             'conditions.*.start_range.required' => 'start_range is required.',
             'conditions.*.start_range.numeric' => 'date_range must be numeric.',
-
             'conditions.*.end_range.required' => 'end_range is required.',
             'conditions.*.end_range.numeric' => 'end_range must be numeric.',
-
             'conditions.*.constant.required' => 'constant is required.',
             'conditions.*.constant.numeric' => 'constant must be numeric.',
-
             'conditions.*.operator.required' => 'operator is required.',
             'conditions.*.operator.boolean' => 'operator must be boolean.',
-
-
             'conditions.*.time.required' => 'Time is required.',
             'conditions.*.time.integer' => 'Time must be integer.',
         );

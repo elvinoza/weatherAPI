@@ -71,7 +71,6 @@
         };
 
         this.createDiseaseModelConditions = function(diseaseModelConditions){
-            console.log(diseaseModelConditions);
             return $http.post(baseURL + 'disease/createConditions', diseaseModelConditions, { headers: { 'Accept': 'Application/json' }});
         };
     }

@@ -8,7 +8,6 @@
 
     function CreateDiseaseModelController($rootScope, $state, $scope, flash, ApiService) {
 
-        $scope.showConditionsForms = false
         $scope.clsfWeatherParams = [];
         $scope.model = null;
         $scope.conditionNr = 1;
