@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class DiseaseCondition extends Model
 {
     /**
+     * The custom attributes.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'date_range'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -30,6 +39,14 @@ class DiseaseCondition extends Model
      */
     public function weatherParameter()
     {
-        return $this->hasOne('App\Models\ClsfWeatherParameter');
+        return $this->morphOne('App\Models\ClsfWeatherParameter', 'parameter');
+    }
+
+    function getDateRangeAttribute() {
+        if ($this->start_range) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -7,6 +7,7 @@ use App\Models\DiseaseCondition;
 interface IDiseaseModelConditionService
 {
     function createConditions($data);
+    function updateConditions($conditions);
 }
 
 class DiseaseModelConditionService implements IDiseaseModelConditionService
@@ -40,5 +41,26 @@ class DiseaseModelConditionService implements IDiseaseModelConditionService
         }
 
         return response(['success' => true], 200);
+    }
+
+    public function updateConditions($conditions)
+    {
+        foreach($conditions as $condition)
+        {
+            $diseaseCondition = $this->diseaseCondition->find($condition->id);
+
+            $diseaseCondition->clsf_weather_parameter = $condition->clsf_weather_parameter;
+
+            if($condition->date_range){
+                $diseaseCondition->start_range = $condition->start_range;
+                $diseaseCondition->end_range = $condition->end_range;
+            } else {
+                $diseaseCondition->constant = $condition->constant;
+                $diseaseCondition->operator = $condition->operator;
+            }
+
+            $diseaseCondition->time = $condition->time;
+            $diseaseCondition->save();
+        }
     }
 }

@@ -31,11 +31,14 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="weather" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, weather) in diseaseModels.models | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr md-row md-select="diseaseModel" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, diseaseModel) in diseaseModels.models | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{index + 1}}</td>
-                    <td md-cell>{{weather.name}}</td>
-                    <td md-cell>{{weather.description}}</td>
-                    <td md-cell>{{weather.created_at}}</td>
+                    <td md-cell>{{diseaseModel.name}}</td>
+                    <td md-cell>{{diseaseModel.description}}</td>
+                    <td md-cell>{{diseaseModel.created_at}}</td>
+                    <td md-cell ng-click="diseaseModels.editModel($event, diseaseModel)">
+                        <md-icon>edit</md-icon>
+                    </td>
                 </tr>
                 </tbody>
             </table>

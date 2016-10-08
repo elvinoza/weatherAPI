@@ -27,10 +27,14 @@
         };
 
         vm.create = function(){
-
             $state.go('createDiseaseModel');
+        };
+
+        vm.editModel = function(event, item) {
+            $state.go('editDiseaseModel', { id: item.id });
         };
 
         vm.getModels($stateParams.id);
     }
 })();
+

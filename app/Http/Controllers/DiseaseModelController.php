@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DiseaseModels\UpdateDiseaseModelWithConditionsRequest;
 use App\Services\DiseaseModelConditionService;
 use App\Services\DiseaseModelService;
 use App\Http\Requests\DiseaseModels\CreateDiseaseModelRequest;
@@ -34,6 +35,17 @@ class DiseaseModelController extends Controller
     public function getAllModels()
     {
         return $this->diseaseModelService->getAllModels();
+    }
+
+    public function getModel($id)
+    {
+        return $this->diseaseModelService->getModelWithConditions($id);
+    }
+
+    public function update(UpdateDiseaseModelWithConditionsRequest $request){
+        $model = json_decode($request->getContent());
+
+        return $this->diseaseModelService->update($model);
     }
 
     public function change()

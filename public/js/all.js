@@ -93162,6 +93162,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                     url: '/disease/create',
                     templateUrl: '../Views/DiseaseModelViews/CreateDiseaseModel.html',
                     controller: 'CreateDiseaseModelController as createDiseaseModel'
+                })
+                .state('editDiseaseModel', {
+                    url: '/disease/edit/:id',
+                    templateUrl: '../Views/DiseaseModelViews/EditDiseaseModel.html',
+                    controller: 'EditDiseaseModelController as editDiseaseModel'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -93292,8 +93297,15 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         };
 
         this.createDiseaseModelConditions = function(diseaseModelConditions){
-            console.log(diseaseModelConditions);
             return $http.post(baseURL + 'disease/createConditions', diseaseModelConditions, { headers: { 'Accept': 'Application/json' }});
+        };
+
+        this.getDiseaseModelById = function(id){
+            return $http.get(baseURL + 'disease/' + id);
+        };
+
+        this.updateDiseaseModel = function(diseaseModel){
+            return $http.post(baseURL + 'disease/update', diseaseModel, { headers: { 'Accept': 'Application/json' }});
         };
     }
 })();
@@ -93614,13 +93626,18 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         };
 
         vm.create = function(){
-
             $state.go('createDiseaseModel');
+        };
+
+        vm.editModel = function(event, item) {
+            $state.go('editDiseaseModel', { id: item.id });
         };
 
         vm.getModels($stateParams.id);
     }
 })();
+
+
 (function() {
 
     'use strict';
@@ -93631,7 +93648,6 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
     function CreateDiseaseModelController($rootScope, $state, $scope, flash, ApiService) {
 
-        $scope.showConditionsForms = false
         $scope.clsfWeatherParams = [];
         $scope.model = null;
         $scope.conditionNr = 1;
@@ -93707,6 +93723,46 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             $scope.conditions.splice($scope.conditions.indexOf(condition),1);
             console.log($scope.conditions);
         };
+    }
+})();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('EditDiseaseModelController', EditDiseaseModelController);
+
+    function EditDiseaseModelController($rootScope, $stateParams, $state, $scope, ApiService) {
+
+        $scope.model = null;
+
+        ApiService.getClsfParams().success(function(data) {
+            $scope.clsfWeatherParams = data;
+        });
+
+        $scope.getDiseaseModel = function($id){
+            ApiService.getDiseaseModelById($id).success(function(data) {
+                $scope.model = data;
+            }).error(function(error) {
+                //display some error's
+            });
+        };
+
+        $scope.update = function() {
+
+            ApiService.updateDiseaseModel($scope.model).success(function(data) {
+                $scope.model = data;
+            }).error(function(error) {
+                //display some error's
+            });
+        };
+
+        $scope.getView = function(){
+            return '../../Views/DiseaseModelViews/ConditionView.html'
+        };
+
+        $scope.getDiseaseModel($stateParams.id);
     }
 })();
 (function() {

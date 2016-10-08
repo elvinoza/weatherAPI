@@ -21,4 +21,8 @@ class ClsfWeatherParameter extends Model {
     protected $fillable = [
         'name'
     ];
+
+    public function parameter(){
+        return "asdasd";
+    }
 }

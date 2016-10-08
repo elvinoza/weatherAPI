@@ -73,5 +73,13 @@
         this.createDiseaseModelConditions = function(diseaseModelConditions){
             return $http.post(baseURL + 'disease/createConditions', diseaseModelConditions, { headers: { 'Accept': 'Application/json' }});
         };
+
+        this.getDiseaseModelById = function(id){
+            return $http.get(baseURL + 'disease/' + id);
+        };
+
+        this.updateDiseaseModel = function(diseaseModel){
+            return $http.post(baseURL + 'disease/update', diseaseModel, { headers: { 'Accept': 'Application/json' }});
+        };
     }
 })();

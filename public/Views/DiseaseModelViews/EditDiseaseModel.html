@@ -19,18 +19,13 @@
                         <md-button style="width: 100%" class="md-raised md-primary" ng-click="add()">Add New Condition</md-button>
                     </div>
 
-                    <div ng-repeat="condition in conditions" ng-include="getView()">
+                    <div ng-repeat="condition in model.conditions" ng-include="getView()">
                     </div>
-                </div>
-
-                <div layout="row" layout-align="center center" style="padding-top:20px;">
-                    <md-button style="width: 100%" class="md-raised md-primary" ng-if="!model.id" ng-click="create()">Save</md-button>
                 </div>
 
                 <div layout="row" layout-align="center center" style="padding-top:20px;">
                     <md-button style="width: 100%" class="md-raised md-primary" ng-if="model.id" ng-click="update()">Update</md-button>
                 </div>
-
             </form>
         </div>
     </md-content>
