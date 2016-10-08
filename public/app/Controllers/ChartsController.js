@@ -6,7 +6,7 @@
         .module('app')
         .controller('ChartsController', ChartsController);
 
-    function ChartsController($scope, $state, $stateParams, ApiService, $timeout) {
+    function ChartsController($scope, $stateParams, ApiService, $timeout) {
 
         $scope.data = [];
         $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
@@ -223,4 +223,3 @@
         };
     };
 })();
-

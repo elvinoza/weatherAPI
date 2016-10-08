@@ -6,7 +6,7 @@
         .module('app')
         .controller('EditDiseaseModelController', EditDiseaseModelController);
 
-    function EditDiseaseModelController($rootScope, $stateParams, $state, $scope, ApiService) {
+    function EditDiseaseModelController($stateParams, $scope, ApiService) {
 
         $scope.model = null;
 

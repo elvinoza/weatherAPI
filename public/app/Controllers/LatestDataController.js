@@ -6,7 +6,7 @@
         .module('app')
         .controller('LatestDataController', LatestDataController);
 
-    function LatestDataController($scope, $rootScope, $state, ApiService) {
+    function LatestDataController($scope, $rootScope, ApiService) {
 
         $scope.weathers = [];
 
