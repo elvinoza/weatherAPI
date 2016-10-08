@@ -93412,7 +93412,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('LatestDataController', LatestDataController);
 
-    function LatestDataController($scope, $rootScope, $state, ApiService) {
+    function LatestDataController($scope, $rootScope, ApiService) {
 
         $scope.weathers = [];
 
@@ -93733,7 +93733,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('EditDiseaseModelController', EditDiseaseModelController);
 
-    function EditDiseaseModelController($rootScope, $stateParams, $state, $scope, ApiService) {
+    function EditDiseaseModelController($stateParams, $scope, ApiService) {
 
         $scope.model = null;
 
@@ -93773,7 +93773,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('ChartsController', ChartsController);
 
-    function ChartsController($scope, $state, $stateParams, ApiService, $timeout) {
+    function ChartsController($scope, $stateParams, ApiService, $timeout) {
 
         $scope.data = [];
         $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
@@ -93990,4 +93990,3 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         };
     };
 })();
-
