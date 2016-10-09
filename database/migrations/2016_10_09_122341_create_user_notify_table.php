@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotificationsTable extends Migration
+class CreateUserNotifyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,11 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('user_notify', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('disease_model_id');
-            $table->string('short_message');
-            $table->string('full_message');
+            $table->integer('count');
             $table->boolean('is_viewed');
-            $table->boolean('is_read');
-            $table->boolean('is_valid');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('notifications');
+        Schema::drop('user_notify');
     }
 }
