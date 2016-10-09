@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
     /**
      * The attributes that are mass assignable.
      *
@@ -32,5 +33,15 @@ class User extends Authenticatable
     public function diseaseModels()
     {
         return $this->hasMany('App\Models\DiseaseModel');
+    }
+
+    public function notificationsInfo()
+    {
+        return $this->hasOne('App\Models\Notification');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notification');
     }
 }

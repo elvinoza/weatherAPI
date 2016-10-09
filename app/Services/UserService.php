@@ -15,6 +15,7 @@ interface IUserService
     function getUserStations($id);
     function getUserStationsLastData($id);
     function getUserDiseaseModels($id);
+    function getUserNotifications($id);
 }
 
 class UserService implements IUserService
@@ -97,5 +98,12 @@ class UserService implements IUserService
         if ($user != null)
             return $user->diseaseModels;
         else return emptyArray();
+    }
+
+    public function getUserNotifications($id)
+    {
+        $user = $this->user->find($id);
+        if ($user != null)
+            return $user->notifications->get(5);
     }
 }

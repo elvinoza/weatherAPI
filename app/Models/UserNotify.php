@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Station extends Model {
+class UserNotify extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'stations';
+    protected $table = 'user_notify';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,7 @@ class Station extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'location', 'update_time', 'isValid', 'app_key'
+        'user_id', 'count', 'is_viewed'
     ];
 
     /**
@@ -31,10 +31,5 @@ class Station extends Model {
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    public function weathers()
-    {
-        return $this->hasMany('App\Models\Weather');
     }
 }

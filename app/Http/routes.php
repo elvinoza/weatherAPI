@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('authenticate', 'AuthenticateController@authenticate');
         Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
         Route::get('user/{id}', 'UserController@getUser');
-        Route::post('createuser', 'UserController@createUser');
+        Route::post('user/create', 'UserController@createUser');
         Route::post('user/{id}', 'UserController@updateUser');
         Route::post('password', 'UserController@changeUserPassword');
         Route::get('user/stations/{id}', 'UserController@getUserStations');
@@ -36,6 +36,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('weather/{id}', 'WeatherController@getWeather');
         Route::get('weathers', 'WeatherController@getWeathers');
 
+        //Notifications
+        Route::get('user/notifications/{id}', 'UserController@getUserNotifications');
+        
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
         Route::post('disease/update', 'DiseaseModelController@update');
