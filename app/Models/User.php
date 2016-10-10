@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function notificationsInfo()
     {
-        return $this->hasOne('App\Models\Notification');
+        return $this->hasOne('App\Models\UserNotify');
     }
 
     public function notifications()

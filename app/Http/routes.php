@@ -38,7 +38,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Notifications
         Route::get('user/notifications/{id}', 'UserController@getUserNotifications');
-        
+
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
         Route::post('disease/update', 'DiseaseModelController@update');
