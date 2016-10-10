@@ -33,3 +33,6 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
     }
 }
+
+//php artisan make:seeder XXXTableSeeder
+//php artisan db:seed --class=XXXTableSeeder
