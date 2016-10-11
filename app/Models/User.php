@@ -8,6 +8,15 @@ class User extends Authenticatable
 {
 
     /**
+     * The custom attributes.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'user_not'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -35,7 +44,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\DiseaseModel');
     }
 
-    public function notificationsInfo()
+    public function userNotify()
     {
         return $this->hasOne('App\Models\UserNotify');
     }
@@ -43,5 +52,10 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->hasMany('App\Models\Notification');
+    }
+
+    public function getUserNotAttribute()
+    {
+        return $this->userNotify;
     }
 }

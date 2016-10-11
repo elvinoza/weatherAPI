@@ -35,7 +35,7 @@
 
                     <li class="xn-icon-button">
                         <a><span class="fa fa-comments"></span></a>
-                        <div class="informer informer-danger">4</div>
+                        <div class="informer informer-danger">{{ currentUser.user_notify.count }}</div>
                         <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><span class="fa fa-comments"></span> Messages</h3>
@@ -86,7 +86,7 @@
         </div>
         <ui-view></ui-view>
     </body>
-    {{ currentUser }}
+
 <script type="application/javascript">
 
     //notification toolbar
