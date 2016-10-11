@@ -93,7 +93,9 @@
             $httpProvider.interceptors.push('redirectWhenLoggedOut');
             $authProvider.loginUrl = '/api/authenticate';
         })
-        .run(function($rootScope, $state, $auth) {
+        .run(function($rootScope, $state, $auth, ApiService) {
+
+            $rootScope.notifications = [];
 
             $rootScope.$on('$stateChangeStart', function(event, toState) {
                 var user = JSON.parse(localStorage.getItem('user'));
@@ -116,6 +118,14 @@
                     $rootScope.authenticated = false;
                     $rootScope.currentUser = null;
                     $state.go('auth');
+                });
+            };
+
+            $rootScope.getUserNotifications = function(){
+                ApiService.getUserNotifications($rootScope.currentUser.id).success(function(data){
+                    $rootScope.notifications = data;
+                }).error(function(error) {
+
                 });
             };
 

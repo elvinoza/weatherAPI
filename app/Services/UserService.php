@@ -104,6 +104,6 @@ class UserService implements IUserService
     {
         $user = $this->user->find($id);
         if ($user != null)
-            return $user->notifications->get(5);
+            return $user->notifications()->take(5)->get();
     }
 }

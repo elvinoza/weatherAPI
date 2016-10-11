@@ -93193,7 +93193,9 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             $httpProvider.interceptors.push('redirectWhenLoggedOut');
             $authProvider.loginUrl = '/api/authenticate';
         })
-        .run(function($rootScope, $state, $auth) {
+        .run(function($rootScope, $state, $auth, ApiService) {
+
+            $rootScope.notifications = [];
 
             $rootScope.$on('$stateChangeStart', function(event, toState) {
                 var user = JSON.parse(localStorage.getItem('user'));
@@ -93216,6 +93218,14 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                     $rootScope.authenticated = false;
                     $rootScope.currentUser = null;
                     $state.go('auth');
+                });
+            };
+
+            $rootScope.getUserNotifications = function(){
+                ApiService.getUserNotifications($rootScope.currentUser.id).success(function(data){
+                    $rootScope.notifications = data;
+                }).error(function(error) {
+
                 });
             };
 
@@ -93278,6 +93288,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         this.getStationDataForChart = function(stationId, startDate, endDate){
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
+        };
+
+        this.getUserNotifications = function(id){
+            return $http.get(baseURL + 'user/notifications/' + id);
         };
 
         //Clsf's
