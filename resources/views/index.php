@@ -31,10 +31,10 @@
             </div>
 
             <div ng-if="authenticated" class="nav-buttons">
-                <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="list-style: none">
+                <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="list-style: none; background: transparent;">
 
                     <li class="xn-icon-button">
-                        <a><span class="fa fa-comments"></span></a>
+                        <a><md-icon>notifications</md-icon></a>
                         <div class="informer informer-danger">{{ currentUser.user_notify.count }}</div>
                         <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                             <div class="panel-heading">
