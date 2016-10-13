@@ -1596,10 +1596,29 @@ ul.panel-controls > li > .dropdown-menu:before {
 .list-group-item {
   border-color: #E5E5E5;
 }
+
+//#ffd79a - on hover
+//#ffebcd - neperskaityta
+//#F9F9F9 - perskaityta
+
 a.list-group-item:hover,
 a.list-group-item:focus {
+  background: #ffd79a;
+}
+
+a.list-group-item {
   background: #F9F9F9;
 }
+
+a.list-group-item.not-read-notification:hover,
+a.list-group-item.not-read-notification:focus {
+  background: #ffd79a;
+}
+
+a.list-group-item.not-read-notification {
+  background: #ffebcd;
+}
+
 /* LIST GROUP CONTACTS */
 .list-group-contacts .list-group-item {
   padding: 10px;

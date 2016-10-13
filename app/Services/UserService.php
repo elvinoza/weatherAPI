@@ -100,10 +100,14 @@ class UserService implements IUserService
         else return emptyArray();
     }
 
-    public function getUserNotifications($id)
+    public function getUserNotifications($id, $count = null)
     {
         $user = $this->user->find($id);
-        if ($user != null)
-            return $user->notifications()->take(5)->get();
+        if ($user != null) {
+            if ($count != null)
+                return $user->notifications()->orderBy('created_at', 'DESC')->take($count)->get();
+
+            return $user->notifications()->orderBy('created_at', 'DESC')->get();
+        }
     }
 }

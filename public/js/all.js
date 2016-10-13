@@ -93163,6 +93163,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                     templateUrl: '../Views/DiseaseModelViews/CreateDiseaseModel.html',
                     controller: 'CreateDiseaseModelController as createDiseaseModel'
                 })
+                .state('notifications', {
+                    url: '/user/notifications/:id',
+                    templateUrl: '../Views/NotificationViews/Notifications.html',
+                    controller: 'NotificationsController as notifications'
+                })
                 .state('editDiseaseModel', {
                     url: '/disease/edit/:id',
                     templateUrl: '../Views/DiseaseModelViews/EditDiseaseModel.html',
@@ -93222,7 +93227,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             };
 
             $rootScope.getUserNotifications = function(){
-                ApiService.getUserNotifications($rootScope.currentUser.id).success(function(data){
+                ApiService.getUserFiveNotifications($rootScope.currentUser.id).success(function(data){
                     $rootScope.notifications = data;
                 }).error(function(error) {
 
@@ -93290,8 +93295,12 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
 
-        this.getUserNotifications = function(id){
-            return $http.get(baseURL + 'user/notifications/' + id);
+        this.getUserFiveNotifications = function(id){
+            return $http.get(baseURL + 'user/fiveUserNotifications/' + id);
+        };
+
+        this.getAllUserNotifications = function(id){
+            return $http.get(baseURL + 'user/allUserNotifications/' + id);
         };
 
         //Clsf's
@@ -93779,6 +93788,33 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         $scope.getDiseaseModel($stateParams.id);
     }
 })();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('NotificationsController', NotificationsController);
+
+    function NotificationsController($stateParams, $scope, ApiService) {
+
+        $scope.notifications = [];
+
+        $scope.getAllNotifications = function(id){
+            console.log('asd');
+            ApiService.getAllUserNotifications(id).success(function(data) {
+                $scope.notifications = data;
+                console.log(data);
+            }).error(function(error) {
+
+            });
+        };
+
+        $scope.getAllNotifications($stateParams.id);
+    };
+})();
+
+
 (function() {
 
     'use strict';

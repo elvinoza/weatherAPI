@@ -63,6 +63,11 @@
                     templateUrl: '../Views/DiseaseModelViews/CreateDiseaseModel.html',
                     controller: 'CreateDiseaseModelController as createDiseaseModel'
                 })
+                .state('notifications', {
+                    url: '/user/notifications/:id',
+                    templateUrl: '../Views/NotificationViews/Notifications.html',
+                    controller: 'NotificationsController as notifications'
+                })
                 .state('editDiseaseModel', {
                     url: '/disease/edit/:id',
                     templateUrl: '../Views/DiseaseModelViews/EditDiseaseModel.html',
@@ -122,7 +127,7 @@
             };
 
             $rootScope.getUserNotifications = function(){
-                ApiService.getUserNotifications($rootScope.currentUser.id).success(function(data){
+                ApiService.getUserFiveNotifications($rootScope.currentUser.id).success(function(data){
                     $rootScope.notifications = data;
                 }).error(function(error) {
 

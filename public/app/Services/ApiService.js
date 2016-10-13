@@ -54,8 +54,12 @@
             return $http.get(baseURL + 'weathers?station_id=' + stationId + '&startDate=' + startDate + '&endDate=' + endDate);
         };
 
-        this.getUserNotifications = function(id){
-            return $http.get(baseURL + 'user/notifications/' + id);
+        this.getUserFiveNotifications = function(id){
+            return $http.get(baseURL + 'user/fiveUserNotifications/' + id);
+        };
+
+        this.getAllUserNotifications = function(id){
+            return $http.get(baseURL + 'user/allUserNotifications/' + id);
         };
 
         //Clsf's

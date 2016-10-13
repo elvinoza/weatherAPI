@@ -53,7 +53,12 @@ class UserController extends Controller
         return $this->userService->getUserDiseaseModels($id);
     }
 
-    public function getUserNotifications($id)
+    public function getFirstFiveUserNotifications($id)
+    {
+        return $this->userService->getUserNotifications($id, 5);
+    }
+
+    public function allUserNotifications($id)
     {
         return $this->userService->getUserNotifications($id);
     }

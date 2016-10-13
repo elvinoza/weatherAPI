@@ -37,7 +37,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('weathers', 'WeatherController@getWeathers');
 
         //Notifications
-        Route::get('user/notifications/{id}', 'UserController@getUserNotifications');
+        Route::get('user/fiveUserNotifications/{id}', 'UserController@getFirstFiveUserNotifications');
+        Route::get('user/allUserNotifications/{id}', 'UserController@allUserNotifications');
+
 
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
