@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class DiseaseCondition extends Model
 {
     /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'disease_conditions';
+
+    /**
      * The custom attributes.
      *
      * @var array

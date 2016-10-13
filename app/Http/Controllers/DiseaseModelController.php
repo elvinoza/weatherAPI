@@ -39,7 +39,9 @@ class DiseaseModelController extends Controller
 
     public function getModel($id)
     {
-        return $this->diseaseModelService->getModelWithConditions($id);
+        $user = \JWTAuth::parseToken()->authenticate();
+
+        return $this->diseaseModelService->getModelWithConditions($id, $user->id);
     }
 
     public function update(UpdateDiseaseModelWithConditionsRequest $request){

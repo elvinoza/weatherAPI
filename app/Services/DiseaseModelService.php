@@ -11,7 +11,7 @@ interface IDiseaseModelService
     function update($model);
     function getAllModels();
     function getModelConditions($id);
-    function getModelWithConditions($id);
+    function getModelWithConditions($modelId, $userId);
 }
 
 class DiseaseModelService implements IDiseaseModelService
@@ -19,15 +19,18 @@ class DiseaseModelService implements IDiseaseModelService
     protected $diseaseModel;
     protected $diseaseCondition;
     protected $diseaseModelConditionService;
+    protected $followDiseaseModelService;
 
     public function __construct(
         DiseaseModel $diseaseModel,
         DiseaseCondition $diseaseCondition,
-        DiseaseModelConditionService $diseaseModelConditionService)
+        DiseaseModelConditionService $diseaseModelConditionService,
+        FollowDiseaseModelService $followDiseaseModelService)
     {
         $this->diseaseModel = $diseaseModel;
         $this->diseaseCondition = $diseaseCondition;
         $this->diseaseModelConditionService = $diseaseModelConditionService;
+        $this->followDiseaseModelService = $followDiseaseModelService;
     }
 
     public function create($data)
@@ -50,7 +53,7 @@ class DiseaseModelService implements IDiseaseModelService
         $this->diseaseModelConditionService->updateConditions($model->conditions);
         $diseaseModel->save();
 
-        return getModelWithConditions($model->id);
+        return getModelWithConditions($model->id, $model->user_id);
     }
 
     public function getAllModels()
@@ -66,10 +69,11 @@ class DiseaseModelService implements IDiseaseModelService
 
     }
 
-    public function getModelWithConditions($id)
+    public function getModelWithConditions($modelId, $userId)
     {
-        $model = $this->diseaseModel->find($id);
+        $model = $this->diseaseModel->find($modelId);
         if($model != null) {
+            $model->follow = $this->followDiseaseModelService->checkUserFollowModel($userId, $modelId);
             $model->conditions = $model->conditions;
             return $model;
         }

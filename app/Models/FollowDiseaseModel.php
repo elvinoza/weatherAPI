@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DiseaseModel extends Model
+class FollowDiseaseModel extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'disease_models';
+    protected $table = 'follow_disease_model';
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +19,6 @@ class DiseaseModel extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'user_id'
+        'user_id', 'disease_model_id'
     ];
-
-    public function conditions()
-    {
-        return $this->hasMany('App\Models\DiseaseCondition');
-    }
 }

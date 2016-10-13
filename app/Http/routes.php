@@ -40,6 +40,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('user/fiveUserNotifications/{id}', 'UserController@getFirstFiveUserNotifications');
         Route::get('user/allUserNotifications/{id}', 'UserController@allUserNotifications');
 
+        //Follow's
+        Route::post('follow/set', 'FollowModelController@setUserFollowModel');
+        Route::get('follow/check/{userId}/{modelId}', 'FollowModelController@check');
 
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
