@@ -6,7 +6,7 @@
         .module('app')
         .controller('EditDiseaseModelController', EditDiseaseModelController);
 
-    function EditDiseaseModelController($stateParams, $scope, ApiService) {
+    function EditDiseaseModelController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.model = null;
 
@@ -14,7 +14,7 @@
             $scope.clsfWeatherParams = data;
         });
 
-        $scope.getDiseaseModel = function($id){
+        $scope.getDiseaseModel = function($id) {
             ApiService.getDiseaseModelById($id).success(function(data) {
                 $scope.model = data;
             }).error(function(error) {
@@ -33,6 +33,19 @@
 
         $scope.getView = function(){
             return '../../Views/DiseaseModelViews/ConditionView.html'
+        };
+
+        $scope.changeStatus = function() {
+            var followModel = {
+                user_id: $rootScope.currentUser.id,
+                disease_model_id: $stateParams.id
+            };
+
+            ApiService.changeModelFollowStatus(followModel).success(function(data) {
+                //display changes
+            }).error(function(error) {
+                //display error
+            });
         };
 
         $scope.getDiseaseModel($stateParams.id);

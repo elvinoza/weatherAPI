@@ -6,13 +6,11 @@
             <h2 class="md-toolbar-tools center" style="width: 50%;"><span>Update Disease Model</span></h2>
 
         </div>
-        <md-content layout="row" layout-align="right" layout-padding>
-            {{ model.follow }}
             <p>Follow this model: </p>
             <md-switch
                     ng-model="model.follow"
                     aria-label="Turn on to follow this model"
-                    ng-change="onChange(data.cb6)">
+                    ng-change="changeStatus()">
             </md-switch>
         </md-content>
         <div>

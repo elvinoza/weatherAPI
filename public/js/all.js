@@ -93330,6 +93330,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         this.updateDiseaseModel = function(diseaseModel){
             return $http.post(baseURL + 'disease/update', diseaseModel, { headers: { 'Accept': 'Application/json' }});
         };
+
+        this.changeModelFollowStatus = function(followModel){
+            return $http.post(baseURL + 'follow/change', followModel, { headers: { 'Accept': 'Application/json' }});
+        };
     }
 })();
 (function() {
@@ -93756,7 +93760,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('EditDiseaseModelController', EditDiseaseModelController);
 
-    function EditDiseaseModelController($stateParams, $scope, ApiService) {
+    function EditDiseaseModelController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.model = null;
 
@@ -93764,7 +93768,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             $scope.clsfWeatherParams = data;
         });
 
-        $scope.getDiseaseModel = function($id){
+        $scope.getDiseaseModel = function($id) {
             ApiService.getDiseaseModelById($id).success(function(data) {
                 $scope.model = data;
             }).error(function(error) {
@@ -93783,6 +93787,19 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         $scope.getView = function(){
             return '../../Views/DiseaseModelViews/ConditionView.html'
+        };
+
+        $scope.changeStatus = function() {
+            var followModel = {
+                user_id: $rootScope.currentUser.id,
+                disease_model_id: $stateParams.id
+            };
+
+            ApiService.changeModelFollowStatus(followModel).success(function(data) {
+                //display changes
+            }).error(function(error) {
+                //display error
+            });
         };
 
         $scope.getDiseaseModel($stateParams.id);

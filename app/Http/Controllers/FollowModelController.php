@@ -15,13 +15,13 @@ class FollowModelController extends Controller
         $this->followDiseaseModelService = $followDiseaseModelService;
     }
 
-    public function setUserFollowModel(SetUserFollowModelRequest $request)
+    public function changeUserFollowModelStatus(SetUserFollowModelRequest $request)
     {
-        return $this->followDiseaseModelService->setUserFollowModel($request->user_id, $request->disease_model_id);
+        return $this->followDiseaseModelService->changeUserFollowModelStatus($request->user_id, $request->disease_model_id);
     }
 
-    public function check($userId, $modelId)
+    public function checkUserFollowModel(SetUserFollowModelRequest $req)
     {
-        return $this->followDiseaseModelService->checkUserFollowModel($userId, $modelId);
+        return response()->json($this->followDiseaseModelService->checkUserFollowModel($req->user_id, $req->disease_model_id));
     }
 }

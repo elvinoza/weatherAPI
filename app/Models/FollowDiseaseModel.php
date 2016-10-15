@@ -19,6 +19,6 @@ class FollowDiseaseModel extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'disease_model_id'
+        'user_id', 'disease_model_id', 'is_valid'
     ];
 }

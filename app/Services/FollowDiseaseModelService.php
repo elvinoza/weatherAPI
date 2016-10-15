@@ -8,6 +8,7 @@ interface IFollowDiseaseModel
 {
     function setUserFollowModel($userId, $modelId);
     function checkUserFollowModel($userId, $modelId);
+    function changeUserFollowModelStatus($userId, $modelId);
 }
 
 class FollowDiseaseModelService implements IFollowDiseaseModel
@@ -30,8 +31,30 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
 
     public function checkUserFollowModel($userId, $modelId)
     {
-        $model = $this->followDiseaseModel->where('user_id', $userId)->where('disease_model_id', $modelId)->get();
-        //return response(['success' => !$model->isEmpty()], 200);
-        return !$model->isEmpty();
+        $model = $this->followDiseaseModel->where('user_id', $userId)->where('disease_model_id', $modelId)->get()->first();
+
+        if ($model == null){
+            return false;
+        } else {
+            return (bool) $model->is_valid;
+        }
+    }
+
+    public function changeUserFollowModelStatus($userId, $modelId)
+    {
+        $model = $this->followDiseaseModel->where('user_id', $userId)->where('disease_model_id', $modelId)->get()->first();
+
+        if ($model == null){
+            return $this->setUserFollowModel($userId, $modelId);
+        } else {
+            if ($model->is_valid){
+                $model->is_valid = false;
+            } else {
+                $model->is_valid = true;
+            }
+            $model->save();
+
+            return $model;
+        }
     }
 }

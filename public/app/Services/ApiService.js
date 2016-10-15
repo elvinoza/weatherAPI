@@ -89,5 +89,9 @@
         this.updateDiseaseModel = function(diseaseModel){
             return $http.post(baseURL + 'disease/update', diseaseModel, { headers: { 'Accept': 'Application/json' }});
         };
+
+        this.changeModelFollowStatus = function(followModel){
+            return $http.post(baseURL + 'follow/change', followModel, { headers: { 'Accept': 'Application/json' }});
+        };
     }
 })();
