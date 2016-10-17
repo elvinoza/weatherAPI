@@ -54,9 +54,13 @@ class DiseaseModelConditionService implements IDiseaseModelConditionService
             if($condition->date_range){
                 $diseaseCondition->start_range = $condition->start_range;
                 $diseaseCondition->end_range = $condition->end_range;
+                $diseaseCondition->constant = null;
+                $diseaseCondition->operator = null;
             } else {
                 $diseaseCondition->constant = $condition->constant;
                 $diseaseCondition->operator = $condition->operator;
+                $diseaseCondition->start_range = null;
+                $diseaseCondition->end_range = null;
             }
 
             $diseaseCondition->time = $condition->time;

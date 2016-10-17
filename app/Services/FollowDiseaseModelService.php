@@ -9,6 +9,7 @@ interface IFollowDiseaseModel
     function setUserFollowModel($userId, $modelId);
     function checkUserFollowModel($userId, $modelId);
     function changeUserFollowModelStatus($userId, $modelId);
+    function getAllUserFollowModels($userId);
 }
 
 class FollowDiseaseModelService implements IFollowDiseaseModel
@@ -56,5 +57,10 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
 
             return $model;
         }
+    }
+
+    public function getAllUserFollowModels($userId)
+    {
+        return $this->followDiseaseModel->where('user_id', $userId)->get();
     }
 }

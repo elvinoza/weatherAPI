@@ -93764,6 +93764,14 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         $scope.model = null;
 
+        $scope.operators = [{
+            value: true,
+            name: 'More than'
+        }, {
+            value: false,
+            name: 'Lest than'
+        }];
+
         ApiService.getClsfParams().success(function(data) {
             $scope.clsfWeatherParams = data;
         });

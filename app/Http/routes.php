@@ -53,6 +53,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('disease/models', 'DiseaseModelController@getAllModels');
         Route::get('clsf/params', 'ClsfController@getAllParameters');
 
+        //testing url's
+        Route::get('disease/tryNot/{userId}', 'DiseaseModelController@tryNot');
     });
 
 });

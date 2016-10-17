@@ -12,6 +12,7 @@ interface IDiseaseModelService
     function getAllModels();
     function getModelConditions($id);
     function getModelWithConditions($modelId, $userId);
+    function checkDiseasesModels($userId);
 }
 
 class DiseaseModelService implements IDiseaseModelService
@@ -20,17 +21,23 @@ class DiseaseModelService implements IDiseaseModelService
     protected $diseaseCondition;
     protected $diseaseModelConditionService;
     protected $followDiseaseModelService;
+    protected $stationService;
+    protected $weatherService;
 
     public function __construct(
         DiseaseModel $diseaseModel,
         DiseaseCondition $diseaseCondition,
         DiseaseModelConditionService $diseaseModelConditionService,
-        FollowDiseaseModelService $followDiseaseModelService)
+        FollowDiseaseModelService $followDiseaseModelService,
+        StationService $stationService,
+        WeatherService $weatherService)
     {
         $this->diseaseModel = $diseaseModel;
         $this->diseaseCondition = $diseaseCondition;
         $this->diseaseModelConditionService = $diseaseModelConditionService;
         $this->followDiseaseModelService = $followDiseaseModelService;
+        $this->stationService = $stationService;
+        $this->weatherService = $weatherService;
     }
 
     public function create($data)
@@ -79,5 +86,32 @@ class DiseaseModelService implements IDiseaseModelService
         }
 
         return null;
+    }
+
+    public function checkDiseasesModels($userId)
+    {
+        $accpetedModels = [];
+
+        $allUserModels = $this->followDiseaseModelService->getAllUserFollowModels($userId);
+        $userStations = $this->stationService->getUserStations($userId);
+
+        if (!$allUserModels->isEmpty()){
+
+            foreach($allUserModels as $userModel)
+            {
+
+                return $this->checkModel($userModel, $userStations);
+            }
+        }
+
+        return false;
+    }
+
+    private function checkModel($model, $stations)
+    {
+        foreach($stations as $station)
+        {
+            $this->weatherService->checkParameters($stations->first()->id, $this->getModelConditions($model->disease_model_id));
+        }
     }
 }

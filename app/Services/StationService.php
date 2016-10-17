@@ -26,7 +26,7 @@ class StationService implements IStationInterface
 
     public function getUserStations($id)
     {
-        return $this->station->where('user_id', $id);
+        return $this->station->where('user_id', $id)->get();
     }
 
     public function getStation($id)

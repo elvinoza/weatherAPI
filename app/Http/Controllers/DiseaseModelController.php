@@ -17,7 +17,7 @@ class DiseaseModelController extends Controller
         DiseaseModelService $diseaseModelService,
         DiseaseModelConditionService $diseaseModelConditionService)
     {
-        $this->middleware('jwt.auth', ['except' => ['change']]);
+        $this->middleware('jwt.auth', ['except' => ['tryNot']]);
         $this->diseaseModelService = $diseaseModelService;
         $this->diseaseModelConditionService = $diseaseModelConditionService;
     }
@@ -50,7 +50,8 @@ class DiseaseModelController extends Controller
         return $this->diseaseModelService->update($model);
     }
 
-    public function change()
+    public function tryNot($userId)
     {
+        return $this->diseaseModelService->checkDiseasesModels($userId);
     }
 }
