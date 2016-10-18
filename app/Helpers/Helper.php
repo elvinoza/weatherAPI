@@ -19,6 +19,18 @@ class Helper
             case ClsfWeatherParameters::Pressure:
                 $parameter = 'pressure';
                 break;
+            case ClsfWeatherParameters::SoilTemperature:
+                $parameter = 'soil_temperature';
+                break;
+            case ClsfWeatherParameters::SoilHumidity:
+                $parameter = 'soil_humidity';
+                break;
+            case ClsfWeatherParameters::WindSpeed:
+                $parameter = 'wind_speed';
+                break;
+            case ClsfWeatherParameters::WindDirection:
+                $parameter = 'wind_direction';
+                break;
             case ClsfWeatherParameters::Rain:
                 $parameter = 'rain';
                 break;
