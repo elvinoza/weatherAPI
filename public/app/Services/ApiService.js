@@ -93,5 +93,9 @@
         this.changeModelFollowStatus = function(followModel){
             return $http.post(baseURL + 'follow/change', followModel, { headers: { 'Accept': 'Application/json' }});
         };
+
+        this.getModelUserStations = function($userId, $modelId){
+            return $http.get(baseURL + 'follow/stations/' + $userId + '/' + $modelId);
+        };
     }
 })();

@@ -15,7 +15,8 @@ class SetUserFollowModelRequest extends Request {
     {
         return [
             'user_id' => 'exists:users,id',
-            'disease_model_id' => 'exists:disease_models,id'
+            'disease_model_id' => 'exists:disease_models,id',
+            'station_id' => 'exists:stations,id'
         ];
     }
 
@@ -41,7 +42,8 @@ class SetUserFollowModelRequest extends Request {
     public function messages(){
         return array(
             'user_id.exists' => 'User not exists in database.',
-            'disease_model_id.exists' => 'Disease model not exists in database.'
+            'disease_model_id.exists' => 'Disease model not exists in database.',
+            'station_id.exists' => 'Station not exists in database.'
         );
     }
 }

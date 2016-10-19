@@ -93334,6 +93334,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         this.changeModelFollowStatus = function(followModel){
             return $http.post(baseURL + 'follow/change', followModel, { headers: { 'Accept': 'Application/json' }});
         };
+
+        this.getModelUserStations = function($userId, $modelId){
+            return $http.get(baseURL + 'follow/stations/' + $userId + '/' + $modelId);
+        };
     }
 })();
 (function() {
@@ -93632,7 +93636,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('DiseaseModelsController', DiseaseModelsController);
 
-    function DiseaseModelsController($state, $scope, $stateParams, ApiService) {
+    function DiseaseModelsController($state, $scope, $stateParams, ApiService, $mdDialog) {
 
         var vm = this;
 
@@ -93658,6 +93662,25 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         vm.editModel = function(event, item) {
             $state.go('editDiseaseModel', { id: item.id });
+        };
+
+        vm.showAdvanced = function(ev, id) {
+            $mdDialog.show({
+                    controller: 'FollowController',
+                    templateUrl: '../../Views/DiseaseModelViews/FollowPopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    locals: {
+                        modelId: id
+                    },
+                    fullscreen: true // Only for -xs, -sm breakpoints.
+                })
+                .then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
         };
 
         vm.getModels($stateParams.id);
@@ -93840,6 +93863,52 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 })();
 
 
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('FollowController', FollowController);
+
+    function FollowController($mdDialog, $rootScope, $scope, modelId, ApiService) {
+
+        $scope.stations = [];
+
+        $scope.getStations = function(id){
+            ApiService.getModelUserStations($rootScope.currentUser.id, id).success(function(data) {
+                console.log(data);
+                $scope.stations= data;
+            }).error(function(error) {
+
+            });
+        };
+
+        $scope.changeStatus = function(stationId) {
+            var followModel = {
+                user_id: $rootScope.currentUser.id,
+                station_id: stationId,
+                disease_model_id: modelId
+            };
+
+            ApiService.changeModelFollowStatus(followModel).success(function(data) {
+                //display changes
+            }).error(function(error) {
+                //display error
+            });
+        };
+        
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.getStations(modelId);
+    }
+})();
 (function() {
 
     'use strict';

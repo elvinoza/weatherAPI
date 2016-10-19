@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIsValidToFollowDiseaseModelTable extends Migration
+class AddStationIdToFollowDiseaseModelTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddIsValidToFollowDiseaseModelTable extends Migration
     public function up()
     {
         Schema::table('follow_disease_model', function (Blueprint $table) {
-            $table->boolean('is_valid')->default(true)->after('disease_model_id');
+            $table->integer('station_id')->after('user_id');
         });
     }
 
@@ -25,7 +25,7 @@ class AddIsValidToFollowDiseaseModelTable extends Migration
     public function down()
     {
         Schema::table('follow_disease_model', function (Blueprint $table) {
-            $table->dropColumn('is_valid');
+            $table->dropColumn('station_id');
         });
     }
 }

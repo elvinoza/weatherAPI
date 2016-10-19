@@ -43,6 +43,7 @@ Route::group(['middleware' => ['web']], function () {
         //Follow's
         Route::post('follow/change', 'FollowModelController@changeUserFollowModelStatus');
         Route::post('follow/check', 'FollowModelController@checkUserFollowModel');
+        Route::get('follow/stations/{userId}/{modelId}', 'FollowModelController@getUserModelFollows');
 
         //Diseases
         Route::post('disease/create', 'DiseaseModelController@create');
