@@ -12,7 +12,7 @@ class WeatherController extends Controller
 
     public function __construct(WeatherService $weatherService)
     {
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        $this->middleware('jwt.auth');
         $this->weatherService = $weatherService;
     }
 

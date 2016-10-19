@@ -32,7 +32,7 @@
                 //display error
             });
         };
-        
+
         $scope.hide = function() {
             $mdDialog.hide();
         };

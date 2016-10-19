@@ -12,7 +12,7 @@ class StationController extends Controller
 
     public function __construct(StationService $stationService)
     {
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        $this->middleware('jwt.auth');
         $this->stationService = $stationService;
     }
 

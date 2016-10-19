@@ -10,16 +10,12 @@ class ClsfController extends Controller
 
     public function __construct(ClsfWeatherParameterService $clsfWeatherParameterService)
     {
-        $this->middleware('jwt.auth', ['except' => ['change']]);
+        $this->middleware('jwt.auth');
         $this->clsfWeatherParameterService = $clsfWeatherParameterService;
     }
 
     public function getAllParameters()
     {
         return $this->clsfWeatherParameterService->getAll();
-    }
-
-    public function change()
-    {
     }
 }
