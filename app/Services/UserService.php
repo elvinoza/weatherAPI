@@ -34,6 +34,7 @@ class UserService implements IUserService
         $user->email = $data->email;
         $user->password = bcrypt($data->password);
         $user->save();
+
         return $user;
     }
 
@@ -48,6 +49,7 @@ class UserService implements IUserService
         $user->name = $data->name;
         $user->email = $data->email;
         $user->save();
+
         return $user;
     }
 
@@ -64,6 +66,7 @@ class UserService implements IUserService
                 return response(['current_password' => 'Blogai nurodytas dabartinis slaptažodis.'], 422);
             }
         }
+
         return null;
     }
 
@@ -87,8 +90,10 @@ class UserService implements IUserService
                 })
                 ->where('stations.user_id', '=', $user->id)
                 ->get();
+
             return $data;
         }
+
         return null;
     }
 

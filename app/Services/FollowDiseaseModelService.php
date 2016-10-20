@@ -34,6 +34,7 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
         $userFollowModel->station_id = $stationId;
         $userFollowModel->disease_model_id = $modelId;
         $userFollowModel->save();
+
         return $userFollowModel;
     }
 
@@ -89,6 +90,7 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
             ->where('station.user_id','=', $userId)
 
             ->get();
+
         return $stations;
     }
 }

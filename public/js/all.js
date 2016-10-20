@@ -93874,10 +93874,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
     function FollowController($mdDialog, $rootScope, $scope, modelId, ApiService) {
 
         $scope.stations = [];
+        $scope.activated = true;
 
         $scope.getStations = function(id){
             ApiService.getModelUserStations($rootScope.currentUser.id, id).success(function(data) {
-                console.log(data);
+                $scope.activated = false;
                 $scope.stations= data;
             }).error(function(error) {
 
@@ -93897,7 +93898,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                 //display error
             });
         };
-        
+
         $scope.hide = function() {
             $mdDialog.hide();
         };

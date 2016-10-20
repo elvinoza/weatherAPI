@@ -9,10 +9,11 @@
     function FollowController($mdDialog, $rootScope, $scope, modelId, ApiService) {
 
         $scope.stations = [];
+        $scope.activated = true;
 
         $scope.getStations = function(id){
             ApiService.getModelUserStations($rootScope.currentUser.id, id).success(function(data) {
-                console.log(data);
+                $scope.activated = false;
                 $scope.stations= data;
             }).error(function(error) {
 
