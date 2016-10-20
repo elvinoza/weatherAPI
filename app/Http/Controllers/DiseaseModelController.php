@@ -50,8 +50,8 @@ class DiseaseModelController extends Controller
         return $this->diseaseModelService->update($model);
     }
 
-    public function tryNot($userId)
+    public function tryNot($stationId)
     {
-        return $this->diseaseModelService->checkDiseasesModels($userId);
+        return $this->diseaseModelService->checkDiseasesModels($stationId);
     }
 }

@@ -55,7 +55,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('clsf/params', 'ClsfController@getAllParameters');
 
         //testing url's
-        Route::get('disease/tryNot/{userId}', 'DiseaseModelController@tryNot');
+        Route::get('disease/tryNot/{stationId}', 'DiseaseModelController@tryNot'); //test note
     });
 
 });

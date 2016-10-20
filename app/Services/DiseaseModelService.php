@@ -90,27 +90,19 @@ class DiseaseModelService implements IDiseaseModelService
 
     public function checkDiseasesModels($stationId)
     {
-        //$accpetedModels = [];
+        $resuls = [];
+        $stationModels = $this->followDiseaseModelService->getStationDiseaseModels($stationId);
 
-        $allUserModels = $this->followDiseaseModelService->getAllUserFollowModels($userId);
-        //$userStations = $this->stationService->getUserStations($userId);
+        if (!$stationModels->isEmpty()){
 
-        if (!$allUserModels->isEmpty()){
-
-            foreach($allUserModels as $userModel)
+            foreach($stationModels as $model)
             {
-                return $this->weatherService->checkParameters($stationId, $this->getModelConditions($model->disease_model_id));
+                $res = $this->weatherService->checkParameters($stationId, $this->getModelConditions($model->disease_model_id));
+                array_push($resuls, $res);
             }
         }
 
-        return false;
+        return $resuls;
+        //return false;
     }
-
-//    private function checkModel($model, $stations)
-//    {
-//        foreach($stations as $station)
-//        {
-//            $this->weatherService->checkParameters($stations->first()->id, $this->getModelConditions($model->disease_model_id));
-//        }
-//    }
 }
