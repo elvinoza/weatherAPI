@@ -9,6 +9,7 @@ interface IFollowDiseaseModel
 {
     function setUserFollowModel($userId, $stationId, $modelId);
     function changeStationFollowModelStatus($userId, $stationId, $modelId);
+    function checkStationFollowModel($stationId, $modelId);
     function getModelUserStations($userId, $modelId);
     function getStationDiseaseModels($stationId);
 }

@@ -11,7 +11,7 @@ interface IDiseaseModelService
     function update($model);
     function getAllModels();
     function getModelConditions($id);
-    function getModelWithConditions($modelId, $userId);
+    function getModelWithConditions($modelId);
     function checkDiseasesModels($stationId);
 }
 
@@ -76,11 +76,10 @@ class DiseaseModelService implements IDiseaseModelService
 
     }
 
-    public function getModelWithConditions($modelId, $userId)
+    public function getModelWithConditions($modelId)
     {
         $model = $this->diseaseModel->find($modelId);
         if($model != null) {
-            $model->follow = $this->followDiseaseModelService->checkUserFollowModel($userId, $modelId);
             $model->conditions = $model->conditions;
             return $model;
         }
