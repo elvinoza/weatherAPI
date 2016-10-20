@@ -43,5 +43,6 @@
         };
 
         $scope.getStations(modelId);
-    }
+    };
+
 })();

@@ -34,8 +34,10 @@
             $state.go('editDiseaseModel', { id: item.id });
         };
 
-        vm.showAdvanced = function(ev, id) {
-            $mdDialog.show({
+        vm.showStations = function(ev, id, hasConditions) {
+
+            if(hasConditions){
+                $mdDialog.show({
                     controller: 'FollowController',
                     templateUrl: '../../Views/DiseaseModelViews/FollowPopup.html',
                     parent: angular.element(document.body),
@@ -51,6 +53,24 @@
                 }, function() {
                     //$scope.status = 'You cancelled the dialog.';
                 });
+            } else {
+                $mdDialog.show({
+                    controller: 'MessagePopupController',
+                    templateUrl: '../../Views/Shared/MessagePopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    locals: {
+                        message: "This model can't be assigned, because it hasn't any condition."
+                    },
+                    fullscreen: true // Only for -xs, -sm breakpoints.
+                })
+                .then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            }
         };
 
         vm.getModels($stateParams.id);
