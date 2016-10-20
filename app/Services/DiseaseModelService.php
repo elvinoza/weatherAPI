@@ -12,7 +12,7 @@ interface IDiseaseModelService
     function getAllModels();
     function getModelConditions($id);
     function getModelWithConditions($modelId, $userId);
-    function checkDiseasesModels($userId);
+    function checkDiseasesModels($stationId);
 }
 
 class DiseaseModelService implements IDiseaseModelService
@@ -88,30 +88,29 @@ class DiseaseModelService implements IDiseaseModelService
         return null;
     }
 
-    public function checkDiseasesModels($userId)
+    public function checkDiseasesModels($stationId)
     {
-        $accpetedModels = [];
+        //$accpetedModels = [];
 
         $allUserModels = $this->followDiseaseModelService->getAllUserFollowModels($userId);
-        $userStations = $this->stationService->getUserStations($userId);
+        //$userStations = $this->stationService->getUserStations($userId);
 
         if (!$allUserModels->isEmpty()){
 
             foreach($allUserModels as $userModel)
             {
-
-                return $this->checkModel($userModel, $userStations);
+                return $this->weatherService->checkParameters($stationId, $this->getModelConditions($model->disease_model_id));
             }
         }
 
         return false;
     }
 
-    private function checkModel($model, $stations)
-    {
-        foreach($stations as $station)
-        {
-            $this->weatherService->checkParameters($stations->first()->id, $this->getModelConditions($model->disease_model_id));
-        }
-    }
+//    private function checkModel($model, $stations)
+//    {
+//        foreach($stations as $station)
+//        {
+//            $this->weatherService->checkParameters($stations->first()->id, $this->getModelConditions($model->disease_model_id));
+//        }
+//    }
 }

@@ -8,9 +8,7 @@ use App\Models\FollowDiseaseModel;
 interface IFollowDiseaseModel
 {
     function setUserFollowModel($userId, $stationId, $modelId);
-    function checkUserFollowModel($userId, $modelId);
     function changeStationFollowModelStatus($userId, $stationId, $modelId);
-    function getAllUserFollowModels($userId);
     function getModelUserStations($userId, $modelId);
 }
 
@@ -36,17 +34,6 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
         $userFollowModel->save();
 
         return $userFollowModel;
-    }
-
-    public function checkUserFollowModel($userId, $modelId)
-    {
-        $model = $this->followDiseaseModel->where('user_id', $userId)->where('disease_model_id', $modelId)->get()->first();
-
-        if ($model == null){
-            return false;
-        } else {
-            return (bool) $model->is_valid;
-        }
     }
 
     public function checkStationFollowModel($stationId, $modelId)
@@ -78,17 +65,11 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
         }
     }
 
-    public function getAllUserFollowModels($userId)
-    {
-        return $this->followDiseaseModel->where('user_id', $userId)->get();
-    }
-
     public function getModelUserStations($userId, $modelId)
     {
         $stations = DB::table('stations as station')
             ->select(DB::raw("station.*, CASE WHEN (SELECT fmd.is_valid FROM follow_disease_model fmd WHERE fmd.station_id = station.id AND fmd.user_id = station.user_id AND fmd.disease_model_id = ?) != FALSE THEN True ELSE False END as follow"))->setBindings([$modelId])
             ->where('station.user_id','=', $userId)
-
             ->get();
 
         return $stations;
