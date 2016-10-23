@@ -38,8 +38,8 @@
             return $http.get(baseURL + 'station/weathers/' + id);
         };
 
-        this.register = function(user){
-            return $http.post(baseURL + 'createuser', user, { headers: { 'Accept': 'Application/json' }});
+        this.signUp = function(user){
+            return $http.post(baseURL + 'user/create', user, { headers: { 'Accept': 'Application/json' }});
         };
 
         this.getLatestWeathers = function(id){

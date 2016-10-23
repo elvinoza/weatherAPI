@@ -19,7 +19,7 @@
             var credentials = {
                 email: vm.email,
                 password: vm.password
-            }
+            };
 
             $auth.login(credentials).then(function() {
 
@@ -40,9 +40,9 @@
         };
 
         vm.register = function(){
-            ApiService.register($scope.register).success(function(data) {
-                $scope.station = data;
-                $scope.selectedTab = 1;
+            ApiService.signUp($scope.register).success(function(data) {
+                $scope.register = {};
+                $scope.selectedTab = 0;
             }).error(function(error) {
                 //flash.error = error;
             });

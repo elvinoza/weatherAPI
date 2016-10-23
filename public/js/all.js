@@ -93279,8 +93279,8 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             return $http.get(baseURL + 'station/weathers/' + id);
         };
 
-        this.register = function(user){
-            return $http.post(baseURL + 'createuser', user, { headers: { 'Accept': 'Application/json' }});
+        this.signUp = function(user){
+            return $http.post(baseURL + 'user/create', user, { headers: { 'Accept': 'Application/json' }});
         };
 
         this.getLatestWeathers = function(id){
@@ -93403,7 +93403,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             var credentials = {
                 email: vm.email,
                 password: vm.password
-            }
+            };
 
             $auth.login(credentials).then(function() {
 
@@ -93424,9 +93424,9 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         };
 
         vm.register = function(){
-            ApiService.register($scope.register).success(function(data) {
-                $scope.station = data;
-                $scope.selectedTab = 1;
+            ApiService.signUp($scope.register).success(function(data) {
+                $scope.register = {};
+                $scope.selectedTab = 0;
             }).error(function(error) {
                 //flash.error = error;
             });
@@ -93937,8 +93937,8 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
-
     };
+
 })();
 (function() {
 

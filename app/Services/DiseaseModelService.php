@@ -89,7 +89,7 @@ class DiseaseModelService implements IDiseaseModelService
 
     public function checkDiseasesModels($stationId)
     {
-        $resuls = [];
+        $results = [];
         $stationModels = $this->followDiseaseModelService->getStationDiseaseModels($stationId);
 
         if (!$stationModels->isEmpty()){
@@ -97,11 +97,11 @@ class DiseaseModelService implements IDiseaseModelService
             foreach($stationModels as $model)
             {
                 $res = $this->weatherService->checkParameters($stationId, $this->getModelConditions($model->disease_model_id));
-                array_push($resuls, $res);
+                array_push($results, $res);
             }
         }
 
-        return $resuls;
+        return $results;
         //return false;
     }
 }
