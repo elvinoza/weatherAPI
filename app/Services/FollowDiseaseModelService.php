@@ -63,6 +63,9 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
             }
             $model->save();
 
+            $model->station = $model->station;
+            $model->model = $model->model;
+
             return $model;
         }
     }

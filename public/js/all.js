@@ -93878,7 +93878,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('FollowController', FollowController);
 
-    function FollowController($mdDialog, $rootScope, $scope, modelId, ApiService) {
+    function FollowController($mdDialog, $rootScope, $scope, modelId, ApiService, $mdToast) {
 
         $scope.stations = [];
         $scope.activated = true;
@@ -93888,7 +93888,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                 $scope.activated = false;
                 $scope.stations= data;
             }).error(function(error) {
-
+                $scope.displayToast('Something going wrong. Try again!')
             });
         };
 
@@ -93900,9 +93900,13 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             };
 
             ApiService.changeModelFollowStatus(followModel).success(function(data) {
-                //display changes
+                if (data.is_valid) {
+                    $scope.displayToast('Station - ' + data.station.name + ' following ' + data.model.name + ' model!');
+                } else {
+                    $scope.displayToast('Station ' + data.station.name + ' un follow ' + data.model.name + ' model!');
+                }
             }).error(function(error) {
-                //display error
+                $scope.displayToast('Something going wrong. Try again!');
             });
         };
 
@@ -93912,6 +93916,15 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         $scope.cancel = function() {
             $mdDialog.cancel();
+        };
+
+        $scope.displayToast = function(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('top right')
+                    .hideDelay(3000)
+            );
         };
 
         $scope.getStations(modelId);
