@@ -71,11 +71,10 @@ class WeatherService implements IWeatherService
     }
 
     public function checkParameters($stationId, $conditions){
-        //
-        //$aa = $this->weather->where('station_id', $stationId)->get();
+
         foreach ($conditions as $condition)
         {
-            $date = date("Y-m-d H:i:s", strtotime(sprintf("-%d hours", $condition->time)));
+            $date = date("Y-m-d", strtotime(sprintf("-%d days", $condition->time)));
 
             $query = $this->weather
                 ->where('station_id','=', $stationId)
@@ -83,13 +82,9 @@ class WeatherService implements IWeatherService
 
             $query = $this->getByParameter($condition, $query);
 
-
-            //not accepted model
             if ($query->get()->count()) {
                 return false;
             }
-
-            //var_dump($query->get()->toJson());
         }
 
         return true;
@@ -102,7 +97,7 @@ class WeatherService implements IWeatherService
         if ($condition->start_range != null) {
             $query = $query->whereNotBetween($parameter, [$condition->start_range, $condition->end_range]);
         } else {
-            $query = $query->where($parameter, $condition->operator == CompareOperators::LessThan ? '<' : '>', $condition->constant);
+            $query = $query->where($parameter, $condition->operator == CompareOperators::LessThan ? '>' : '<', $condition->constant);
         }
 
         return $query;
