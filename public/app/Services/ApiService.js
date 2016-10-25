@@ -62,6 +62,14 @@
             return $http.get(baseURL + 'user/allUserNotifications/' + id);
         };
 
+        this.decreaseUserNotificationCount = function(userId){
+            return $http.get(baseURL + 'notification/decrease/' + userId);
+        };
+
+        this.setAsRead = function(id){
+            return $http.get(baseURL + 'notification/setAsRead/' + id);
+        };
+
         //Clsf's
 
         this.getClsfParams = function(){

@@ -39,6 +39,8 @@ Route::group(['middleware' => ['web']], function () {
         //Notifications
         Route::get('user/fiveUserNotifications/{id}', 'UserController@getFirstFiveUserNotifications');
         Route::get('user/allUserNotifications/{id}', 'UserController@allUserNotifications');
+        Route::get('notification/decrease/{userId}', 'NotifyController@decreaseUserNotificationsCount'); // decrease user notification count
+        Route::get('notification/setAsRead/{id}', 'NotifyController@setAsRead'); // decrease user notification count
 
         //Follow's
         Route::post('follow/change', 'FollowModelController@changeUserFollowModelStatus');

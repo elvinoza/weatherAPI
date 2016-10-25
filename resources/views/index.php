@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="panel-body list-group list-group-contacts scroll" style="height: auto;">
-                                <a ng-repeat="notification in notifications" href="#" ng-class="(notification.is_read == 1) ? 'list-group-item' : 'list-group-item not-read-notification'">
+                                <a ng-repeat="notification in notifications" ng-click="showNotification($event, notification)" ng-class="(notification.is_read == 1) ? 'list-group-item' : 'list-group-item not-read-notification'">
 <!--                                    class="list-group-item" data-ng-style="notification.is_read == 0 && {'background':'#ffebcd'}-->
                                     <div class="list-group-status status-online"></div>
 <!--                                <img src="images/users/user2.jpg" class="pull-left" alt="John Doe"/>-->

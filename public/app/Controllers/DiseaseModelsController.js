@@ -61,6 +61,7 @@
                     targetEvent: ev,
                     clickOutsideToClose:true,
                     locals: {
+                        title: "Set Follow Stations",
                         message: "This model can't be assigned, because it hasn't any condition."
                     },
                     fullscreen: true // Only for -xs, -sm breakpoints.

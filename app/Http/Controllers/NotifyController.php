@@ -18,4 +18,14 @@ class NotifyController extends Controller
     {
         return $this->notifyService->getNotification($id);
     }
+
+    public function decreaseUserNotificationsCount($userId)
+    {
+        return $this->notifyService->decreaseCount($userId);
+    }
+
+    public function setAsRead($id)
+    {
+        return $this->notifyService->setAsRead($id);
+    }
 }

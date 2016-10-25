@@ -98,7 +98,7 @@
             $httpProvider.interceptors.push('redirectWhenLoggedOut');
             $authProvider.loginUrl = '/api/authenticate';
         })
-        .run(function($rootScope, $state, $auth, ApiService) {
+        .run(function($rootScope, $state, $auth, ApiService, $mdDialog) {
 
             $rootScope.notifications = [];
 
@@ -126,11 +126,36 @@
                 });
             };
 
-            $rootScope.getUserNotifications = function(){
+            $rootScope.getUserNotifications = function() {
                 ApiService.getUserFiveNotifications($rootScope.currentUser.id).success(function(data){
                     $rootScope.notifications = data;
                 }).error(function(error) {
 
+                });
+            };
+
+            $rootScope.showNotification = function(ev, notification) {
+
+                ApiService.setAsRead(notification.id).success(function(count){
+                    $rootScope.currentUser.user_notify.count = count
+                });
+
+                $mdDialog.show({
+                    controller: 'MessagePopupController',
+                    templateUrl: '../Views/Shared/MessagePopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: true,
+                    locals: {
+                        title: "Notification",
+                        message: notification.full_message
+                    },
+                    fullscreen: true // Only for -xs, -sm breakpoints.
+                })
+                .then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
                 });
             };
 
