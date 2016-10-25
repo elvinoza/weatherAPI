@@ -14,22 +14,28 @@ interface IDiseaseModelCorrectnessService
 class DiseaseModelCorrectnessService implements IDiseaseModelCorrectnessService
 {
     protected $weather;
+    protected $notifyService;
+    protected $stationService;
     protected $diseaseModelService;
     protected $followDiseaseModelService;
 
     public function __construct(
         Weather $weather,
+        NotifyService $notifyService,
+        StationService $stationService,
         DiseaseModelService $diseaseModelService,
         FollowDiseaseModelService $followDiseaseModelService)
     {
         $this->weather = $weather;
+        $this->notifyService = $notifyService;
+        $this->stationService = $stationService;
         $this->diseaseModelService = $diseaseModelService;
         $this->followDiseaseModelService = $followDiseaseModelService;
     }
 
     public function checkDiseasesModels($stationId)
     {
-        $results = [];
+        $user = $this->stationService->getUserByStation($stationId);
         $stationModels = $this->followDiseaseModelService->getStationDiseaseModels($stationId);
 
         if (!$stationModels->isEmpty()){
@@ -37,11 +43,13 @@ class DiseaseModelCorrectnessService implements IDiseaseModelCorrectnessService
             foreach($stationModels as $model)
             {
                 $res = $this->checkParameters($stationId, $this->diseaseModelService->getModelConditions($model->disease_model_id));
-                array_push($results, $res);
+
+                if ($res) {
+                    $this->notifyService->crateNotification($user->id, $model->disease_model_id, $model->model->name . " observed in station - " . $model->station->name,
+                        "In the station " . $model->station->name . "detected model (" . $model->model->name . ") conditions. Please investigate it!");
+                }
             }
         }
-
-        return $results;
     }
 
     private function checkParameters($stationId, $conditions){

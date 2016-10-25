@@ -34,7 +34,11 @@ class NotifyService implements INotifyService
         $notification->disease_model_id = $diseaseModelId;
         $notification->short_message = $shortMessage;
         $notification->full_message = $fullMessage;
+        $notification->is_viewed = false;
+        $notification->is_read = false;
+        $notification->is_valid = true;
         $notification->save();
+
         $this->increaseUserNotificationsCount($userId);
 
         return $notification;

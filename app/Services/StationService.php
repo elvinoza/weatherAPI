@@ -13,6 +13,7 @@ interface IStationInterface
     function delete($id);
     function getStationWeathers($id, $count);
     function getStationUpdateTime($id);
+    function getUserByStation($stationId);
 }
 
 class StationService implements IStationInterface
@@ -81,6 +82,11 @@ class StationService implements IStationInterface
     {
         $station = $this->station->find($id);
         return response(['time' => $station->update_time], 200);
+    }
+
+    public function getUserByStation($stationId)
+    {
+        return $this->station->find($stationId)->user;
     }
 
     private function generateAppKey()

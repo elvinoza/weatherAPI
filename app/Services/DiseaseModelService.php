@@ -12,7 +12,6 @@ interface IDiseaseModelService
     function getAllModels();
     function getModelConditions($id);
     function getModelWithConditions($modelId);
-    function checkDiseasesModels($stationId);
 }
 
 class DiseaseModelService implements IDiseaseModelService
@@ -22,22 +21,19 @@ class DiseaseModelService implements IDiseaseModelService
     protected $diseaseModelConditionService;
     protected $followDiseaseModelService;
     protected $stationService;
-    protected $weatherService;
 
     public function __construct(
         DiseaseModel $diseaseModel,
         DiseaseCondition $diseaseCondition,
         DiseaseModelConditionService $diseaseModelConditionService,
         FollowDiseaseModelService $followDiseaseModelService,
-        StationService $stationService,
-        WeatherService $weatherService)
+        StationService $stationService)
     {
         $this->diseaseModel = $diseaseModel;
         $this->diseaseCondition = $diseaseCondition;
         $this->diseaseModelConditionService = $diseaseModelConditionService;
         $this->followDiseaseModelService = $followDiseaseModelService;
         $this->stationService = $stationService;
-        $this->weatherService = $weatherService;
     }
 
     public function create($data)
@@ -60,7 +56,7 @@ class DiseaseModelService implements IDiseaseModelService
         $this->diseaseModelConditionService->updateConditions($model->conditions);
         $diseaseModel->save();
 
-        return getModelWithConditions($model->id, $model->user_id);
+        return $this->getModelWithConditions($model->id, $model->user_id);
     }
 
     public function getAllModels()
@@ -85,22 +81,5 @@ class DiseaseModelService implements IDiseaseModelService
         }
 
         return null;
-    }
-
-    public function checkDiseasesModels($stationId)
-    {
-        $results = [];
-        $stationModels = $this->followDiseaseModelService->getStationDiseaseModels($stationId);
-
-        if (!$stationModels->isEmpty()){
-
-            foreach($stationModels as $model)
-            {
-                $res = $this->weatherService->checkParameters($stationId, $this->getModelConditions($model->disease_model_id));
-                array_push($results, $res);
-            }
-        }
-
-        return $results;
     }
 }
