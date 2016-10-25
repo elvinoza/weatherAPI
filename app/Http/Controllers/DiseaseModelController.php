@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DiseaseModels\UpdateDiseaseModelWithConditionsRequest;
 use App\Services\DiseaseModelConditionService;
+use App\Services\DiseaseModelCorrectnessService;
 use App\Services\DiseaseModelService;
 use App\Http\Requests\DiseaseModels\CreateDiseaseModelRequest;
 use App\Http\Requests\DiseaseModels\CreateDiseaseModelConditionRequest;
@@ -12,14 +13,17 @@ class DiseaseModelController extends Controller
 {
     protected $diseaseModelService;
     protected $diseaseModelConditionService;
+    protected $diseaseModelCorrectnessService;
 
     public function __construct(
         DiseaseModelService $diseaseModelService,
+        DiseaseModelCorrectnessService $diseaseModelCorrectnessService,
         DiseaseModelConditionService $diseaseModelConditionService)
     {
         $this->middleware('jwt.auth', ['except' => ['tryNot']]);
         $this->diseaseModelService = $diseaseModelService;
         $this->diseaseModelConditionService = $diseaseModelConditionService;
+        $this->diseaseModelCorrectnessService = $diseaseModelCorrectnessService;
     }
 
     public function create(CreateDiseaseModelRequest $request)
@@ -50,6 +54,6 @@ class DiseaseModelController extends Controller
 
     public function tryNot($stationId)
     {
-        return $this->diseaseModelService->checkDiseasesModels($stationId);
+        return $this->diseaseModelCorrectnessService->checkDiseasesModels($stationId);
     }
 }

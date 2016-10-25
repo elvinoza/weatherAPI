@@ -102,6 +102,5 @@ class DiseaseModelService implements IDiseaseModelService
         }
 
         return $results;
-        //return false;
     }
 }
