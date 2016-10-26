@@ -11,10 +11,10 @@
         $scope.model = null;
 
         $scope.operators = [{
-            value: true,
+            value: 1,
             name: 'More than'
         }, {
-            value: false,
+            value: 0,
             name: 'Lest than'
         }];
 
