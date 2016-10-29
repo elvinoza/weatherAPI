@@ -93842,10 +93842,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         $scope.model = null;
 
         $scope.operators = [{
-            value: true,
+            value: 1,
             name: 'More than'
         }, {
-            value: false,
+            value: 0,
             name: 'Lest than'
         }];
 

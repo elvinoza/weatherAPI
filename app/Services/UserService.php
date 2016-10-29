@@ -16,6 +16,7 @@ interface IUserService
     function getUserStationsLastData($id);
     function getUserDiseaseModels($id);
     function getUserNotifications($id);
+    function delete($id);
 }
 
 class UserService implements IUserService
@@ -114,5 +115,11 @@ class UserService implements IUserService
 
             return $user->notifications()->orderBy('created_at', 'DESC')->get();
         }
+    }
+
+    public function delete($id)
+    {
+        $user = $this->user->find($id);
+        $user->delete();
     }
 }
