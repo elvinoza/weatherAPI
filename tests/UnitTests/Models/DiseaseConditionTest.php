@@ -7,8 +7,6 @@ use App\Enums\ClsfWeatherParameters;
 
 class DiseaseConditionTest extends TestCase
 {
-    use DatabaseMigrations;
-
     protected $conditionId;
     protected $diseaseModel;
 
@@ -21,14 +19,12 @@ class DiseaseConditionTest extends TestCase
     }
 
     /**
-     * Create Station Test.
+     * Create Disease Model Condition Test.
      *
      * @return void
      */
     public function testCreateDiseaseModelCondition()
     {
-        //$diseaseModel = factory(DiseaseModel::class)->create();
-
         $condition = $this->diseaseModel->conditions()->create([
             'disease_model_id' => $this->diseaseModel->id,
             'clsf_weather_parameter' => ClsfWeatherParameters::Temperature,
@@ -51,13 +47,10 @@ class DiseaseConditionTest extends TestCase
             'end_range' => $condition->end_range,
             'time' => $condition->time
         ]);
-
-        //$user->delete();
-        //$found_station->delete();
     }
 
     /**
-     * Delete Station Test.
+     * Delete Disease Model Condition Test.
      *
      * @return void
      */

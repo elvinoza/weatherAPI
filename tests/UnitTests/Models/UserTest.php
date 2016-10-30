@@ -5,8 +5,6 @@ use App\Models\User;
 
 class UserTest extends TestCase
 {
-    use DatabaseMigrations;
-
     /**
      * Create User test.
      *

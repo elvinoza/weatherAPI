@@ -5,8 +5,6 @@ use App\Models\DiseaseModel;
 
 class DiseaseModelTest extends TestCase
 {
-    use DatabaseMigrations;
-
     /**
      * Create Station Test.
      *

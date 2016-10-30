@@ -8,8 +8,6 @@ use App\Models\User;
 
 class UserServiceTest extends TestCase
 {
-    use DatabaseMigrations;
-
     protected $createdUserList;
     protected $userService;
     protected $user;

@@ -6,8 +6,6 @@ use App\Models\Station;
 
 class StationTest extends TestCase
 {
-    use DatabaseMigrations;
-
     /**
      * Create Station Test.
      *

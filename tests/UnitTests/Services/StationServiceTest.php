@@ -9,8 +9,6 @@ use App\Models\Station;
 
 class StationServiceTest extends TestCase
 {
-    use DatabaseMigrations;
-
     protected $user;
     protected $userMock;
     protected $stationService;
