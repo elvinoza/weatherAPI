@@ -100,6 +100,29 @@ class StationServiceTest extends TestCase
         $this->assertEquals($stationFromMethod->update_time, 10);
     }
 
+    /**
+     * Soft Delete Station Data Test.
+     *
+     * @return void
+     */
+    public function testSoftDeleteStation()
+    {
+        $station = $this->user->stations()->create([
+            'name' => 'NewStation',
+            'location' => 'Kaunas',
+            'update_time' => 60,
+            'isValid' => true,
+            'app_key' => 'cFUmzZlWtsxaeupyboFNIzsR7Ow4PS06'
+        ]);
+
+        array_push($this->createdStationList, $station->id);
+
+        $stationFromMethod = $this->stationService->delete($station->id);
+
+        $this->assertEquals($stationFromMethod->id, $station->id);
+        $this->assertEquals($stationFromMethod->isValid, 0);
+    }
+
     public function tearDown()
     {
         foreach ($this->createdStationList as $station) {
