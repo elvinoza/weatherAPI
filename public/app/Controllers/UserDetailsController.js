@@ -10,6 +10,8 @@
 
         var vm = this;
 
+        $scope.password = {};
+
         vm.error;
 
         vm.getUser = function(id){
@@ -23,6 +25,16 @@
         vm.update = function(){
             ApiService.updateUser($scope.user).success(function(data) {
                 $scope.user = data;
+            }).error(function(error) {
+                console.log(error);
+            });
+        };
+
+        vm.changePassword = function(){
+            $scope.password.user_id = $stateParams.id;
+
+            ApiService.changeUserPassword($scope.password).success(function(data) {
+                $scope.password = {};
             }).error(function(error) {
                 console.log(error);
             });

@@ -14,6 +14,7 @@ class ChangeUserPasswordRequest extends Request
     public function rules()
     {
         return [
+            'user_id' => 'required',
             'current_password' => 'required|min:5',
             'new_password' => 'required|confirmed|min:5'
         ];

@@ -57,6 +57,7 @@ class UserService implements IUserService
     public function changeUserPassword($data)
     {
         $user = $this->user->find($data->user_id);
+
         if($user != null){
             if(Hash::check($data->current_password, $user->password))
             {
@@ -76,7 +77,7 @@ class UserService implements IUserService
         $user = $this->user->find($id);
         if ($user != null)
             return $user->stations->where('isValid', 1);
-        else return emptyArray();
+        else return collect([]);
     }
 
     public function getUserStationsLastData($id)
@@ -101,19 +102,23 @@ class UserService implements IUserService
     public function getUserDiseaseModels($id)
     {
         $user = $this->user->find($id);
+
         if ($user != null)
             return $user->diseaseModels;
-        else return emptyArray();
+        else return collect([]);
     }
 
     public function getUserNotifications($id, $count = null)
     {
         $user = $this->user->find($id);
+
         if ($user != null) {
             if ($count != null)
                 return $user->notifications()->orderBy('created_at', 'DESC')->take($count)->get();
 
             return $user->notifications()->orderBy('created_at', 'DESC')->get();
+        } else {
+            return collect([]);
         }
     }
 

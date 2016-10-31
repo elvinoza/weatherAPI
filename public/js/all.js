@@ -93280,6 +93280,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             return $http.get(baseURL + 'user/' + id);
         };
 
+        this.changeUserPassword = function(password) {
+            return $http.post(baseURL + 'password', password, { headers: { 'Accept': 'Application/json' }});
+        };
+
         this.updateUser = function(user){
             return $http.post(baseURL + 'user/' + user.id, user, { headers: { 'Accept': 'Application/json' }});
         };
@@ -93504,6 +93508,8 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         var vm = this;
 
+        $scope.password = {};
+
         vm.error;
 
         vm.getUser = function(id){
@@ -93517,6 +93523,16 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         vm.update = function(){
             ApiService.updateUser($scope.user).success(function(data) {
                 $scope.user = data;
+            }).error(function(error) {
+                console.log(error);
+            });
+        };
+
+        vm.changePassword = function(){
+            $scope.password.user_id = $stateParams.id;
+
+            ApiService.changeUserPassword($scope.password).success(function(data) {
+                $scope.password = {};
             }).error(function(error) {
                 console.log(error);
             });

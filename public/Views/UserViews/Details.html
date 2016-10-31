@@ -25,19 +25,19 @@
             <form name="userPasswordForm">
                 <md-input-container class="md-block">
                     <label>Current Password</label>
-                    <input type="password" ng-model="">
+                    <input type="password" ng-model="password.current_password">
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>New Password</label>
-                    <input type="password" ng-model="">
+                    <input type="password" ng-model="password.new_password">
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>New Password Confirmation</label>
-                    <input type="email" ng-model="">
+                    <input type="password" ng-model="password.new_password_confirmation">
                 </md-input-container>
 
                 <div layout="row" layout-align="center center" style="padding-top:20px;">
-                    <md-button style="width: 100%" class="md-raised md-warn" ng-click="userDetails.ChangePassword()">Change</md-button>
+                    <md-button style="width: 100%" class="md-raised md-warn" ng-click="userDetails.changePassword()">Change</md-button>
                 </div>
             </form>
         </div>

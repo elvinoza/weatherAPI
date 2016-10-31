@@ -14,6 +14,10 @@
             return $http.get(baseURL + 'user/' + id);
         };
 
+        this.changeUserPassword = function(password) {
+            return $http.post(baseURL + 'password', password, { headers: { 'Accept': 'Application/json' }});
+        };
+
         this.updateUser = function(user){
             return $http.post(baseURL + 'user/' + user.id, user, { headers: { 'Accept': 'Application/json' }});
         };
