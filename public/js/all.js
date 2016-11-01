@@ -93901,18 +93901,34 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         .module('app')
         .controller('NotificationsController', NotificationsController);
 
-    function NotificationsController($stateParams, $scope, ApiService) {
+    function NotificationsController($stateParams, $rootScope, $scope, ApiService) {
 
+        $scope.query = {
+            order: 'short_message',
+            limit: 10,
+            page: 1
+        };
+
+        $scope.limitOptions = [5, 10, 15, 20];
         $scope.notifications = [];
 
-        $scope.getAllNotifications = function(id){
-            console.log('asd');
+
+        $scope.getAllNotifications = function(id) {
+
             ApiService.getAllUserNotifications(id).success(function(data) {
                 $scope.notifications = data;
-                console.log(data);
             }).error(function(error) {
 
             });
+        };
+
+        $scope.refreshList = function() {
+            $scope.getAllNotifications($stateParams.id);
+        };
+
+        $scope.showNotification = function(ev, notification){
+            $rootScope.showNotification(ev, notification);
+            $scope.getAllNotifications($stateParams.id);
         };
 
         $scope.getAllNotifications($stateParams.id);
