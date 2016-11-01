@@ -53,7 +53,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('disease/createConditions', 'DiseaseModelController@createConditions');
         Route::get('disease/{id}', 'DiseaseModelController@getModel');
         Route::get('user/models/{id}', 'UserController@getUserDiseaseModels');
-        Route::get('disease/models', 'DiseaseModelController@getAllModels');
+        Route::get('diseases', 'DiseaseModelController@getAllModels');
         Route::get('clsf/params', 'ClsfController@getAllParameters');
 
         //testing url's

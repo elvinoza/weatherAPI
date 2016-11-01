@@ -80,6 +80,6 @@ class DiseaseModelService implements IDiseaseModelService
             return $model;
         }
 
-        return null;
+        return new DiseaseModel();
     }
 }

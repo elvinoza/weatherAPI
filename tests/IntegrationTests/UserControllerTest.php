@@ -5,7 +5,7 @@ use App\Models\User;
 use App\Models\Station;
 use App\Models\Weather;
 
-class UserCTest extends TestCase
+class UserControllerTest extends TestCase
 {
     use WithoutMiddleware;
 
