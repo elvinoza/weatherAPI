@@ -76,7 +76,7 @@ class UserService implements IUserService
     {
         $user = $this->user->find($id);
         if ($user != null)
-            return $user->stations->where('isValid', 1);
+            return $user->stations()->where('isValid', 1)->get();
         else return collect([]);
     }
 

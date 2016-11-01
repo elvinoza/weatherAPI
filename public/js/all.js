@@ -93552,25 +93552,37 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
     function UserStationsController($scope, $state, $stateParams, ApiService) {
 
-        var vm = this;
+        $scope.stations = [];
 
-        vm.stations;
-        vm.error;
-
-        vm.getUserStations = function(id){
+        $scope.getUserStations = function(id){
             ApiService.getUserStations(id).success(function(data) {
-                vm.stations = data;
+                $scope.stations = data;
             }).error(function(error) {
 
-                vm.error = error;
             });
-        }
+        };
 
-        vm.create = function(){
+        $scope.create = function(){
             $state.go('createStation');
-        }
+        };
 
-        vm.getUserStations($stateParams.id);
+        $scope.editStation = function(id){
+            $state.go('editStation', { id: id })
+        };
+
+        $scope.chart = function(id){
+            $state.go('charts', { id: id })
+        };
+
+        $scope.weathers = function(id){
+            $state.go('stationWeathers', { id: id })
+        };
+
+        $scope.refreshList = function() {
+            $scope.getUserStations($stateParams.id);
+        };
+
+        $scope.getUserStations($stateParams.id);
     }
 })();
 
