@@ -20,6 +20,17 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Models\Station::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => $faker->numberBetween(1,3),
+        'name' => $faker->name,
+        'location' => $faker->address,
+        'update_time' => $faker->numberBetween(1,300),
+        'isValid' => true,
+        'app_key' => $faker->text(32)
+    ];
+});
+
 $factory->define(App\Models\DiseaseModel::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
