@@ -72,6 +72,11 @@
                     url: '/disease/edit/:id',
                     templateUrl: '../Views/DiseaseModelViews/EditDiseaseModel.html',
                     controller: 'EditDiseaseModelController as editDiseaseModel'
+                })
+                .state('forecast', {
+                    url: '/forecast/:id',
+                    templateUrl: '../Views/ForecastViews/Forecast.html',
+                    controller: 'ForecastController as forecast'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {

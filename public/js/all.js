@@ -93172,6 +93172,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                     url: '/disease/edit/:id',
                     templateUrl: '../Views/DiseaseModelViews/EditDiseaseModel.html',
                     controller: 'EditDiseaseModelController as editDiseaseModel'
+                })
+                .state('forecast', {
+                    url: '/forecast/:id',
+                    templateUrl: '../Views/ForecastViews/Forecast.html',
+                    controller: 'ForecastController as forecast'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -94029,6 +94034,19 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
+    };
+
+})();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('ForecastController', ForecastController);
+
+    function ForecastController($rootScope) {
+
     };
 
 })();

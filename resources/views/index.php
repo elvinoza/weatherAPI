@@ -27,7 +27,7 @@
                 <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="latestData()">Latest Stations Data</md-button>
                 <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="userStations({ id: currentUser.id })">Stations</md-button>
                 <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="userModels({ id: currentUser.id })">Disease Models</md-button>
-                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="userModels({ id: currentUser.id })">Forecast</md-button>
+                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="forecast({ id: currentUser.id })">Forecast</md-button>
             </div>
 
             <div ng-if="authenticated" class="nav-buttons">
