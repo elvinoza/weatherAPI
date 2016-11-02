@@ -77,6 +77,11 @@
                     url: '/forecast/:id',
                     templateUrl: '../Views/ForecastViews/Forecast.html',
                     controller: 'ForecastController as forecast'
+                })
+                .state('allStations', {
+                    url: '/stations',
+                    templateUrl: '../Views/StationViews/AllStations.html',
+                    controller: 'AllStationsController as allStations'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {

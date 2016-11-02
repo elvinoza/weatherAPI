@@ -14,6 +14,7 @@ interface IStationInterface
     function getStationWeathers($id, $count);
     function getStationUpdateTime($id);
     function getUserByStation($stationId);
+    function getAllSystemStations();
 }
 
 class StationService implements IStationInterface
@@ -87,6 +88,11 @@ class StationService implements IStationInterface
     public function getUserByStation($stationId)
     {
         return $this->station->find($stationId)->user;
+    }
+
+    public function getAllSystemStations()
+    {
+        return $this->station->where('isValid', 1)->get();
     }
 
     private function generateAppKey()

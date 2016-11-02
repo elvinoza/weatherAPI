@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('station/create', 'StationController@createStation');
         Route::get('station/delete/{id}', 'StationController@deleteStation');
         Route::get('station/weathers/{id}/{count?}', 'StationController@getWeathers');
+        Route::get('stations', 'StationController@getAllSystemStations');
         Route::get('weather/{id}', 'WeatherController@getWeather');
         Route::get('weathers', 'WeatherController@getWeathers');
 

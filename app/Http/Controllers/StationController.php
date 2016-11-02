@@ -12,7 +12,7 @@ class StationController extends Controller
 
     public function __construct(StationService $stationService)
     {
-        $this->middleware('jwt.auth');
+        $this->middleware('jwt.auth', ['except' => ['getAllSystemStations', 'getWeathers']]);
         $this->stationService = $stationService;
     }
 
@@ -43,5 +43,10 @@ class StationController extends Controller
     public function getWeathers($id, $count = null)
     {
         return $this->stationService->getStationWeathers($id, $count);
+    }
+
+    public function getAllSystemStations()
+    {
+        return $this->stationService->getAllSystemStations();
     }
 }

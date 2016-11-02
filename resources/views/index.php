@@ -30,6 +30,10 @@
                 <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="forecast({ id: currentUser.id })">Forecast</md-button>
             </div>
 
+            <div ng-if="!authenticated">
+                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="allStations()">Stations</md-button>
+            </div>
+
             <div ng-if="authenticated" class="nav-buttons">
                 <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="list-style: none; background: transparent;">
 

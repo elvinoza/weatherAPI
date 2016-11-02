@@ -26,6 +26,10 @@
             return $http.get(baseURL + 'user/stations/' + id);
         };
 
+        this.getAllStations = function(){
+            return $http.get(baseURL + 'stations');
+        };
+
         this.getStation = function(id){
             return $http.get(baseURL + 'station/' + id);
         };

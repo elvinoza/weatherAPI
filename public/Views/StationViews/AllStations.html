@@ -1,0 +1,55 @@
+<div>
+    <md-fab-speed-dial md-open="true" class="md-fab-bottom-right">
+        <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-warn md-fab-bottom-right" ng-click="create()">
+                <md-icon class="material-icons">create</md-icon>
+            </md-button>
+        </md-fab-trigger>
+    </md-fab-speed-dial>
+</div>
+
+<md-content laout="column" flex>
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <span>Stations</span>
+                <div flex></div>
+                <md-button class="md-icon-button" ng-click="refreshList()">
+                    <md-icon>refresh</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table  md-progress="promise">
+                <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column numeric><span>#</span></th>
+                    <th md-column md-numeric md-order-by="name" md-desc><span>Name</span></th>
+                    <th md-column md-numeric md-order-by="location" md-desc><span>Location</span></th>
+                    <th md-column md-numeric md-order-by="update_time" md-desc><span>Data Update time</span></th>
+                    <th md-column md-numeric md-order-by="updated_at" md-desc><span>Last Update Time</span></th>
+                    <th md-column ><span>Charts</span></th>
+                    <th md-column ><span>Weathers</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="station" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, station) in stations | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{index + 1}}</td>
+                    <td md-cell>{{station.name}}</td>
+                    <td md-cell>{{station.location}}</td>
+                    <td md-cell>{{station.update_time}}</td>
+                    <td md-cell>{{station.updated_at}}</td>
+                    <td md-cell ng-click="chart(station.id)">
+                        <md-icon>timeline</md-icon>
+                    </td>
+                    <td md-cell ng-click="weathers(station.id)">
+                        <md-icon>more_horiz</md-icon>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{stations.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
+    </md-card>
+</md-content>

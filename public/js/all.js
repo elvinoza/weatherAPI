@@ -93177,6 +93177,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                     url: '/forecast/:id',
                     templateUrl: '../Views/ForecastViews/Forecast.html',
                     controller: 'ForecastController as forecast'
+                })
+                .state('allStations', {
+                    url: '/stations',
+                    templateUrl: '../Views/StationViews/AllStations.html',
+                    controller: 'AllStationsController as allStations'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -93295,6 +93300,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         this.getUserStations = function(id){
             return $http.get(baseURL + 'user/stations/' + id);
+        };
+
+        this.getAllStations = function(){
+            return $http.get(baseURL + 'stations');
         };
 
         this.getStation = function(id){
@@ -94050,6 +94059,52 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
     };
 
 })();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('AllStationsController', AllStationsController);
+
+    function AllStationsController($scope, $state, ApiService) {
+
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
+        $scope.stations = [];
+
+        $scope.getAllStations = function() {
+            ApiService.getAllStations().success(function(data) {
+                $scope.stations = data;
+            }).error(function(error) {
+
+            });
+        };
+
+        $scope.create = function(){
+            $state.go('createStation');
+        };
+
+        $scope.chart = function(id){
+            $state.go('charts', { id: id })
+        };
+
+        $scope.weathers = function(id){
+            $state.go('stationWeathers', { id: id })
+        };
+
+        $scope.refreshList = function() {
+            $scope.getAllStations();
+        };
+
+        $scope.getAllStations();
+    }
+})();
+
 (function() {
 
     'use strict';
