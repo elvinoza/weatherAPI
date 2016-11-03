@@ -10,6 +10,12 @@
 
         $scope.weathers = [];
 
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
         $scope.getLatestData = function(){
 
             ApiService.getLatestWeathers($rootScope.currentUser.id).success(function(data) {
@@ -17,6 +23,10 @@
             }).error(function(error) {
 
             });
+        };
+
+        $scope.refreshList = function(){
+            $scope.getLatestData();
         };
 
         $scope.getLatestData();

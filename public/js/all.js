@@ -93498,6 +93498,12 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         $scope.weathers = [];
 
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
         $scope.getLatestData = function(){
 
             ApiService.getLatestWeathers($rootScope.currentUser.id).success(function(data) {
@@ -93505,6 +93511,10 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             }).error(function(error) {
 
             });
+        };
+
+        $scope.refreshList = function(){
+            $scope.getLatestData();
         };
 
         $scope.getLatestData();
