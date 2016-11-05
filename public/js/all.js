@@ -102232,8 +102232,24 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
                 });
             };
 
+            $rootScope.latestData = function() {
+                $state.go('latestData', { id: $rootScope.currentUser.id });
+            };
+
             $rootScope.profile = function() {
                 $state.go('userDetails', { id: $rootScope.currentUser.id });
+            };
+
+            $rootScope.stations = function() {
+                $state.go('userStations', { id: $rootScope.currentUser.id });
+            };
+
+            $rootScope.diseaseModels = function() {
+                $state.go('userModels', { id: $rootScope.currentUser.id });
+            };
+
+            $rootScope.forecast = function() {
+                $state.go('forecast', { id: $rootScope.currentUser.id });
             };
     });
 })();
