@@ -22,56 +22,6 @@
         <!-- //js -->
     </head>
     <body ng-cloak >
-<!--        <div layout="row" style="background-color: paleturquoise;" layout-padding class="bg-blue-grey nav-dark" layout-align="space-between center">-->
-<!--            <div ng-if="authenticated" >-->
-<!--                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="latestData()">Latest Stations Data</md-button>-->
-<!--                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="userStations({ id: currentUser.id })">Stations</md-button>-->
-<!--                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="userModels({ id: currentUser.id })">Disease Models</md-button>-->
-<!--                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="forecast({ id: currentUser.id })">Forecast</md-button>-->
-<!--            </div>-->
-<!---->
-<!--            <div ng-if="!authenticated">-->
-<!--                <md-button style="background-color: rgb(255,87,34); color: white" class="md-ripple-size" ui-sref="allStations()">Stations</md-button>-->
-<!--            </div>-->
-<!---->
-<!--            <div ng-if="authenticated" class="nav-buttons">-->
-<!--                <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="list-style: none; background: transparent;">-->
-<!---->
-<!--                    <li ng-click="getUserNotifications()" class="xn-icon-button">-->
-<!--                        <a><md-icon>notifications</md-icon></a>-->
-<!--                        <div class="informer informer-danger">{{ currentUser.user_notify.count }}</div>-->
-<!--                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">-->
-<!--                            <div class="panel-heading">-->
-<!--                                <h3 class="panel-title"><span class="fa fa-comments"></span> Notifications</h3>-->
-<!--                                <div class="pull-right">-->
-<!--                                    <span class="label label-danger">{{ currentUser.user_notify.count }} new</span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="panel-body list-group list-group-contacts scroll" style="height: auto;">-->
-<!--                                <a ng-repeat="notification in notifications" ng-click="showNotification($event, notification)" ng-class="(notification.is_read == 1) ? 'list-group-item' : 'list-group-item not-read-notification'">-->
-<!--<!--                                    class="list-group-item" data-ng-style="notification.is_read == 0 && {'background':'#ffebcd'}-->
-<!--                                    <div class="list-group-status status-online"></div>-->
-<!--<!--                                <img src="images/users/user2.jpg" class="pull-left" alt="John Doe"/>-->
-<!--                                    {{ notification.is_read }}-->
-<!--                                    <span class="contacts-title">{{ notification.short_message }}</span>-->
-<!--                                    Praesent placerat tellus id augue condimentum-->
-<!--                                </a>-->
-<!--                            </div>-->
-<!--                            <div class="panel-footer text-center">-->
-<!--                                <a ui-sref="notifications({ id: currentUser.id })">Show all notifications</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!---->
-<!--                    <li>-->
-<!--                        <md-button class="md-raised md-accent" ng-click="profile()">My profile</md-button>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <md-button ng-if="authenticated" class="md-raised md-warn" ng-click="logout()">Log Out</md-button>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
             <md-content flex style="height: 100%;">
                 <md-nav-bar ng-if="authenticated" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
                     <md-nav-item md-nav-click="latestData()" name="latestData">Stations Latest Data</md-nav-item>
@@ -79,6 +29,33 @@
                     <md-nav-item md-nav-click="diseaseModels()" name="diseaseModels">Disease Models</md-nav-item>
                     <md-nav-item md-nav-click="forecast()" name="forecast">Forecast</md-nav-item>
                     <span flex></span>
+                    <div ng-if="authenticated" class="nav-buttons">
+                        <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="list-style: none; background: transparent;">
+                            <li ng-click="getUserNotifications()" class="xn-icon-button">
+                                <a><md-icon>notifications</md-icon></a>
+                                <div class="informer informer-danger">{{ currentUser.user_notify.count }}</div>
+                                <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><span class="fa fa-comments"></span> Notifications</h3>
+                                        <div class="pull-right">
+                                            <span class="label label-danger">{{ currentUser.user_notify.count }} new</span>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body list-group list-group-contacts scroll" style="height: auto;">
+                                        <a ng-repeat="notification in notifications" ng-click="showNotification($event, notification)" ng-class="(notification.is_read == 1) ? 'list-group-item' : 'list-group-item not-read-notification'">
+                                            <div class="list-group-status status-online"></div>
+                                            {{ notification.is_read }}
+                                            <span class="contacts-title">{{ notification.short_message }}</span>
+                                            Praesent placerat tellus id augue condimentum
+                                        </a>
+                                    </div>
+                                    <div class="panel-footer text-center">
+                                        <a ui-sref="notifications({ id: currentUser.id })">Show all notifications</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                     <md-nav-item md-nav-click="profile()" name="logout"><md-icon>account_circle</md-icon></md-nav-item>
                     <md-nav-item md-nav-click="logout()" name="logout"><md-icon>exit_to_app</md-icon></md-nav-item>
                 </md-nav-bar>
