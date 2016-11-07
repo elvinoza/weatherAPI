@@ -18,14 +18,14 @@ class ClsfWeatherParameterTableSeeder extends Seeder
         DB::table('clsf_weather_parameter')->delete();
 
         $parameters = array(
-            ['name' => 'temperature'],
-            ['name' => 'humidity'],
-            ['name' => 'pressure'],
-            ['name' => 'soil_temperature'],
-            ['name' => 'soil_humidity'],
-            ['name' => 'wind_speed'],
-            ['name' => 'wind_direction'],
-            ['name' => 'rain']
+            ['name' => 'Temperature'],
+            ['name' => 'Humidity'],
+            ['name' => 'Pressure'],
+            ['name' => 'Soil Temperature'],
+            ['name' => 'Soil Humidity'],
+            ['name' => 'Wind Speed'],
+            ['name' => 'Wind Direction'],
+            ['name' => 'Rain']
         );
 
         foreach ($parameters as $parameter)
