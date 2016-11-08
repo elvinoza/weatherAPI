@@ -53,6 +53,7 @@ class DiseaseModelService implements IDiseaseModelService
         $diseaseModel->name = $model->name;
         $diseaseModel->description = $model->description;
         $diseaseModel->user_id = $model->user_id;
+        $diseaseModel->conditions()->delete();
         $this->diseaseModelConditionService->updateConditions($model->conditions);
         $diseaseModel->save();
 

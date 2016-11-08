@@ -32,7 +32,6 @@ class UpdateDiseaseModelWithConditionsRequest extends Request {
                     $rules['conditions.'.$key.'.start_range'] = 'required|numeric';
                     $rules['conditions.'.$key.'.end_range'] = 'required|numeric';
                 } else {
-                    var_dump($val->operator);
                     $rules['conditions.'.$key.'.constant'] = 'required|numeric';
                     $rules['conditions.'.$key.'.operator'] = 'required|boolean';
                 }
