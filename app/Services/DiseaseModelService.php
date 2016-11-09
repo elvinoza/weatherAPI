@@ -71,6 +71,7 @@ class DiseaseModelService implements IDiseaseModelService
         if($model != null)
             return $model->conditions;
 
+        return null;
     }
 
     public function getModelWithConditions($modelId)
