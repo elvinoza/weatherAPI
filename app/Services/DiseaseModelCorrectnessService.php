@@ -42,10 +42,9 @@ class DiseaseModelCorrectnessService implements IDiseaseModelCorrectnessService
             foreach($stationModels as $model)
             {
                 $res = $this->checkParameters($stationId, $this->diseaseModelService->getModelConditions($model->disease_model_id));
-
                 if ($res) {
                     $this->notifyService->crateNotification($user->id, $model->disease_model_id, $model->model->name . " observed in station - " . $model->station->name,
-                        "In the station " . $model->station->name . "detected model (" . $model->model->name . ") conditions. Please investigate it!");
+                        "In the station " . $model->station->name . " detected model (" . $model->model->name . ") conditions. Please investigate it!");
                 }
             }
         }

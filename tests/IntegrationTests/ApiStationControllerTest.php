@@ -2,11 +2,13 @@
 
 use App\Models\Station;
 use App\Services\StationService;
+use App\Models\Notification;
 
 class ApiStationControllerTest extends TestCase
 {
     protected $station;
     protected $stationService;
+    protected $notificationId;
 
     public function setUp()
     {
@@ -14,6 +16,7 @@ class ApiStationControllerTest extends TestCase
 
         $this->station = factory(Station::class)->create();
         $this->stationService = new StationService(new Station());
+        $this->notificationId = null;
     }
 
     /**
@@ -31,7 +34,7 @@ class ApiStationControllerTest extends TestCase
     }
 
     /**
-     * Insert Data From Station
+     * Insert Data From Station (Success test)
      *
      * @return void
      */
@@ -42,7 +45,7 @@ class ApiStationControllerTest extends TestCase
         $data = [
             'station_id' => $station->id,
             'app_key' => $station->app_key,
-            'temperature' => 1.3,
+            'temperature' => 14,
             'humidity' => 60.05,
             'pressure' => 2500,
             'soil_temperature' => 10.51,
@@ -57,11 +60,21 @@ class ApiStationControllerTest extends TestCase
         $response->seeJson([
             'success' => true
         ]);
+
+        //check for notification
+        $notification = Notification::where('user_id', $station->user_id)->where('disease_model_id', 54)->get()->first();
+        $this->assertNotNull($notification);
+
+        $this->notificationId = $notification->id;
+
+        $this->assertEquals("In the station sadsa detected model (AAAAA) conditions. Please investigate it!", $notification->full_message);
     }
 
     public function tearDown()
     {
         $this->station->delete();
+        if ($this->notificationId != null)
+            Notification::find($this->notificationId)->delete();
 
         parent::tearDown();
     }

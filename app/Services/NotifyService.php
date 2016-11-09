@@ -11,6 +11,7 @@ interface INotifyService
     function crateNotification($userId, $diseaseModelId, $shortMessage, $fullMessage);
     function setAsRead($id);
     function decreaseCount($userId);
+    function checkUserModelNotification($userId, $diseaseModelId);
 }
 
 class NotifyService implements INotifyService
@@ -70,6 +71,12 @@ class NotifyService implements INotifyService
         $userNotify->save();
 
         return $userNotify->count;
+    }
+
+    public function checkUserModelNotification($userId, $diseaseModelId)
+    {
+        $notification = $this->notification->where('userId', $userId)->where('disease_model_id', $diseaseModelId)->get()->first();
+        return $notification;
     }
 
     private function increaseUserNotificationsCount($userId) {

@@ -29,11 +29,11 @@ class FollowDiseaseModel extends Model
 
     public function model()
     {
-        return $this->hasOne('App\Models\DiseaseModel', 'id');
+        return $this->belongsTo('App\Models\DiseaseModel', 'disease_model_id');
     }
 
     public function station()
     {
-        return $this->hasOne('App\Models\Station', 'id');
+        return $this->belongsTo('App\Models\Station', 'station_id');
     }
 }

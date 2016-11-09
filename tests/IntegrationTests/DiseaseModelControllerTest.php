@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\DiseaseModel;
 use App\Models\DiseaseCondition;
 use App\Enums\ClsfWeatherParameters;
+use App\Enums\CompareOperators;
 
 class DiseaseModelControllerTest extends TestCase
 {
@@ -99,22 +100,38 @@ class DiseaseModelControllerTest extends TestCase
     }
 
     /**
-     * Create Disease Model Conditions Test.
+     * Create Disease Model Conditions Test. (Data range)
      *
      * @return void
      */
-    public function testCreateDiseaseConditions()
+    public function testCreateDiseaseConditionsDataRange()
     {
         $diseaseModel = factory(DiseaseModel::class)->create();
         $this->diseaseModelId = $diseaseModel->id;
 
         $data = $diseaseModel['original'];
-        $data['conditions'] = [$this->createDiseaseModelConditions($diseaseModel)];
+        $data['conditions'] = [$this->createDiseaseModelConditionsDataRange($diseaseModel)];
 
         $this->json('POST', '/api/disease/createConditions', $data)->seeJson(['success' => true]);
     }
 
-    private function createDiseaseModelConditions($diseaseModel)
+    /**
+     * Create Disease Model Conditions Test. (Constant)
+     *
+     * @return void
+     */
+    public function testCreateDiseaseConditionsConstant()
+    {
+        $diseaseModel = factory(DiseaseModel::class)->create();
+        $this->diseaseModelId = $diseaseModel->id;
+
+        $data = $diseaseModel['original'];
+        $data['conditions'] = [$this->createDiseaseModelConditionsConstant($diseaseModel)];
+
+        $this->json('POST', '/api/disease/createConditions', $data)->seeJson(['success' => true]);
+    }
+
+    private function createDiseaseModelConditionsDataRange($diseaseModel)
     {
         $condition = $diseaseModel->conditions()->create([
             'disease_model_id' => $diseaseModel->id,
@@ -122,6 +139,21 @@ class DiseaseModelControllerTest extends TestCase
             'start_range' => 10,
             'end_range' => 20,
             'time' => 60
+        ]);
+
+        $this->conditionId = $condition->id;
+
+        return $condition;
+    }
+
+    private function createDiseaseModelConditionsConstant($diseaseModel)
+    {
+        $condition = $diseaseModel->conditions()->create([
+            'disease_model_id' => $diseaseModel->id,
+            'clsf_weather_parameter' => ClsfWeatherParameters::SoilHumidity,
+            'operator' => CompareOperators::MoreThan,
+            'constant' => 50,
+            'time' => 20
         ]);
 
         $this->conditionId = $condition->id;
