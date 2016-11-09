@@ -74,7 +74,7 @@ class FollowDiseaseModelService implements IFollowDiseaseModel
     {
         $stations = DB::table('stations as station')
             ->select(DB::raw("station.*, CASE WHEN (SELECT fmd.is_valid FROM follow_disease_model fmd WHERE fmd.station_id = station.id AND fmd.user_id = station.user_id AND fmd.disease_model_id = ?) != FALSE THEN True ELSE False END as follow"))->setBindings([$modelId])
-            ->where('station.user_id','=', $userId)
+            ->where('station.user_id','=', $userId)->where('station.isValid', 1)
             ->get();
 
         return $stations;
