@@ -39,7 +39,6 @@ class DiseaseModelCorrectnessService implements IDiseaseModelCorrectnessService
         $stationModels = $this->followDiseaseModelService->getStationDiseaseModels($stationId);
 
         if (!$stationModels->isEmpty()){
-
             foreach($stationModels as $model)
             {
                 $res = $this->checkParameters($stationId, $this->diseaseModelService->getModelConditions($model->disease_model_id));
