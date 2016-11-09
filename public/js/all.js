@@ -102686,7 +102686,11 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             }).error(function(error) {
 
             });
-        }
+        };
+
+        vm.refreshList = function(){
+            vm.getStationWeathers($stateParams.id);
+        };
 
         vm.getStationWeathers($stateParams.id);
     }
