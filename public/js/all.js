@@ -102297,8 +102297,8 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
             return $http.post(baseURL + 'station/create', station, { headers: { 'Accept': 'Application/json' }});
         };
 
-        this.getStationWeathers = function(id){
-            return $http.get(baseURL + 'station/weathers/' + id);
+        this.getStationWeathers = function(id, count){
+            return $http.get(baseURL + 'station/weathers/' + id + '/' + count);
         };
 
         this.signUp = function(user){
@@ -102681,7 +102681,7 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         vm.weathers;
 
         vm.getStationWeathers = function(id){
-            ApiService.getStationWeathers(id).success(function(data) {
+            ApiService.getStationWeathers(id, 1000).success(function(data) {
                 vm.weathers = data;
             }).error(function(error) {
 

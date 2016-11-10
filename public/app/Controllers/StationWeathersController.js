@@ -21,7 +21,7 @@
         vm.weathers;
 
         vm.getStationWeathers = function(id){
-            ApiService.getStationWeathers(id).success(function(data) {
+            ApiService.getStationWeathers(id, 1000).success(function(data) {
                 vm.weathers = data;
             }).error(function(error) {
 

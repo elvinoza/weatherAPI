@@ -42,8 +42,8 @@
             return $http.post(baseURL + 'station/create', station, { headers: { 'Accept': 'Application/json' }});
         };
 
-        this.getStationWeathers = function(id){
-            return $http.get(baseURL + 'station/weathers/' + id);
+        this.getStationWeathers = function(id, count){
+            return $http.get(baseURL + 'station/weathers/' + id + '/' + count);
         };
 
         this.signUp = function(user){
