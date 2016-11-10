@@ -45,7 +45,6 @@
                                     <a ng-repeat="notification in notifications" ng-click="showNotification($event, notification)" ng-class="(notification.is_read == 1) ? 'list-group-item' : 'list-group-item not-read-notification'">
                                         <div class="list-group-status status-online"></div>
                                         <span class="contacts-title">{{ notification.short_message }}</span>
-                                        Praesent placerat tellus id augue condimentum
                                     </a>
                                 </div>
                                 <div class="panel-footer text-center">
