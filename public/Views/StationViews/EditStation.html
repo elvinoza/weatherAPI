@@ -23,6 +23,11 @@
                     <input ng-model="station.app_key" disabled>
                 </md-input-container>
 
+                <input id="lng" ng-model="station.lng">
+                <input id="lat" ng-model="station.lat">
+
+                <div style="height: 400px; width: 100%" id="map"></div>
+
                 <div layout="row" layout-align="center center" style="padding-top:20px;">
                     <md-button style="width: 100%" class="md-raised md-primary" ng-click="editStation.update()">Update</md-button>
                 </div>
@@ -34,3 +39,53 @@
         </div>
     </md-content>
 </div>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnPb15Kj_Jh3LjYuh-piAyf7P3YuocgHw&callback=initMap">
+</script>
+<script>
+
+    var marker = {};
+    var map;
+
+    function initMap() {
+        var lat = Number($('#lat').val());
+        console.log(lat);
+        var lng = Number($('#lng').val());
+        var uluru = {lat: lat, lng: lng};
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: uluru
+        });
+
+        marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+
+        map.addListener('click', function(event) {
+            addMarker(event.latLng);
+            console.log(location);
+        });
+
+        function addMarker(location) {
+            marker.setMap(null);
+            marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+
+            $('#lat').val(location.lat).trigger('input');
+            $('#lng').val(location.lng).trigger('input');
+        }
+    }
+
+    $(document).ready(function() {
+        var lat = Number($('#lat').val());
+        console.log(lat);
+
+
+
+    });
+
+
+</script>

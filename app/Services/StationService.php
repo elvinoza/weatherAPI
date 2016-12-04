@@ -42,6 +42,8 @@ class StationService implements IStationInterface
         $station->name = $data->name;
         $station->location = $data->location;
         $station->update_time = $data->update_time;
+        $station->lat = $data->lat;
+        $station->lng = $data->lng;
         $station->save();
 
         return $station;

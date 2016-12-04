@@ -102601,10 +102601,16 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
 
         var vm = this;
 
+        //vm.location = {
+        //    lat: 54.8985049,
+        //    lng: 23.9578067
+        //};
+
         vm.error;
 
         vm.getStation = function(id){
             ApiService.getStation(id).success(function(data) {
+                console.log(data);
                 $scope.station = data;
             }).error(function(error) {
                 vm.error = error;
@@ -102612,7 +102618,9 @@ $templateCache.put("picker/time-picker.html","<div class=\"picker-container  md-
         };
 
         vm.update = function(){
+            console.log($scope.station);
             ApiService.updateStation($scope.station).success(function(data) {
+
                 $scope.station = data;
                 flash.success = "Station successful updated"
             }).error(function(error) {

@@ -13,8 +13,8 @@ class AddCoordinatesToStationsTable extends Migration
     public function up()
     {
         Schema::table('stations', function (Blueprint $table) {
-            $table->decimal('lat')->nullable();
-            $table->decimal('lng')->nullable();
+            $table->double('lat', 30, 26)->nullable();
+            $table->double('lng', 30, 26)->nullable();
         });
     }
 
