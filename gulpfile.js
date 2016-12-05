@@ -60,6 +60,7 @@ gulp.task('scripts', function(){
         'resources/lib/highcharts-ng/dist/highcharts-ng.js',
         'resources/lib/moment/moment.js',
         'resources/lib/smDateTimeRangePicker/src/picker.js',
+        'resources/lib/ngmap/build/scripts/ng-map.min.js',
         'public/app/app.js',
         'public/app/Services/ApiService.js',
         'public/app/Directives/Directives.js',

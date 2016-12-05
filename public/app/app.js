@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('app', ['ui.router', 'satellizer', 'angular-flash.service', 'angular-flash.flash-alert-directive',
-            'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng', 'smDateTimeRangePicker', 'directives'])
+            'ngMaterial', 'angular-loading-bar', 'md.data.table', 'highcharts-ng', 'smDateTimeRangePicker', 'directives', 'ngMap'])
         .config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, $logProvider) {
 
             $logProvider.debugEnabled(true);
@@ -109,6 +109,8 @@
             $authProvider.loginUrl = '/api/authenticate';
         })
         .run(function($rootScope, $state, $auth, ApiService, $mdDialog) {
+            //AIzaSyBnPb15Kj_Jh3LjYuh-piAyf7P3YuocgHw
+            $rootScope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBnPb15Kj_Jh3LjYuh-piAyf7P3YuocgHw";
 
             $rootScope.notifications = [];
 

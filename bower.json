@@ -8,14 +8,15 @@
     "angular": "^1.5.5",
     "bootstrap-sass-official": "3.3.4",
     "angular-ui-router": "^0.2.18",
-    "angular-material" : "1.1.1",
+    "angular-material": "1.1.1",
     "satellizer": "^0.14.0",
     "angular-flash": "^0.1.14",
     "angular-material-data-table": "^0.10.9",
     "angular-loading-bar": "^0.9.0",
     "highcharts-ng": "^0.0.11",
     "highcharts": "^4.2.5",
-    "smDateTimeRangePicker": "^1.6.0"
+    "smDateTimeRangePicker": "^1.6.0",
+    "ngmap": "^1.17.8"
   },
   "exportsOverride": {},
   "main": "",

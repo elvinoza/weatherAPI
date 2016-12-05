@@ -9,17 +9,12 @@
     function EditStationController($state, $scope, $rootScope, $stateParams, ApiService, flash) {
 
         var vm = this;
-
-        //vm.location = {
-        //    lat: 54.8985049,
-        //    lng: 23.9578067
-        //};
+        vm.googleMapsUrl = $rootScope.googleMapsUrl;
 
         vm.error;
 
         vm.getStation = function(id){
             ApiService.getStation(id).success(function(data) {
-                console.log(data);
                 $scope.station = data;
             }).error(function(error) {
                 vm.error = error;
@@ -27,9 +22,7 @@
         };
 
         vm.update = function(){
-            console.log($scope.station);
             ApiService.updateStation($scope.station).success(function(data) {
-
                 $scope.station = data;
                 flash.success = "Station successful updated"
             }).error(function(error) {
@@ -46,6 +39,12 @@
             });
         };
 
+        vm.changeMapMarker = function(event)
+        {
+            $scope.station.lat = event.latLng.lat();
+            $scope.station.lng = event.latLng.lng();
+        };
+
         vm.getStation($stateParams.id);
-    };
+    }
 })();
