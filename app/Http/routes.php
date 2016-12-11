@@ -57,8 +57,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('diseases', 'DiseaseModelController@getAllModels');
         Route::get('clsf/params', 'ClsfController@getAllParameters');
 
+        //Forecasts
+        Route::get('forecast/{id}', 'ForecastController@getForecast');
+        Route::get('forecast/user/{id}', 'ForecastController@getUserStationsForecasts');
+        Route::get('forecast/station/{id}', 'ForecastController@getAllStationForecasts');
+
         //testing url's
-        Route::get('disease/tryNot/{stationId}', 'DiseaseModelController@tryNot'); //test note
+        Route::get('disease/tryNot/{stationId}', 'DiseaseModelController@tryNot'); //test notification url
     });
 
 });

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Station extends Model {
 
@@ -36,5 +37,10 @@ class Station extends Model {
     public function weathers()
     {
         return $this->hasMany('App\Models\Weather');
+    }
+
+    public function forecasts()
+    {
+        return $this->hasMany('App\Models\Forecast')->where('date', '=', Carbon::now())->where('date', '=', Carbon::now()->addDay(1));
     }
 }
