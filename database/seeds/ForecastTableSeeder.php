@@ -21,16 +21,16 @@ class ForecastTableSeeder extends Seeder
         $forecasts = array(
             ['station_id' => 2, 'temperature' => 12.85, 'humidity' => 60.05, 'pressure' => 121010,
                 'soil_temperature' => 10.52, 'soil_humidity' => 53.85, 'wind_speed' => 121.85, 'wind_direction' => 120,
-                'rain' => 12.2, 'forecast_date' => Carbon::now()->toDateString(),],
+                'rain' => 12.2, 'forecast_date' => Carbon::now()->toDateString()],
             ['station_id' => 2, 'temperature' => 12.85, 'humidity' => 60.05, 'pressure' => 121010,
                 'soil_temperature' => 10.52, 'soil_humidity' => 53.85, 'wind_speed' => 121.85, 'wind_direction' => 120,
-                'rain' => 12.2, 'forecast_date' => Carbon::now()->toDateString(),],
+                'rain' => 12.2, 'forecast_date' => Carbon::now()->addDay()->toDateString()],
             ['station_id' => 3, 'temperature' => 12.85, 'humidity' => 60.05, 'pressure' => 121010,
                 'soil_temperature' => 10.52, 'soil_humidity' => 53.85, 'wind_speed' => 121.85, 'wind_direction' => 120,
-                'rain' => 12.2, 'forecast_date' => Carbon::now()->toDateString(),],
+                'rain' => 12.2, 'forecast_date' => Carbon::now()->toDateString()],
             ['station_id' => 3, 'temperature' => 12.85, 'humidity' => 60.05, 'pressure' => 121010,
                 'soil_temperature' => 10.52, 'soil_humidity' => 53.85, 'wind_speed' => 121.85, 'wind_direction' => 120,
-                'rain' => 12.2, 'forecast_date' => Carbon::now()->toDateString(),],
+                'rain' => 12.2, 'forecast_date' => Carbon::now()->addDay()->toDateString()],
         );
 
         foreach ($forecasts as $forecast)
