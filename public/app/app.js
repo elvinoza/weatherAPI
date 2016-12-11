@@ -190,5 +190,5 @@
             $rootScope.forecast = function() {
                 $state.go('forecast', { id: $rootScope.currentUser.id });
             };
-    });
+        });
 })();
