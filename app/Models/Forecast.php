@@ -11,7 +11,7 @@ class Forecast extends Model {
      *
      * @var string
      */
-    protected $table = 'weathers';
+    protected $table = 'forecast';
 
     /**
      * The attributes that are mass assignable.
@@ -20,8 +20,16 @@ class Forecast extends Model {
      */
 
     protected $fillable = [
-        'station_id', 'temperature', 'humidity', 'pressure', 'soil_temperature', 'soil_humidity', 'wind_speed',
-        'wind_direction', 'rain', 'date'
+        'station_id',
+        'temperature',
+        'humidity',
+        'pressure',
+        'soil_temperature',
+        'soil_humidity',
+        'wind_speed',
+        'wind_direction',
+        'rain',
+        'forecast_date',
     ];
 
     /**

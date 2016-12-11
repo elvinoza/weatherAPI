@@ -23,7 +23,7 @@ class CreateForecastTable extends Migration
             $table->double('wind_speed', 6, 2);
             $table->integer('wind_direction');
             $table->double('rain', 5, 2);
-            $table->date('date');
+            $table->date('forecast_date');
             $table->timestamps();
         });
     }

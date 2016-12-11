@@ -41,6 +41,6 @@ class Station extends Model {
 
     public function forecasts()
     {
-        return $this->hasMany('App\Models\Forecast')->where('date', '=', Carbon::now())->where('date', '=', Carbon::now()->addDay(1));
+        return $this->hasMany('App\Models\Forecast')->where('date', '=', Carbon::now())->where('date', '=', Carbon::now()->addDay());
     }
 }
