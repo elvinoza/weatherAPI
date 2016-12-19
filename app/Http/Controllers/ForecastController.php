@@ -10,7 +10,7 @@ class ForecastController extends Controller
 
     public function __construct(ForecastService $forecastService)
     {
-        $this->middleware('jwt.auth');
+        $this->middleware('jwt.auth', ['except' => ['getDataFromGisMeteo']]);
         $this->forecastService = $forecastService;
     }
 
@@ -27,5 +27,10 @@ class ForecastController extends Controller
     public function getAllStationForecasts($id)
     {
         return $this->forecastService->getAllStationForecasts($id);
+    }
+
+    public function getDataFromGisMeteo()
+    {
+        return $this->forecastService->getDataFromGisMeteo();
     }
 }
