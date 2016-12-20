@@ -12,7 +12,7 @@ use DOMDocument;
 
 interface IForecastService
 {
-    function calculateForecast();
+    function calculateForecast($stationId);
     function getAllStationForecasts($stationId);
     function getUserStationsForecast($id);
     function getForecast($id);
@@ -24,6 +24,7 @@ interface IForecastService
 class ForecastService implements IForecastService
 {
     protected $gismeteoUrl = 'https://www.gismeteo.ru/diary/4202/';
+    protected $todayDate;
     protected $user;
     protected $forecast;
     protected $dataForForecast;
@@ -33,11 +34,17 @@ class ForecastService implements IForecastService
         $this->user = $user;
         $this->forecast = $forecast;
         $this->dataForForecast = $dataForForecast;
+        $this->todayDate = date('y-m-d');
     }
 
-    public function calculateForecast()
+    public function calculateForecast($stationId)
     {
-        // TODO: Implement calculateForecast() method.
+        $todayDate = date("Y-m-d");
+
+        $cdMatrix = $this->getDataForForecast($stationId, date('Y-m-d', strtotime('-1 week')), $todayDate); //CD matrix
+        $pdMatrix = $this->getDataForForecast($stationId, date('Y-m-d', strtotime("-1 year -2 week")), date('Y-m-d', strtotime("-1 year"))); //PD matrix
+
+        return $this->createSlidingWindows($pdMatrix, 8, 7);
     }
 
     public function getAllStationForecasts($stationId)
@@ -108,6 +115,45 @@ class ForecastService implements IForecastService
                 sleep(3); //to prevent blockage
             }
         }
+    }
+
+    private function getDataForForecast($stationId, $startDate, $endDate)
+    {
+        if ($endDate == $this->todayDate)
+        {
+            $data = $this->dataForForecast
+                ->where('station_id', '=', $stationId)
+                ->where('date', '>=', $startDate)
+                ->get();
+        }
+        else
+        {
+            $data = $this->dataForForecast
+                ->where('station_id', '=', $stationId)
+                ->where('date', '>=', $startDate)
+                ->where('date', '<=', $endDate)
+                ->get();
+        }
+
+        return $data;
+    }
+
+    private function createSlidingWindows($pdMatrix, $windowsCount, $windowSize)
+    {
+        $slidingWindows = [];
+
+        for($i = 0; $i < $windowsCount; $i++)
+        {
+            $slidingWindow = [];
+            for($j = 0; $j < $windowSize; $j++)
+            {
+                array_push($slidingWindow, $pdMatrix[$i + $j]);
+            }
+
+            array_push($slidingWindows, $slidingWindow);
+        }
+
+        return $slidingWindows;
     }
 
     private function getTableData($year, $month)
