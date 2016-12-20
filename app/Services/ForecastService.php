@@ -44,7 +44,7 @@ class ForecastService implements IForecastService
         $cdMatrix = $this->getDataForForecast($stationId, date('Y-m-d', strtotime('-1 week')), $todayDate); //CD matrix
         $pdMatrix = $this->getDataForForecast($stationId, date('Y-m-d', strtotime("-1 year -2 week")), date('Y-m-d', strtotime("-1 year"))); //PD matrix
 
-        return $this->createSlidingWindows($pdMatrix, 8, 7);
+        $slidingWindows = $this->createSlidingWindows($pdMatrix, 8, 7);
     }
 
     public function getAllStationForecasts($stationId)
@@ -154,6 +154,23 @@ class ForecastService implements IForecastService
         }
 
         return $slidingWindows;
+    }
+
+    private function euclideanDistance($cdMatrix, $slidingWindow, $size)
+    {
+        $sum = 0;
+        for($i = 0; $i < $size; $i++)
+        {
+            $sum = $sum +
+                pow(($cdMatrix[$i]->temperature + $slidingWindow[$i]->temperature), 2) +
+                pow(($cdMatrix[$i]->pressure + $slidingWindow[$i]->pressure), 2) +
+                pow(($cdMatrix[$i]->wind_speed + $slidingWindow[$i]->wind_speed), 2) +
+                pow(($cdMatrix[$i]->wind_direction + $slidingWindow[$i]->wind_direction), 2) +
+                pow(($cdMatrix[$i]->phenomena + $slidingWindow[$i]->phenomena), 2);
+        }
+        $euclideanDistance = sqrt($sum);
+
+        return $euclideanDistance;
     }
 
     private function getTableData($year, $month)
