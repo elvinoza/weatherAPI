@@ -22,23 +22,20 @@ class Forecast extends Model {
     protected $fillable = [
         'station_id',
         'temperature',
-        'humidity',
         'pressure',
-        'soil_temperature',
-        'soil_humidity',
         'wind_speed',
         'wind_direction',
-        'rain',
-        'forecast_date',
+        'phenomena',
+        'forecast_date'
     ];
 
-    /**
-     * Many to one relation
-     *
-     * @return Illuminate\Database\Eloquent\Relations\belongTo
-     */
-    public function station()
-    {
-        return $this->belongsTo('App\Models\Station', 'id');
-    }
+//    /**
+//     * Many to one relation
+//     *
+//     * @return Illuminate\Database\Eloquent\Relations\belongTo
+//     */
+//    public function station()
+//    {
+//        return $this->belongsTo('App\Models\Station', 'id');
+//    }
 }
