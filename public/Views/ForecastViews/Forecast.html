@@ -13,14 +13,14 @@
                 week-start-day="Monday">
         </sm-range-picker-input>
         <span flex></span>
-        <md-button ng-click="getForecasts()" class="md-raised md-primary">Update</md-button>
+        <md-button ng-click="getForecasts()" class="md-raised md-primary">Get</md-button>
     </div>
 
     <md-content ng-repeat="forecast in forecasts" class="md-padding" layout-xs="column" layout="row">
         <md-card style="width: 100%">
             <md-card-header>
                 <md-card-avatar>
-                    <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                    <!--<md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>-->
                 </md-card-avatar>
                 <md-card-header-text>
                     <span class="md-title">{{ forecast.forecast_date }}</span>
@@ -44,10 +44,9 @@
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="start center">
-                <md-button class="md-warn">Weathers</md-button>
-                <md-button class="md-primary">Chart</md-button>
+                <md-button ng-click="stationWeathers(forecast.station_id)" class="md-warn">Weathers</md-button>
+                <md-button ng-click="stationChart(forecast.station_id)" class="md-primary">Chart</md-button>
             </md-card-actions>
-
         </md-card>
     </md-content>
 </div>

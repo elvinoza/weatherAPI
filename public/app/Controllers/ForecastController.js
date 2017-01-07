@@ -6,7 +6,7 @@
         .module('app')
         .controller('ForecastController', ForecastController);
 
-    function ForecastController($scope, ApiService) {
+    function ForecastController($scope, $state, ApiService) {
 
         $scope.forecasts = [];
         $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
@@ -20,6 +20,14 @@
             }).error(function(error) {
                 //TODO: handle error's
             });
+        };
+
+        $scope.stationWeathers = function(stationId) {
+            $state.go('stationWeathers', { id: stationId })
+        };
+
+        $scope.stationChart = function(stationId){
+            $state.go('charts', { id: stationId })
         };
 
         $scope.getForecasts();
