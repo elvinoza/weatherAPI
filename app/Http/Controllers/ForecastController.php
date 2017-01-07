@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Forecast\FilterForecastRequest;
 use App\Services\ForecastService;
 
 class ForecastController extends Controller
@@ -10,7 +11,7 @@ class ForecastController extends Controller
 
     public function __construct(ForecastService $forecastService)
     {
-        $this->middleware('jwt.auth', ['except' => ['getDataFromGisMeteo', 'calculateForecast', 'test']]);
+        $this->middleware('jwt.auth', ['except' => ['getDataFromGisMeteo', 'calculateForecast', 'getForecasts']]);
         $this->forecastService = $forecastService;
     }
 
@@ -22,6 +23,11 @@ class ForecastController extends Controller
     public function getForecast($id)
     {
         return $this->forecastService->getForecast($id);
+    }
+
+    public function getForecasts(FilterForecastRequest $request)
+    {
+        return $this->forecastService->getForecasts($request->startDate, $request->endDate);
     }
 
     public function getAllStationForecasts($id)

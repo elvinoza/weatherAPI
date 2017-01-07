@@ -113,5 +113,11 @@
         this.getModelUserStations = function($userId, $modelId){
             return $http.get(baseURL + 'follow/stations/' + $userId + '/' + $modelId);
         };
+
+        //Forecast
+
+        this.getForecasts = function(startDate, endDate){
+            return $http.get(baseURL + 'forecasts?startDate=' + startDate + '&endDate=' + endDate);
+        };
     }
 })();

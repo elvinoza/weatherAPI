@@ -29,13 +29,8 @@ class Forecast extends Model {
         'forecast_date'
     ];
 
-//    /**
-//     * Many to one relation
-//     *
-//     * @return Illuminate\Database\Eloquent\Relations\belongTo
-//     */
-//    public function station()
-//    {
-//        return $this->belongsTo('App\Models\Station', 'id');
-//    }
+    public function station()
+    {
+        return $this->belongsTo('App\Models\Station');
+    }
 }

@@ -17,6 +17,7 @@ interface IForecastService
     function getAllStationForecasts($stationId);
     function getUserStationsForecast($id);
     function getForecast($id);
+    function getForecasts($startDate, $endDate);
 
     //----
     function getDataFromGisMeteo();
@@ -77,6 +78,16 @@ class ForecastService implements IForecastService
     public function getForecast($id)
     {
         return $this->forecast->find($id);
+    }
+
+    public function getForecasts($startDate, $endDate)
+    {
+        if ($startDate == $endDate && $startDate == $this->todayDate)
+        {
+            return $this->forecast->where('forecast_date', '=', $this->todayDate)->with('station')->get();
+        }
+
+        return $this->forecast->where('forecast_date', '>=', $startDate)->where('forecast_date', '<=', $endDate)->with('station')->get();
     }
 
     public function getDataFromGisMeteo()

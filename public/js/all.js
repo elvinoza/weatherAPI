@@ -102279,7 +102279,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             $rootScope.forecast = function() {
                 $state.go('forecast', { id: $rootScope.currentUser.id });
             };
-    });
+        });
 })();
 (function() {
 
@@ -102395,6 +102395,12 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         this.getModelUserStations = function($userId, $modelId){
             return $http.get(baseURL + 'follow/stations/' + $userId + '/' + $modelId);
+        };
+
+        //Forecast
+
+        this.getForecasts = function(startDate, endDate){
+            return $http.get(baseURL + 'forecasts?startDate=' + startDate + '&endDate=' + endDate);
         };
     }
 })();
@@ -103121,10 +103127,24 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('ForecastController', ForecastController);
 
-    function ForecastController($rootScope) {
+    function ForecastController($scope, ApiService) {
 
+        $scope.forecasts = [];
+        $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
+
+        $scope.getForecasts = function() {
+
+            var dates = $scope.date.split(/[ ,]+/);
+
+            ApiService.getForecasts(dates[0], dates[1]).success(function(data) {
+                $scope.forecasts = data;
+            }).error(function(error) {
+                //TODO: handle error's
+            });
+        };
+
+        $scope.getForecasts();
     };
-
 })();
 (function() {
 

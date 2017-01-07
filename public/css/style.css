@@ -5438,6 +5438,10 @@ input[name=chartRange] {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.87); }
 
+.asd > md-input-container > input[name=chartRange] {
+  font-size: 14px !important;
+  color: black !important; }
+
 /* END PAGE CONTAINER */
 /* NAVIGATION */
 .x-navigation, .x-navigation ul {

@@ -62,6 +62,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('forecast/user/{id}', 'ForecastController@getUserStationsForecasts');
         Route::get('forecast/station/{id}', 'ForecastController@getAllStationForecasts');
         Route::get('forecast/calculate/{id}', 'ForecastController@calculateForecast');
+        Route::get('forecasts', 'ForecastController@getForecasts');
 
         //curl gismeteo
         Route::get('curl/gismeteo', 'ForecastController@getDataFromGisMeteo');
