@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\ClsfWeatherParameters;
 use App\Enums\PhenomenaTypes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +13,7 @@ class Forecast extends Model
      * @var array
      */
     protected $appends = [
-        'image_url'
+        'image_url', 'phenomena_name'
     ];
 
     /**
@@ -55,8 +54,30 @@ class Forecast extends Model
             case PhenomenaTypes::Snow:
                 return "/images/snow.png";
                 break;
-            default:
+            case PhenomenaTypes::Thunderstorm:
                 return "/images/thunderstorm.png";
+                break;
+            default:
+                return "/images/cloudy_day.png";
+                break;
+        }
+    }
+
+    public function getPhenomenaNameAttribute()
+    {
+        switch ($this->phenomena)
+        {
+            case PhenomenaTypes::Rain:
+                return "Rain";
+                break;
+            case PhenomenaTypes::Snow:
+                return "Snow";
+                break;
+            case PhenomenaTypes::Thunderstorm:
+                return "Thunderstorm";
+                break;
+            default:
+                return "Cloudy Day";
                 break;
         }
     }
