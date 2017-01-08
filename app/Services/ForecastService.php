@@ -140,6 +140,7 @@ class ForecastService implements IForecastService
                             if (strlen($tds->item(1)->nodeValue) != 0 && strlen($tds->item(6)->nodeValue) != 0) {
                                 $day = strlen($tds->item(0)->nodeValue) == 1 ? '0' . $tds->item(0)->nodeValue : $tds->item(0)->nodeValue;
                                 $date = $year . '-' . $month . '-' . $day;
+                                
                                 //Day time
                                 $dayTemp = $tds->item(1)->nodeValue; // day temp
                                 $dayPressure = $tds->item(2)->nodeValue; // day pressure
@@ -151,12 +152,12 @@ class ForecastService implements IForecastService
                                 //Night time
                                 $nightTemp = $tds->item(6)->nodeValue; // day temp
                                 $nightPressure = $tds->item(7)->nodeValue; // day pressure
-                                //$nightPhenomena = $this->getPhenomena($tds->item(9)); // phenomena
+                                $nightPhenomena = $this->getPhenomena($tds->item(9)); // phenomena
                                 $wind = Helper::ParseWindParameters(utf8_decode($tds->item(10)->getElementsByTagName('span')->item(0)->textContent));
                                 //$nightWindDir = $wind['dir'];
                                 $nightWindSpeed = $wind['speed'];
 
-                                $this->createDataForForecast($dayTemp, $nightTemp, $dayPressure, $nightPressure, $dayWindSpeed, $nightWindSpeed, $dayWindDir, $dayPhenomena, $date);
+                                $this->createDataForForecast($dayTemp, $nightTemp, $dayPressure, $nightPressure, $dayWindSpeed, $nightWindSpeed, $dayWindDir, $dayPhenomena, $nightPhenomena, $date);
                             }
                         }
                     }
@@ -358,7 +359,7 @@ class ForecastService implements IForecastService
         return null;
     }
 
-    private function createDataForForecast($dayTemp, $nightTemp, $dayPressure, $nightPressure, $dayWindSpeed, $nightWindSpeed, $dayWindDir, $dayPhenomena, $date)
+    private function createDataForForecast($dayTemp, $nightTemp, $dayPressure, $nightPressure, $dayWindSpeed, $nightWindSpeed, $dayWindDir, $dayPhenomena, $nightPhenomena, $date)
     {
         $weather = new DataForForecast();
         $weather->station_id = 1; //TODO: ?????
@@ -366,7 +367,7 @@ class ForecastService implements IForecastService
         $weather->pressure = ($dayPressure + $nightPressure) / 2;
         $weather->wind_speed = ($dayWindSpeed + $nightWindSpeed);
         $weather->wind_direction = $dayWindDir;
-        $weather->phenomena = $dayPhenomena;
+        $weather->phenomena = $dayPhenomena != null ? $dayPhenomena : $nightPhenomena;
         $weather->date = $date;
         $weather->save();
     }
