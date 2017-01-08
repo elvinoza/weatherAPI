@@ -10,8 +10,8 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-            <div ng-if="activated"  layout="row" layout-sm="column" layout-align="space-around">
-                <md-progress-circular md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+            <div ng-if="activated" style="height: 70px" layout="row" layout-sm="column" layout-align="space-around">
+                <md-progress-circular style="margin: auto; padding-top: 20px" md-diameter="50" md-mode="indeterminate"></md-progress-circular>
             </div>
             <div class="md-dialog-content">
                 <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="station in stations">
