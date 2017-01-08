@@ -1721,3 +1721,15 @@ a.list-group-item.not-read-notification {
 .panel-fullscreen-wrap .panel .panel-body {
   overflow-y: scroll;
 }
+
+img#logo {
+  cursor: pointer;
+  width: 140px;
+  height: 25px;
+  margin-left: 2%;
+  margin-top: 0.5%;
+}
+
+img#logo:focus {
+  outline: none;
+}

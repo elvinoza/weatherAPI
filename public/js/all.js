@@ -102284,6 +102284,15 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             $rootScope.forecast = function() {
                 $state.go('forecast', { id: $rootScope.currentUser.id });
             };
+
+            $rootScope.homeButton = function()
+            {
+                if ($rootScope.authenticated) {
+                    $rootScope.latestData();
+                } else {
+                    $state.go('auth');
+                }
+            };
         });
 })();
 (function() {

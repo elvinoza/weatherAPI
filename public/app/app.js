@@ -195,5 +195,14 @@
             $rootScope.forecast = function() {
                 $state.go('forecast', { id: $rootScope.currentUser.id });
             };
+
+            $rootScope.homeButton = function()
+            {
+                if ($rootScope.authenticated) {
+                    $rootScope.latestData();
+                } else {
+                    $state.go('auth');
+                }
+            };
         });
 })();

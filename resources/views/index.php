@@ -24,6 +24,9 @@
     <body ng-cloak >
         <md-content flex style="height: 100%;">
             <md-nav-bar ng-if="authenticated" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+                <md-nav-item md-nav-sref="latestData()" name="latestData">
+                    <img ng-click="homeButton()" id="logo" ng-src="/images/meteo_logo.png" class="md-card-image" alt="MeteO">
+                </md-nav-item>
                 <md-nav-item md-nav-click="latestData()" name="latestData">Stations Latest Data</md-nav-item>
                 <md-nav-item md-nav-click="stations()" name="userStations">Stations</md-nav-item>
                 <md-nav-item md-nav-click="diseaseModels()" name="diseaseModels">Disease Models</md-nav-item>
@@ -59,6 +62,10 @@
             </md-nav-bar>
 
             <md-nav-bar ng-if="!authenticated" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+                <md-nav-item md-nav-sref="#" name="latestData">
+                    <img ng-click="homeButton()" id="logo" ng-src="/images/meteo_logo.png" class="md-card-image" alt="MeteO">
+                </md-nav-item>
+
                 <md-nav-item md-nav-sref="allStations()" name="allStations">System Stations</md-nav-item>
                 <md-nav-item md-nav-sref="allForecasts()" name="allForecasts">Stations Forecasts</md-nav-item>
             </md-nav-bar>

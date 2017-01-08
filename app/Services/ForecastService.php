@@ -140,7 +140,7 @@ class ForecastService implements IForecastService
                             if (strlen($tds->item(1)->nodeValue) != 0 && strlen($tds->item(6)->nodeValue) != 0) {
                                 $day = strlen($tds->item(0)->nodeValue) == 1 ? '0' . $tds->item(0)->nodeValue : $tds->item(0)->nodeValue;
                                 $date = $year . '-' . $month . '-' . $day;
-                                
+
                                 //Day time
                                 $dayTemp = $tds->item(1)->nodeValue; // day temp
                                 $dayPressure = $tds->item(2)->nodeValue; // day pressure
