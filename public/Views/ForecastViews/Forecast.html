@@ -20,7 +20,7 @@
         <md-card style="width: 100%">
             <md-card-header>
                 <md-card-avatar>
-                    <!--<md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>-->
+                    <md-icon class="md-avatar-icon"></md-icon>
                 </md-card-avatar>
                 <md-card-header-text>
                     <span class="md-title">{{ forecast.forecast_date }}</span>
@@ -28,22 +28,31 @@
                 </md-card-header-text>
             </md-card-header>
             <!--if by phenomena-->
-            <!--<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">-->
-            <md-card-title>
+
+
+            <md-card-title style="text-align: center;">
                 <md-card-title-text>
                     <span class="md-headline">Daily forecast</span>
                     <span class="md-subhead">Sunny</span>
                 </md-card-title-text>
             </md-card-title>
 
-            <md-card-content>
-                <b> Temperature - </b> {{ forecast.temperature }} &#8451; <br>
-                <b> Wind Speed - </b> {{ forecast.wind_speed }} m/s <br>
-                <b> Wind Direction - </b> {{ forecast.wind_direction }} <br>
-                <b> Pressure - </b> {{ forecast.pressure }} mmHg; <br>
+            <md-card-content style="left: 50%; margin: auto; width: 40%">
+                <div>
+                    <div style="float: left">
+                        <b> Temperature - </b> {{ forecast.temperature }} &#8451; <br>
+                        <b> Wind Speed - </b> {{ forecast.wind_speed }} m/s <br>
+                        <b> Wind Direction - </b> {{ forecast.wind_direction }} <br>
+                        <b> Pressure - </b> {{ forecast.pressure }} mmHg; <br>
+                    </div>
+                    <div style="float: right">
+                        <img src="/images/cloud.png" style="width: 100px; height: 100px" class="md-card-image" alt="Washed Out">
+                    </div>
+                </div>
+
             </md-card-content>
 
-            <md-card-actions layout="row" layout-align="start center">
+            <md-card-actions layout="row" layout-align="center">
                 <md-button ng-click="stationWeathers(forecast.station_id)" class="md-warn">Weathers</md-button>
                 <md-button ng-click="stationChart(forecast.station_id)" class="md-primary">Chart</md-button>
             </md-card-actions>
