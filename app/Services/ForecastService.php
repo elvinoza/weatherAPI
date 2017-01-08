@@ -17,7 +17,8 @@ interface IForecastService
     function getAllStationForecasts($stationId);
     function getUserStationsForecast($id);
     function getForecast($id);
-    function getForecasts($startDate, $endDate);
+    function getForecasts($userId, $startDate, $endDate);
+    function getAllForecasts($startDate, $endDate);
 
     //----
     function getDataFromGisMeteo();
@@ -80,14 +81,42 @@ class ForecastService implements IForecastService
         return $this->forecast->find($id);
     }
 
-    public function getForecasts($startDate, $endDate)
+    public function getForecasts($userId, $startDate, $endDate)
     {
         if ($startDate == $endDate && $startDate == $this->todayDate)
         {
-            return $this->forecast->where('forecast_date', '=', $this->todayDate)->with('station', 'imageUlr')->get();
+            return $this->forecast
+                ->join('stations', 'stations.id', '=', 'forecast.station_id')
+                ->where('forecast_date', '=', $this->todayDate)
+                ->where('stations.user_id', '=', $userId)
+                ->with('station')
+                ->get();
         }
 
-        return $this->forecast->where('forecast_date', '>=', $startDate)->where('forecast_date', '<=', $endDate)->with('station')->get();
+        return $this->forecast
+            ->join('stations', 'stations.id', '=', 'forecast.station_id')
+            ->where('forecast_date', '>=', $startDate)
+            ->where('forecast_date', '<=', $endDate)
+            ->where('stations.user_id', '=', $userId)
+            ->with('station')
+            ->get();
+    }
+
+    public function getAllForecasts($startDate, $endDate)
+    {
+        if ($startDate == $endDate && $startDate == $this->todayDate)
+        {
+            return $this->forecast
+                ->where('forecast_date', '=', $this->todayDate)
+                ->with('station')
+                ->get();
+        }
+
+        return $this->forecast
+            ->where('forecast_date', '>=', $startDate)
+            ->where('forecast_date', '<=', $endDate)
+            ->with('station')
+            ->get();
     }
 
     public function getDataFromGisMeteo()

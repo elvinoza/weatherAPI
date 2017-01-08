@@ -4,9 +4,9 @@
 
     angular
         .module('app')
-        .controller('ForecastController', ForecastController);
+        .controller('AllForecastsController', AllForecastsController);
 
-    function ForecastController($scope, $state, $stateParams, ApiService) {
+    function AllForecastsController($scope, $state, ApiService) {
 
         $scope.forecasts = [];
         $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
@@ -15,7 +15,7 @@
 
             var dates = $scope.date.split(/[ ,]+/);
 
-            ApiService.getForecasts($stateParams.id, dates[0], dates[1]).success(function(data) {
+            ApiService.getAllForecasts(dates[0], dates[1]).success(function(data) {
                 $scope.forecasts = data;
             }).error(function(error) {
                 //TODO: handle error's

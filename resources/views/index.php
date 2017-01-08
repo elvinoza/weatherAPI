@@ -60,6 +60,7 @@
 
             <md-nav-bar ng-if="!authenticated" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
                 <md-nav-item md-nav-sref="allStations()" name="allStations">System Stations</md-nav-item>
+                <md-nav-item md-nav-sref="allForecasts()" name="allForecasts">Stations Forecasts</md-nav-item>
             </md-nav-bar>
 
             <div class="ext-content">

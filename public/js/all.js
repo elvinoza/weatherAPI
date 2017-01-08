@@ -102171,6 +102171,11 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     url: '/stations',
                     templateUrl: '../Views/StationViews/AllStations.html',
                     controller: 'AllStationsController as allStations'
+                })
+                .state('allForecasts', {
+                    url: '/forecasts',
+                    templateUrl: '../Views/ForecastViews/Forecast.html',
+                    controller: 'AllForecastsController as allForecasts'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -102399,8 +102404,12 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         //Forecast
 
-        this.getForecasts = function(startDate, endDate){
-            return $http.get(baseURL + 'forecasts?startDate=' + startDate + '&endDate=' + endDate);
+        this.getForecasts = function(userId, startDate, endDate){
+            return $http.get(baseURL + 'forecasts?user_id=' + userId + '&startDate=' + startDate + '&endDate=' + endDate);
+        };
+
+        this.getAllForecasts = function(startDate, endDate){
+            return $http.get(baseURL + 'allForecasts?startDate=' + startDate + '&endDate=' + endDate);
         };
     }
 })();
@@ -103127,7 +103136,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('ForecastController', ForecastController);
 
-    function ForecastController($scope, $state, ApiService) {
+    function ForecastController($scope, $state, $stateParams, ApiService) {
 
         $scope.forecasts = [];
         $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
@@ -103136,7 +103145,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
             var dates = $scope.date.split(/[ ,]+/);
 
-            ApiService.getForecasts(dates[0], dates[1]).success(function(data) {
+            ApiService.getForecasts($stateParams.id, dates[0], dates[1]).success(function(data) {
                 $scope.forecasts = data;
             }).error(function(error) {
                 //TODO: handle error's
@@ -103200,6 +103209,41 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
     }
 })();
 
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('AllForecastsController', AllForecastsController);
+
+    function AllForecastsController($scope, $state, ApiService) {
+
+        $scope.forecasts = [];
+        $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
+
+        $scope.getForecasts = function() {
+
+            var dates = $scope.date.split(/[ ,]+/);
+
+            ApiService.getAllForecasts(dates[0], dates[1]).success(function(data) {
+                $scope.forecasts = data;
+            }).error(function(error) {
+                //TODO: handle error's
+            });
+        };
+
+        $scope.stationWeathers = function(stationId) {
+            $state.go('stationWeathers', { id: stationId })
+        };
+
+        $scope.stationChart = function(stationId){
+            $state.go('charts', { id: stationId })
+        };
+
+        $scope.getForecasts();
+    };
+})();
 (function() {
 
     'use strict';

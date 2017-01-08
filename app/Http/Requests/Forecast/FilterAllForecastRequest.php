@@ -4,7 +4,7 @@ namespace App\Http\Requests\Forecast;
 
 use App\Http\Requests\Request;
 
-class FilterForecastRequest extends Request {
+class FilterAllForecastRequest extends Request {
 
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +14,6 @@ class FilterForecastRequest extends Request {
     public function rules()
     {
         return [
-            'user_id' => 'required',
             'startDate' => 'required',
             'endDate' => 'required'
         ];
@@ -41,7 +40,6 @@ class FilterForecastRequest extends Request {
      */
     public function messages(){
         return array(
-            'startDate.user_id' => 'User id is required.',
             'startDate.required' => 'Start date is required.',
             'endDate.required' => 'End date is required.'
         );

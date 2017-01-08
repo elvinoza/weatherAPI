@@ -116,8 +116,12 @@
 
         //Forecast
 
-        this.getForecasts = function(startDate, endDate){
-            return $http.get(baseURL + 'forecasts?startDate=' + startDate + '&endDate=' + endDate);
+        this.getForecasts = function(userId, startDate, endDate){
+            return $http.get(baseURL + 'forecasts?user_id=' + userId + '&startDate=' + startDate + '&endDate=' + endDate);
+        };
+
+        this.getAllForecasts = function(startDate, endDate){
+            return $http.get(baseURL + 'allForecasts?startDate=' + startDate + '&endDate=' + endDate);
         };
     }
 })();
