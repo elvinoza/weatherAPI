@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
+        'App\Console\Commands\Inspire',
+        'App\Console\Commands\ForecastCommand'
     ];
 
     /**
@@ -24,6 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('forecast:update')->dailyAt("20:21");
+
         // $schedule->command('inspire')
         //          ->hourly();
     }
