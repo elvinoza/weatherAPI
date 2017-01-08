@@ -84,7 +84,7 @@ class ForecastService implements IForecastService
     {
         if ($startDate == $endDate && $startDate == $this->todayDate)
         {
-            return $this->forecast->where('forecast_date', '=', $this->todayDate)->with('station')->get();
+            return $this->forecast->where('forecast_date', '=', $this->todayDate)->with('station', 'imageUlr')->get();
         }
 
         return $this->forecast->where('forecast_date', '>=', $startDate)->where('forecast_date', '<=', $endDate)->with('station')->get();
