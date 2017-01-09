@@ -4,9 +4,9 @@
 
     angular
         .module('app')
-        .controller('AllStationsController', AllStationsController);
+        .controller('AllSystemStationsForAdminController', AllSystemStationsForAdminController);
 
-    function AllStationsController($scope, $state, ApiService) {
+    function AllSystemStationsForAdminController($scope, $state, ApiService) {
 
         $scope.query = {
             order: 'name',
@@ -22,6 +22,14 @@
             }).error(function(error) {
 
             });
+        };
+
+        $scope.editStation = function(id){
+            $state.go('editStation', { id: id })
+        };
+
+        $scope.create = function(){
+            $state.go('createStation');
         };
 
         $scope.chart = function(id){

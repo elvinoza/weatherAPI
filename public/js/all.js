@@ -102172,6 +102172,11 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     templateUrl: '../Views/StationViews/AllStations.html',
                     controller: 'AllStationsController as allStations'
                 })
+                .state('allSystemStationsForAdmin', {
+                    url: '/stations',
+                    templateUrl: '../Views/StationViews/AllSystemStationsForAdmin.html',
+                    controller: 'AllSystemStationsForAdminController as allSystemStationsForAdmin'
+                })
                 .state('allForecasts', {
                     url: '/forecasts',
                     templateUrl: '../Views/ForecastViews/Forecast.html',
@@ -102213,6 +102218,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
                 if(user) {
                     $rootScope.authenticated = true;
+                    $rootScope.is_admin = user.is_admin;
                     $rootScope.currentUser = user;
 
                     if(toState.name === "auth") {
@@ -102227,6 +102233,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $auth.logout().then(function() {
                     localStorage.removeItem('user');
                     $rootScope.authenticated = false;
+                    $rootScope.is_admin = false;
                     $rootScope.currentUser = null;
                     $state.go('auth');
                 });
@@ -103198,10 +103205,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             });
         };
 
-        $scope.create = function(){
-            $state.go('createStation');
-        };
-
         $scope.chart = function(id){
             $state.go('charts', { id: id })
         };
@@ -103252,6 +103255,55 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.getForecasts();
     };
+})();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('AllSystemStationsForAdminController', AllSystemStationsForAdminController);
+
+    function AllSystemStationsForAdminController($scope, $state, ApiService) {
+
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
+        $scope.stations = [];
+
+        $scope.getAllStations = function() {
+            ApiService.getAllStations().success(function(data) {
+                $scope.stations = data;
+            }).error(function(error) {
+
+            });
+        };
+
+        $scope.editStation = function(id){
+            $state.go('editStation', { id: id })
+        };
+
+        $scope.create = function(){
+            $state.go('createStation');
+        };
+
+        $scope.chart = function(id){
+            $state.go('charts', { id: id })
+        };
+
+        $scope.weathers = function(id){
+            $state.go('stationWeathers', { id: id })
+        };
+
+        $scope.refreshList = function() {
+            $scope.getAllStations();
+        };
+
+        $scope.getAllStations();
+    }
 })();
 (function() {
 

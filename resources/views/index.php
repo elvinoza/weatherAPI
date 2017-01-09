@@ -32,6 +32,7 @@
                 <md-nav-item md-nav-click="diseaseModels()" name="diseaseModels">Disease Models</md-nav-item>
                 <md-nav-item md-nav-click="forecast()" name="forecast">Forecast</md-nav-item>
                 <span flex></span>
+                <md-nav-item ng-if="is_admin" md-nav-sref="allSystemStationsForAdmin()" name="systemStations">System Stations</md-nav-item>
                 <div ng-if="authenticated" class="nav-buttons">
                     <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="list-style: none; background: transparent;">
                         <li ng-click="getUserNotifications()" class="xn-icon-button">

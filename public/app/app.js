@@ -83,6 +83,11 @@
                     templateUrl: '../Views/StationViews/AllStations.html',
                     controller: 'AllStationsController as allStations'
                 })
+                .state('allSystemStationsForAdmin', {
+                    url: '/stations',
+                    templateUrl: '../Views/StationViews/AllSystemStationsForAdmin.html',
+                    controller: 'AllSystemStationsForAdminController as allSystemStationsForAdmin'
+                })
                 .state('allForecasts', {
                     url: '/forecasts',
                     templateUrl: '../Views/ForecastViews/Forecast.html',
@@ -124,6 +129,7 @@
 
                 if(user) {
                     $rootScope.authenticated = true;
+                    $rootScope.is_admin = user.is_admin;
                     $rootScope.currentUser = user;
 
                     if(toState.name === "auth") {
@@ -138,6 +144,7 @@
                 $auth.logout().then(function() {
                     localStorage.removeItem('user');
                     $rootScope.authenticated = false;
+                    $rootScope.is_admin = false;
                     $rootScope.currentUser = null;
                     $state.go('auth');
                 });
