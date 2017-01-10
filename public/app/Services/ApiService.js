@@ -123,5 +123,11 @@
         this.getAllForecasts = function(startDate, endDate){
             return $http.get(baseURL + 'allForecasts?startDate=' + startDate + '&endDate=' + endDate);
         };
+
+        //Loggs
+
+        this.getLogs = function(){
+            return $http.get(baseURL + 'logs');
+        };
     }
 })();

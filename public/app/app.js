@@ -92,6 +92,11 @@
                     url: '/forecasts',
                     templateUrl: '../Views/ForecastViews/Forecast.html',
                     controller: 'AllForecastsController as allForecasts'
+                })
+                .state('requests', {
+                    url: '/requests',
+                    templateUrl: '../Views/AdminViews/Requests.html',
+                    controller: 'RequestsController as requests'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -211,5 +216,12 @@
                     $state.go('auth');
                 }
             };
+
+            //admin
+
+            $rootScope.goToState = function(state)
+            {
+                $state.go(state);
+            }
         });
 })();

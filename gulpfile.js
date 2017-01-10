@@ -26,6 +26,7 @@ var paths = {
         'public/app/Controllers/AllStationsController.js',
         'public/app/Controllers/AllForecastsController.js',
         'public/app/Controllers/AllSystemStationForAdminController.js',
+        'public/app/Controllers/RequestsController.js',
         'public/app/Services/ApiService.js'
     ]
 };
@@ -83,6 +84,7 @@ gulp.task('scripts', function(){
         'public/app/Controllers/AllStationsController.js',
         'public/app/Controllers/AllForecastsController.js',
         'public/app/Controllers/AllSystemStationForAdminController.js',
+        'public/app/Controllers/RequestsController.js',
         'public/app/Controllers/ChartsController.js'
     ])
         .pipe(concat('all.js'))

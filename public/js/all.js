@@ -102181,6 +102181,11 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     url: '/forecasts',
                     templateUrl: '../Views/ForecastViews/Forecast.html',
                     controller: 'AllForecastsController as allForecasts'
+                })
+                .state('requests', {
+                    url: '/requests',
+                    templateUrl: '../Views/AdminViews/Requests.html',
+                    controller: 'RequestsController as requests'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {
@@ -102300,6 +102305,13 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     $state.go('auth');
                 }
             };
+
+            //admin
+
+            $rootScope.goToState = function(state)
+            {
+                $state.go(state);
+            }
         });
 })();
 (function() {
@@ -102426,6 +102438,12 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         this.getAllForecasts = function(startDate, endDate){
             return $http.get(baseURL + 'allForecasts?startDate=' + startDate + '&endDate=' + endDate);
+        };
+
+        //Loggs
+
+        this.getLogs = function(){
+            return $http.get(baseURL + 'logs');
         };
     }
 })();
@@ -103305,6 +103323,38 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         $scope.getAllStations();
     }
 })();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('RequestsController', RequestsController);
+
+    function RequestsController($scope, ApiService) {
+
+        $scope.requests = [];
+
+        $scope.limitOptions = [5, 10, 15, 20];
+
+        $scope.getAllLogs = function() {
+
+            ApiService.getLogs().success(function(data) {
+                $scope.requests = data;
+            }).error(function(error) {
+
+            });
+        };
+
+        $scope.refreshList = function() {
+            $scope.getAllLogs();
+        };
+
+        $scope.getAllLogs();
+    };
+})();
+
+
 (function() {
 
     'use strict';
