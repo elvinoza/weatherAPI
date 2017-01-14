@@ -13,7 +13,7 @@ class Forecast extends Model
      * @var array
      */
     protected $appends = [
-        'image_url', 'phenomena_name'
+        'image_url', 'phenomena_name', 'favorite'
     ];
 
     /**
@@ -36,7 +36,8 @@ class Forecast extends Model
         'wind_speed',
         'wind_direction',
         'phenomena',
-        'forecast_date'
+        'forecast_date',
+        'is_confirmed'
     ];
 
     public function station()
@@ -79,6 +80,15 @@ class Forecast extends Model
             default:
                 return "Cloudy Day";
                 break;
+        }
+    }
+
+    public function getFavoriteAttribute()
+    {
+        if ($this->is_confirmed){
+            return "favorite";
+        } else {
+            return "favorite_border";
         }
     }
 }

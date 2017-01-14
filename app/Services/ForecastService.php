@@ -19,7 +19,7 @@ interface IForecastService
     function getForecast($id);
     function getForecasts($userId, $startDate, $endDate);
     function getAllForecasts($startDate, $endDate);
-
+    function confirm($id);
     //----
     function getDataFromGisMeteo();
     function updateDataFromGisMeteo();
@@ -86,18 +86,20 @@ class ForecastService implements IForecastService
         if ($startDate == $endDate && $startDate == $this->todayDate)
         {
             return $this->forecast
-                ->join('stations', 'stations.id', '=', 'forecast.station_id')
+                ->leftJoin('stations', 'stations.id', '=', 'forecast.station_id')
                 ->where('forecast_date', '=', $this->todayDate)
                 ->where('stations.user_id', '=', $userId)
+                ->select('forecast.*')
                 ->with('station')
                 ->get();
         }
 
         return $this->forecast
-            ->join('stations', 'stations.id', '=', 'forecast.station_id')
+            ->leftJoin('stations', 'stations.id', '=', 'forecast.station_id')
             ->where('forecast_date', '>=', $startDate)
             ->where('forecast_date', '<=', $endDate)
             ->where('stations.user_id', '=', $userId)
+            ->select('forecast.*')
             ->with('station')
             ->get();
     }
@@ -170,6 +172,20 @@ class ForecastService implements IForecastService
     public function updateDataFromGisMeteo()
     {
         // TODO: Implement updateDataFromGisMeteo() method.
+    }
+
+    public function confirm($id)
+    {
+        $forecast = $this->forecast->find($id);
+
+        if ($forecast != null)
+        {
+            $forecast->is_confirmed = !$forecast->is_confirmed;
+            $forecast->save();
+            return $forecast;
+        }
+
+        return null;
     }
 
     private function predicatedVariations($cdMatrix, $pdMatrix, $correspondingMatrix)
@@ -391,6 +407,7 @@ class ForecastService implements IForecastService
         $forecast->wind_direction = round($lastDayData->wind_direction + $variation['wind_direction']);
         $forecast->phenomena = round($lastDayData->phenomena + $variation['phenomena']);
         $forecast->forecast_date = $this->todayDate;
+        $forecast->is_confirmed = false;
         $forecast->save();
 
         return $forecast;

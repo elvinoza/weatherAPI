@@ -102440,6 +102440,10 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             return $http.get(baseURL + 'allForecasts?startDate=' + startDate + '&endDate=' + endDate);
         };
 
+        this.confirmForecast = function(id){
+            return $http.get(baseURL + 'forecast/confirm/' + id);
+        };
+
         //Loggs
 
         this.getLogs = function(){
@@ -103192,6 +103196,18 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.stationChart = function(stationId){
             $state.go('charts', { id: stationId })
+        };
+
+        $scope.confirm = function(index) {
+            var id = $scope.forecasts[index].id;
+
+            ApiService.confirmForecast(id).success(function(data) {
+                $scope.forecasts[index].favorite = data.favorite;
+                $scope.forecasts[index].is_confirmed = data.is_confirmed;
+                //parodyt ta popupa virsuje
+            }).error(function(error) {
+                //TODO: handle error's
+            });
         };
 
         $scope.getForecasts();

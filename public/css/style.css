@@ -6541,6 +6541,67 @@ img#logo {
 img#logo:focus {
   outline: none; }
 
+@-webkit-keyframes hvr-push {
+  50% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8); }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes hvr-push {
+  50% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8); }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+.hvr-push {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale; }
+
+.hvr-push:hover, .hvr-push:focus, .hvr-push:active {
+  -webkit-animation-name: hvr-push;
+  animation-name: hvr-push;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1; }
+
+.favorite-icon {
+  margin: 30px;
+  outline: none;
+  background: none;
+  border: 2px solid white;
+  border-radius: 250px;
+  height: 40px;
+  width: 40px;
+  padding: 2px;
+  -moz-transition: all 0.5s 0.1s, color 0.1s;
+  -o-transition: all 0.5s 0.1s, color 0.1s;
+  -webkit-transition: all 0.5s 0.1s, color 0.1s;
+  transition: all 0.5s 0.1s, color 0.1s; }
+  .favorite-icon:hover {
+    color: white;
+    background: #c1004d;
+    border: 2px solid #ffc1da;
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2); }
+
 html, body {
   height: 100%;
   position: relative; }

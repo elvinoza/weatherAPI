@@ -124,6 +124,10 @@
             return $http.get(baseURL + 'allForecasts?startDate=' + startDate + '&endDate=' + endDate);
         };
 
+        this.confirmForecast = function(id){
+            return $http.get(baseURL + 'forecast/confirm/' + id);
+        };
+
         //Loggs
 
         this.getLogs = function(){

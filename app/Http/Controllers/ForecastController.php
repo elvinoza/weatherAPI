@@ -50,4 +50,9 @@ class ForecastController extends Controller
     {
         $this->forecastService->getDataFromGisMeteo();
     }
+
+    public function confirmForecast($id)
+    {
+        return $this->forecastService->confirm($id);
+    }
 }

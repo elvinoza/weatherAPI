@@ -16,7 +16,7 @@
         <md-button ng-click="getForecasts()" class="md-raised md-primary">Get</md-button>
     </div>
 
-    <md-content ng-repeat="forecast in forecasts" class="md-padding" layout-xs="column" layout="row">
+    <md-content ng-repeat="(index, forecast) in forecasts" class="md-padding" layout-xs="column" layout="row">
         <md-card style="width: 100%">
             <md-card-header>
                 <md-card-avatar>
@@ -26,6 +26,8 @@
                     <span class="md-title">{{ forecast.forecast_date }}</span>
                     <span class="md-subhead"> {{ forecast.station.name }}</span>
                 </md-card-header-text>
+                <span flex></span>
+                <button ng-click="confirm(index)" class="favorite-icon"><span data-text-swap="favorite" id="favorite-btn" class="material-icons hvr-push"> {{ forecast.favorite }}</span></button>
             </md-card-header>
 
             <md-card-title style="text-align: center;">

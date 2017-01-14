@@ -58,7 +58,7 @@ class UserService implements IUserService
     {
         $user = $this->user->find($data->user_id);
 
-        if($user != null){
+        if ($user != null){
             if(Hash::check($data->current_password, $user->password))
             {
                 $user->password = bcrypt($data->new_password);
