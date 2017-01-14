@@ -8,7 +8,14 @@
 
     function RequestsController($scope, ApiService) {
 
-        $scope.requests = [];
+        $scope.requests = null;
+
+        $scope.query = {
+            order: ['ip'],
+            limit: 20,
+            page: 1
+        };
+
 
         $scope.limitOptions = [5, 10, 15, 20];
 
