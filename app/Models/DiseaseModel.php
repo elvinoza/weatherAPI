@@ -28,7 +28,7 @@ class DiseaseModel extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'user_id'
+        'name', 'description', 'solution', 'user_id'
     ];
 
     public function conditions()
