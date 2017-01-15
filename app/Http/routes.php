@@ -66,6 +66,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('allForecasts', 'ForecastController@getAllForecasts');
         Route::get('forecast/confirm/{id}', 'ForecastController@confirmForecast');
 
+        //Notification settings
+        Route::get('station/notifications/{id}', 'NotificationSettingsController@getSettings');
+        Route::post('station/notifications/update', 'NotificationSettingsController@update');
+
         //curl gismeteo
         Route::get('curl/gismeteo', 'ForecastController@getDataFromGisMeteo');
 

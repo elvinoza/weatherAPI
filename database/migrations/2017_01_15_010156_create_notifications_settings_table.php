@@ -17,6 +17,7 @@ class CreateNotificationsSettingsTable extends Migration
             $table->integer('station_id');
             $table->integer('clsf_weather_parameter');
             $table->integer('compare_operator');
+            $table->double('value', 8, 2);
             $table->boolean('is_active');
             $table->boolean('is_valid');
             $table->timestamps();
