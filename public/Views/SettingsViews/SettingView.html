@@ -1,0 +1,30 @@
+<md-content layout-padding>
+    <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Parameter</label>
+            <md-select ng-model="setting.clsf_weather_parameter" placeholder="Select a parameter">
+                <md-option ng-value="param.id" ng-repeat="param in clsfWeatherParams">{{ param.name }}</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Compare Operator</label>
+            <md-select ng-model="setting.compare_operator" placeholder="Select Operator">
+                <md-option ng-value="operator.value" ng-repeat="operator in operators">{{ operator.name }}</md-option>
+            </md-select>
+        </md-input-container>
+
+        <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Value</label>
+                <input numeric ng-model="setting.value">
+            </md-input-container>
+        </div>
+        <md-switch ng-click="delete(setting)" class="md-secondary" ng-model="setting.is_active" ng-true-value="1" ng-false-value="0"></md-switch>
+        <md-button style="height: 20px" class="md-warn md-hue-5">
+            <md-icon>
+                delete
+            </md-icon>
+        </md-button>
+    </div>
+</md-content>

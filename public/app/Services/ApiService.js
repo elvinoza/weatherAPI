@@ -128,6 +128,16 @@
             return $http.get(baseURL + 'forecast/confirm/' + id);
         };
 
+        //Station notifications settings
+
+        this.getSettings = function(id){
+            return $http.get(baseURL + 'station/notifications/' + id);
+        };
+
+        this.updateSettings = function(settings){
+            return $http.post(baseURL + 'station/notifications/update', settings, { headers: { 'Accept': 'Application/json' }});
+        };
+
         //Loggs
 
         this.getLogs = function(){

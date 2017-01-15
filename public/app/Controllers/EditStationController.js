@@ -45,6 +45,11 @@
             $scope.station.lng = event.latLng.lng();
         };
 
+        vm.settings = function()
+        {
+            $state.go('stationNotificationSettings', { id: $stateParams.id });
+        };
+
         vm.getStation($stateParams.id);
     }
 })();

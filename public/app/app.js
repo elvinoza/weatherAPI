@@ -97,6 +97,11 @@
                     url: '/requests',
                     templateUrl: '../Views/AdminViews/Requests.html',
                     controller: 'RequestsController as requests'
+                })
+                .state('stationNotificationSettings', {
+                    url: '/station/settings/:id',
+                    templateUrl: '../Views/SettingsViews/Settings.html',
+                    controller: 'StationNotificationSettingsController as stationNotificationSettings'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {

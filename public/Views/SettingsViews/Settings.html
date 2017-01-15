@@ -1,0 +1,26 @@
+<div class="container">
+
+    <md-content layout-padding>
+        <div>
+            <h2 class="md-toolbar-tools center" style="width: 50%;"><span>Station Settings</span></h2>
+
+        </div>
+        <div>
+            <form name="settingsForm">
+
+                <div>
+                    <div layout="row" layout-align="center center" style="padding-top:20px;">
+                        <md-button style="width: 100%" class="md-raised md-primary" ng-click="add()">Add New Setting</md-button>
+                    </div>
+
+                    <div ng-repeat="setting in settings" ng-include="getView()">
+                    </div>
+                </div>
+
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button style="width: 100%" class="md-raised md-primary" ng-click="update()">Update</md-button>
+                </div>
+            </form>
+        </div>
+    </md-content>
+</div>
