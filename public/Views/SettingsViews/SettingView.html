@@ -20,8 +20,8 @@
                 <input numeric ng-model="setting.value">
             </md-input-container>
         </div>
-        <md-switch ng-click="delete(setting)" class="md-secondary" ng-model="setting.is_active" ng-true-value="1" ng-false-value="0"></md-switch>
-        <md-button style="height: 20px" class="md-warn md-hue-5">
+        <md-switch class="md-secondary" ng-model="setting.is_active" ng-true-value="1" ng-false-value="0"></md-switch>
+        <md-button ng-click="delete(setting)" style="height: 20px" class="md-warn md-hue-5">
             <md-icon>
                 delete
             </md-icon>

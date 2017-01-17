@@ -103425,7 +103425,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         $scope.add = function(){
             $scope.settings.push({
                 id: 0,
-                station_id: $scope.model.id,
+                station_id: $stateParams.id,
                 clsf_weather_parameter: null,
                 compare_operator: 0,
                 value: null,
