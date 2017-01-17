@@ -9,13 +9,14 @@
         <!-- css -->
         <link href="css/angular-material.css" rel='stylesheet' type='text/css' />
         <link href="css/style.css" rel='stylesheet' type='text/css' />
-
         <!-- //css -->
+
         <!-- fonts -->
         <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
         <!-- //fonts -->
+        
         <!-- js -->
         <script src="js/all.js"></script>
         <script src="js/modernizr.custom.js"></script>
@@ -27,7 +28,6 @@
                 <md-nav-item md-nav-sref="latestData()" name="latestData">
                     <img ng-click="homeButton()" id="logo" ng-src="/images/meteo_logo.png" class="md-card-image" alt="MeteO">
                 </md-nav-item>
-<!--                <md-nav-item md-nav-click="latestData()" name="latestData">Stations Latest Data</md-nav-item>-->
                 <md-nav-item md-nav-click="stations()" name="userStations">Stations</md-nav-item>
                 <md-nav-item md-nav-click="diseaseModels()" name="diseaseModels">Disease Models</md-nav-item>
                 <md-nav-item md-nav-click="forecast()" name="forecast">Forecast</md-nav-item>
@@ -45,7 +45,6 @@
                     </md-menu-content>
                 </md-menu>
 
-<!--                <md-nav-item ng-if="is_admin" md-nav-sref="allSystemStationsForAdmin()" name="systemStations">System Stations</md-nav-item>-->
                 <div ng-if="authenticated" class="nav-buttons">
                     <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="list-style: none; background: transparent;">
                         <li ng-click="getUserNotifications()" class="xn-icon-button">
