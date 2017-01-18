@@ -19,5 +19,4 @@
             $mdDialog.cancel();
         };
     };
-
 })();

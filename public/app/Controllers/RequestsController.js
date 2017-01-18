@@ -20,7 +20,6 @@
         $scope.limitOptions = [5, 10, 15, 20];
 
         $scope.getAllLogs = function() {
-
             ApiService.getLogs().success(function(data) {
                 $scope.requests = data;
             }).error(function(error) {

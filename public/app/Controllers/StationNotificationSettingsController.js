@@ -6,7 +6,7 @@
         .module('app')
         .controller('StationNotificationSettingsController', StationNotificationSettingsController);
 
-    function StationNotificationSettingsController($stateParams, $scope, ApiService) {
+    function StationNotificationSettingsController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.settings = [];
 
@@ -37,7 +37,6 @@
 
         $scope.getSettings = function($id) {
             ApiService.getSettings($id).success(function(data) {
-                console.log(data);
                 $scope.settings = data;
 
                 if ($scope.settings == null)
@@ -55,6 +54,7 @@
             console.log($scope.settings);
             ApiService.updateSettings($scope.settings).success(function(data) {
                 $scope.settings = data;
+                $rootScope.displayToast('Notifications settings saved!');
             }).error(function(error) {
                 //display some error's
             });
@@ -66,7 +66,6 @@
 
         $scope.delete = function(setting){
             $scope.settings.splice($scope.settings.indexOf(setting), 1);
-            console.log($scope.settings);
         };
 
         $scope.getSettings($stateParams.id);

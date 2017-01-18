@@ -6,7 +6,7 @@
         .module('app')
         .controller('UserDetailsController', UserDetailsController);
 
-    function UserDetailsController($scope, $stateParams, ApiService) {
+    function UserDetailsController($rootScope, $scope, $stateParams, ApiService) {
 
         var vm = this;
 
@@ -25,6 +25,7 @@
         vm.update = function(){
             ApiService.updateUser($scope.user).success(function(data) {
                 $scope.user = data;
+                $rootScope.displayToast('User data updated!');
             }).error(function(error) {
                 console.log(error);
             });
@@ -35,6 +36,7 @@
 
             ApiService.changeUserPassword($scope.password).success(function(data) {
                 $scope.password = {};
+                $rootScope.displayToast('User password updated!');
             }).error(function(error) {
                 console.log(error);
             });

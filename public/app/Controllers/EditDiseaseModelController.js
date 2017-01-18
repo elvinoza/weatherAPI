@@ -6,7 +6,7 @@
         .module('app')
         .controller('EditDiseaseModelController', EditDiseaseModelController);
 
-    function EditDiseaseModelController($stateParams, $scope, ApiService) {
+    function EditDiseaseModelController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.model = null;
 
@@ -53,11 +53,10 @@
         };
 
         $scope.update = function() {
-            console.log($scope.model);
             $scope.model = angular.toJson($scope.model);
-            console.log($scope.model);
             ApiService.updateDiseaseModel($scope.model).success(function(data) {
                 $scope.model = data;
+                $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
                 //display some error's
             });
@@ -69,7 +68,6 @@
 
         $scope.delete = function(condition){
             $scope.model.conditions.splice($scope.model.conditions.indexOf(condition), 1);
-            console.log($scope.model.conditions);
         };
 
         $scope.getDiseaseModel($stateParams.id);

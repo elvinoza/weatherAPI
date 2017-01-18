@@ -49,7 +49,6 @@
             $scope.model.user_id = $rootScope.currentUser.id;
             ApiService.createDiseaseModel($scope.model).success(function(data) {
                 $scope.model = data;
-                flash.success = "Model created";
 
                 $scope.conditions.push({
                     id: $scope.conditionNr,
@@ -63,6 +62,8 @@
                     time: null,
                     conditionNr: $scope.conditionNr++
                 });
+
+                $rootScope.displayToast('Disease model created!');
             }).error(function(error) {
                 flash.error = error;
             });
@@ -74,6 +75,7 @@
 
             ApiService.createDiseaseModelConditions(cond).success(function(data) {
                 $state.go('userModels', { id: $scope.model.user_id });
+                $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
                 flash.error = error;
             });

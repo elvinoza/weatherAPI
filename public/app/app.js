@@ -128,7 +128,7 @@
             $httpProvider.interceptors.push('redirectWhenLoggedOut');
             $authProvider.loginUrl = '/api/authenticate';
         })
-        .run(function($rootScope, $state, $auth, ApiService, $mdDialog) {
+        .run(function($rootScope, $state, $auth, ApiService, $mdDialog, $mdToast) {
             //AIzaSyBnPb15Kj_Jh3LjYuh-piAyf7P3YuocgHw
             $rootScope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBnPb15Kj_Jh3LjYuh-piAyf7P3YuocgHw";
 
@@ -220,6 +220,17 @@
                 } else {
                     $state.go('auth');
                 }
+            };
+
+            //Shared
+
+            $rootScope.displayToast = function(message) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent(message)
+                        .position('top right')
+                        .hideDelay(3000)
+                );
             };
 
             //admin

@@ -102217,7 +102217,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             $httpProvider.interceptors.push('redirectWhenLoggedOut');
             $authProvider.loginUrl = '/api/authenticate';
         })
-        .run(function($rootScope, $state, $auth, ApiService, $mdDialog) {
+        .run(function($rootScope, $state, $auth, ApiService, $mdDialog, $mdToast) {
             //AIzaSyBnPb15Kj_Jh3LjYuh-piAyf7P3YuocgHw
             $rootScope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBnPb15Kj_Jh3LjYuh-piAyf7P3YuocgHw";
 
@@ -102309,6 +102309,17 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 } else {
                     $state.go('auth');
                 }
+            };
+
+            //Shared
+
+            $rootScope.displayToast = function(message) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent(message)
+                        .position('top right')
+                        .hideDelay(3000)
+                );
             };
 
             //admin
@@ -102603,7 +102614,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('UserDetailsController', UserDetailsController);
 
-    function UserDetailsController($scope, $stateParams, ApiService) {
+    function UserDetailsController($rootScope, $scope, $stateParams, ApiService) {
 
         var vm = this;
 
@@ -102622,6 +102633,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         vm.update = function(){
             ApiService.updateUser($scope.user).success(function(data) {
                 $scope.user = data;
+                $rootScope.displayToast('User data updated!');
             }).error(function(error) {
                 console.log(error);
             });
@@ -102632,6 +102644,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
             ApiService.changeUserPassword($scope.password).success(function(data) {
                 $scope.password = {};
+                $rootScope.displayToast('User password updated!');
             }).error(function(error) {
                 console.log(error);
             });
@@ -102693,7 +102706,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('EditStationController', EditStationController);
 
-    function EditStationController($state, $scope, $rootScope, $stateParams, ApiService, flash) {
+    function EditStationController($state, $scope, $rootScope, $stateParams, ApiService) {
 
         var vm = this;
         vm.googleMapsUrl = $rootScope.googleMapsUrl;
@@ -102711,7 +102724,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         vm.update = function(){
             ApiService.updateStation($scope.station).success(function(data) {
                 $scope.station = data;
-                flash.success = "Station successful updated"
+                $rootScope.displayToast('Station updated!');
             }).error(function(error) {
                 flash.error = error;
             });
@@ -102720,7 +102733,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         vm.delete = function(id){
             ApiService.deleteStation(id).success(function(data) {
                 $state.go('userStations', { id: $rootScope.currentUser.id});
-                //flash.success = "Station successful updated"
+                $rootScope.displayToast('Station deleted!');
             }).error(function(error) {
                 //flash.error = error;
             });
@@ -102748,21 +102761,20 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('CreateStationController', CreateStationController);
 
-    function CreateStationController($rootScope, $scope, $state, flash, ApiService) {
+    function CreateStationController($rootScope, $scope, $state, ApiService) {
         var vm = this;
         $scope.station = {};
         $scope.station.lat = null;
         $scope.station.lng = null;
 
         vm.create = function(){
-            console.log($scope.station);
             $scope.station.user_id = $rootScope.currentUser.id;
             ApiService.createStation($scope.station).success(function(data) {
                 $scope.station = data;
-                flash.success = "Station created";
+                $rootScope.displayToast('Station created!');
                 $state.go('userStations', { id: data.user_id });
             }).error(function(error) {
-                flash.error = error;
+                $rootScope.displayToast(error);
             });
         };
 
@@ -102770,7 +102782,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         {
             $scope.station.lat = event.latLng.lat();
             $scope.station.lng = event.latLng.lng();
-            console.log($scope.station);
         };
     }
 })();
@@ -102946,7 +102957,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             $scope.model.user_id = $rootScope.currentUser.id;
             ApiService.createDiseaseModel($scope.model).success(function(data) {
                 $scope.model = data;
-                flash.success = "Model created";
 
                 $scope.conditions.push({
                     id: $scope.conditionNr,
@@ -102960,6 +102970,8 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     time: null,
                     conditionNr: $scope.conditionNr++
                 });
+
+                $rootScope.displayToast('Disease model created!');
             }).error(function(error) {
                 flash.error = error;
             });
@@ -102971,6 +102983,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
             ApiService.createDiseaseModelConditions(cond).success(function(data) {
                 $state.go('userModels', { id: $scope.model.user_id });
+                $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
                 flash.error = error;
             });
@@ -102990,7 +103003,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('EditDiseaseModelController', EditDiseaseModelController);
 
-    function EditDiseaseModelController($stateParams, $scope, ApiService) {
+    function EditDiseaseModelController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.model = null;
 
@@ -103037,11 +103050,10 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         };
 
         $scope.update = function() {
-            console.log($scope.model);
             $scope.model = angular.toJson($scope.model);
-            console.log($scope.model);
             ApiService.updateDiseaseModel($scope.model).success(function(data) {
                 $scope.model = data;
+                $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
                 //display some error's
             });
@@ -103053,7 +103065,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.delete = function(condition){
             $scope.model.conditions.splice($scope.model.conditions.indexOf(condition), 1);
-            console.log($scope.model.conditions);
         };
 
         $scope.getDiseaseModel($stateParams.id);
@@ -103110,7 +103121,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('FollowController', FollowController);
 
-    function FollowController($mdDialog, $rootScope, $scope, modelId, ApiService, $mdToast) {
+    function FollowController($mdDialog, $rootScope, $scope, modelId, ApiService) {
 
         $scope.stations = [];
         $scope.activated = true;
@@ -103133,9 +103144,9 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
             ApiService.changeModelFollowStatus(followModel).success(function(data) {
                 if (data.is_valid) {
-                    $scope.displayToast('Station - ' + data.station.name + ' following ' + data.model.name + ' model!');
+                    $rootScope.displayToast('Station - ' + data.station.name + ' following ' + data.model.name + ' model!');
                 } else {
-                    $scope.displayToast('Station ' + data.station.name + ' un follow ' + data.model.name + ' model!');
+                    $rootScope.displayToast('Station ' + data.station.name + ' un follow ' + data.model.name + ' model!');
                 }
             }).error(function(error) {
                 $scope.displayToast('Something going wrong. Try again!');
@@ -103148,15 +103159,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.cancel = function() {
             $mdDialog.cancel();
-        };
-
-        $scope.displayToast = function(message) {
-            $mdToast.show(
-                $mdToast.simple()
-                    .textContent(message)
-                    .position('top right')
-                    .hideDelay(3000)
-            );
         };
 
         $scope.getStations(modelId);
@@ -103184,7 +103186,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             $mdDialog.cancel();
         };
     };
-
 })();
 (function() {
 
@@ -103381,7 +103382,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         $scope.limitOptions = [5, 10, 15, 20];
 
         $scope.getAllLogs = function() {
-
             ApiService.getLogs().success(function(data) {
                 $scope.requests = data;
             }).error(function(error) {
@@ -103406,7 +103406,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('StationNotificationSettingsController', StationNotificationSettingsController);
 
-    function StationNotificationSettingsController($stateParams, $scope, ApiService) {
+    function StationNotificationSettingsController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.settings = [];
 
@@ -103437,7 +103437,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.getSettings = function($id) {
             ApiService.getSettings($id).success(function(data) {
-                console.log(data);
                 $scope.settings = data;
 
                 if ($scope.settings == null)
@@ -103455,6 +103454,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             console.log($scope.settings);
             ApiService.updateSettings($scope.settings).success(function(data) {
                 $scope.settings = data;
+                $rootScope.displayToast('Notifications settings saved!');
             }).error(function(error) {
                 //display some error's
             });
@@ -103466,7 +103466,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.delete = function(setting){
             $scope.settings.splice($scope.settings.indexOf(setting), 1);
-            console.log($scope.settings);
         };
 
         $scope.getSettings($stateParams.id);
