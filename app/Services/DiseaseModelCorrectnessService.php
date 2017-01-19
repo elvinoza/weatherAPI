@@ -44,10 +44,24 @@ class DiseaseModelCorrectnessService implements IDiseaseModelCorrectnessService
                 $res = $this->checkParameters($stationId, $this->diseaseModelService->getModelConditions($model->disease_model_id));
                 if ($res) {
                     $this->notifyService->crateNotification($user->id, $model->disease_model_id, $model->model->name . " observed in station - " . $model->station->name,
-                        "In the station " . $model->station->name . " detected model (" . $model->model->name . ") conditions. Please investigate it!");
+                        $this->createNotificationMessage($model));
                 }
             }
         }
+    }
+
+    private function createNotificationMessage($model)
+    {
+        if ($model->model->solution != null) {
+            $message = "In the station " . $model->station->name . " detected model (" . $model->model->name . ") conditions. Please investigate it! Solution: " .
+                $model->model->solution;
+        }
+        else
+        {
+            $message = "In the station " . $model->station->name . " detected model (" . $model->model->name . ") conditions. Please investigate it!";
+        }
+
+        return $message;
     }
 
     private function checkParameters($stationId, $conditions){
