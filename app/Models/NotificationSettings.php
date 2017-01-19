@@ -24,7 +24,8 @@ class NotificationSettings extends Model {
         'compare_operator',
         'value',
         'is_active',
-        'is_valid'
+        'is_valid',
+        'last_notification_date'
     ];
 
     public function station()

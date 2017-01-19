@@ -17,14 +17,17 @@ class WeatherService implements IWeatherService
     protected $weather;
     protected $station;
     protected $diseaseModelCorrectnessService;
+    protected $notificationSettingsService;
 
     public function __construct(
         Weather $weather,
         Station $station,
+        NotificationSettingsService $notificationSettingsService,
         DiseaseModelCorrectnessService $diseaseModelCorrectnessService)
     {
         $this->weather = $weather;
         $this->station = $station;
+        $this->notificationSettingsService = $notificationSettingsService;
         $this->diseaseModelCorrectnessService = $diseaseModelCorrectnessService;
     }
 
@@ -48,6 +51,7 @@ class WeatherService implements IWeatherService
         $weather->save();
 
         $this->diseaseModelCorrectnessService->checkDiseasesModels($data->station_id);
+        $this->notificationSettingsService->checkForNotifications($data);
 
         //Response for station
         return response(['success' => true], 200);

@@ -93,4 +93,23 @@ class Helper
 
         return PhenomenaTypes::Snow;
     }
+
+    public static function formatNotificationMessage($stationName, $value, $parameter, $unit)
+    {
+        return "Now in " . $stationName ." " . $parameter . " is " . $value. " " . $unit . ".";
+    }
+
+    public static function compareDatesForNotification($notificationDate)
+    {
+        if ($notificationDate != null)
+        {
+            $hourDiff = round((strtotime(date("Y-m-d H:m:s")) - strtotime($notificationDate))/3600, 1);
+            if ($hourDiff > 24)
+                return true;
+
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -15,6 +15,7 @@ interface IStationInterface
     function getStationUpdateTime($id);
     function getUserByStation($stationId);
     function getAllSystemStations();
+    function getStationName($id);
 }
 
 class StationService implements IStationInterface
@@ -112,6 +113,11 @@ class StationService implements IStationInterface
         }
 
         return $app_key;
+    }
+
+    public function getStationName($id)
+    {
+        return $this->station->find($id)->name;
     }
 
     private function generateRandomString($length){
