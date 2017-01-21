@@ -1850,3 +1850,13 @@ $icon-color: #c1004d;
     @include transform(scale(1.2));
   }
 }
+
+//footer
+#license-footer {
+  align-self: flex-end;
+  padding: 16px 32px;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+  border-top: 1px solid #ddd;
+}

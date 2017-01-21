@@ -23,7 +23,7 @@
         <!-- //js -->
     </head>
     <body ng-cloak >
-        <md-content flex style="height: 100%;">
+        <md-content flex class="_md layout-column flex" style="height: 100%;">
             <md-nav-bar ng-if="authenticated" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
                 <md-nav-item md-nav-sref="latestData()" name="latestData">
                     <img ng-click="homeButton()" id="logo" ng-src="/images/meteo_logo.png" class="md-card-image" alt="MeteO">
@@ -85,6 +85,12 @@
 
             <div class="ext-content">
                 <ui-view></ui-view>
+            </div>
+            <div layout="row" flex="noshrink" layout-align="center center" class="layout-align-center-center layout-row flex-noshrink">
+                <div id="license-footer" flex class="ng-binding flex">
+                    Powered by MeteO &copy;2016-2017
+                    <a href="#/doc" class="md-accent">API Documentation</a>
+                </div>
             </div>
         </md-content>
     </body>

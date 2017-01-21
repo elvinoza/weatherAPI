@@ -6602,6 +6602,14 @@ img#logo:focus {
     -webkit-transform: scale(1.2);
     transform: scale(1.2); }
 
+#license-footer {
+  align-self: flex-end;
+  padding: 16px 32px;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+  border-top: 1px solid #ddd; }
+
 html, body {
   height: 100%;
   position: relative; }
