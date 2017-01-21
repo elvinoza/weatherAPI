@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PhenomenaTypes;
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
 
 class Forecast extends Model
@@ -13,7 +14,10 @@ class Forecast extends Model
      * @var array
      */
     protected $appends = [
-        'image_url', 'phenomena_name', 'favorite'
+        'image_url',
+        'phenomena_name',
+        'favorite',
+        'wind_direction_name'
     ];
 
     /**
@@ -90,5 +94,10 @@ class Forecast extends Model
         } else {
             return "favorite_border";
         }
+    }
+
+    public function getWindDirectionNameAttribute()
+    {
+        return Helper::GetWindDirectionName($this->wind_direction);
     }
 }

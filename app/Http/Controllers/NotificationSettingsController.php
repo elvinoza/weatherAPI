@@ -24,6 +24,4 @@ class NotificationSettingsController extends Controller
     {
         return $this->notificationSettingsService->update($request);
     }
-
-
 }

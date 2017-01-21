@@ -94,12 +94,12 @@ class Helper
         return PhenomenaTypes::Snow;
     }
 
-    public static function formatNotificationMessage($stationName, $value, $parameter, $unit)
+    public static function FormatNotificationMessage($stationName, $value, $parameter, $unit)
     {
         return "Now in " . $stationName ." " . $parameter . " is " . $value. " " . $unit . ".";
     }
 
-    public static function compareDatesForNotification($notificationDate)
+    public static function CompareDatesForNotification($notificationDate)
     {
         if ($notificationDate != null)
         {
@@ -111,5 +111,39 @@ class Helper
         }
 
         return true;
+    }
+
+    public static function GetWindDirectionName($id)
+    {
+        switch ($id)
+        {
+            case WindDirections::East:
+                return "East";
+                break;
+            case WindDirections::North:
+                return "North";
+                break;
+            case WindDirections::NorthEast:
+                return "North East";
+                break;
+            case WindDirections::NorthWest:
+                return "North West";
+                break;
+            case WindDirections::South:
+                return "South";
+                break;
+            case WindDirections::SouthEast:
+                return "South East";
+                break;
+            case WindDirections::SouthWest:
+                return "South West";
+                break;
+            case WindDirections::West:
+                return "West";
+                break;
+            default:
+                return "NF";
+                break;
+        }
     }
 }

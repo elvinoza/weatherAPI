@@ -81,7 +81,7 @@
                     }
                 },
                 labels: {
-                    format: '{value} Pa',
+                    format: '{value} mmHg',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
@@ -91,7 +91,7 @@
             }, { // 4 yAxis
                 gridLineWidth: 0,
                 title: {
-                    text: 'Soil temperature',
+                    text: 'Soil Temperature',
                     style: {
                         color: Highcharts.getOptions().colors[3]
                     }

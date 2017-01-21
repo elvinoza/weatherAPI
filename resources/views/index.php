@@ -86,6 +86,7 @@
             <div class="ext-content">
                 <ui-view></ui-view>
             </div>
+
             <div layout="row" flex="noshrink" layout-align="center center" class="layout-align-center-center layout-row flex-noshrink">
                 <div id="license-footer" flex class="ng-binding flex">
                     Powered by MeteO &copy;2016-2017

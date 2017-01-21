@@ -74,7 +74,7 @@ class NotificationSettingsService implements INotificationSettingsService
         {
             $message = $this->checkParameter($setting, $data, $station->name);
 
-            if ($message != null && ($setting->last_notification_date == null || Helper::compareDatesForNotification($setting->last_notification_date))) {
+            if ($message != null && ($setting->last_notification_date == null || Helper::CompareDatesForNotification($setting->last_notification_date))) {
                 $this->notifyService->crateNotification($stationUser->id, 0, "Detected comparison by station(" . $station->name . ") settings", $message);
                 $this->updateSettingLastNotificationDate($setting->id);
             }
@@ -92,42 +92,42 @@ class NotificationSettingsService implements INotificationSettingsService
         {
             case ClsfWeatherParameters::Temperature:
                 if ($this->compare($setting->value, $data->temperature, $setting->compare_operator))
-                    return Helper::formatNotificationMessage($stationName, $data->temperature, "temperature", "C");
+                    return Helper::FormatNotificationMessage($stationName, $data->temperature, "temperature", "C");
 
                 break;
             case ClsfWeatherParameters::Humidity:
                 if ($this->compare($setting->value, $data->humidity, $setting->compare_operator))
-                    return Helper::formatNotificationMessage($stationName, $data->humidity, "humidity", "%");
+                    return Helper::FormatNotificationMessage($stationName, $data->humidity, "humidity", "%");
 
                 break;
             case ClsfWeatherParameters::Pressure:
                 if ($this->compare($setting->value, $data->pressure, $setting->compare_operator))
-                    return Helper::formatNotificationMessage($stationName, $data->pressure, "pressure", "Pa");
+                    return Helper::FormatNotificationMessage($stationName, $data->pressure, "pressure", "Pa");
 
                 break;
             case ClsfWeatherParameters::SoilTemperature:
                 if ($this->compare($setting->value, $data->soil_temperature, $setting->compare_operator))
-                    return Helper::formatNotificationMessage($stationName, $data->soil_temperature, "soil temperature", "C");
+                    return Helper::FormatNotificationMessage($stationName, $data->soil_temperature, "soil temperature", "C");
 
                 break;
             case ClsfWeatherParameters::SoilHumidity:
                 if ($this->compare($setting->value, $data->soil_humidity, $setting->compare_operator))
-                    return Helper::formatNotificationMessage($stationName, $data->soil_humidity, "soil humidity", "%");
+                    return Helper::FormatNotificationMessage($stationName, $data->soil_humidity, "soil humidity", "%");
 
                 break;
             case ClsfWeatherParameters::WindSpeed:
                 if ($this->compare($setting->value, $data->wind_speed, $setting->compare_operator))
-                    return Helper::formatNotificationMessage($stationName, $data->wind_speed, "wind speed", "m/s");
+                    return Helper::FormatNotificationMessage($stationName, $data->wind_speed, "wind speed", "m/s");
 
                 break;
             case ClsfWeatherParameters::Rain:
                 if ($this->compare($setting->value, $data->rain, $setting->compare_operator))
-                    return Helper::formatNotificationMessage($stationName, $data->rain, "rain", "mm");
+                    return Helper::FormatNotificationMessage($stationName, $data->rain, "rain", "mm");
 
                 break;
             default:
                 if ($setting->value == $data->wind_direction)
-                    return Helper::formatNotificationMessage($stationName, $data->wind_direction, "wind direction", "");
+                    return Helper::FormatNotificationMessage($stationName, $data->wind_direction, "wind direction", "");
 
                 break;
         }
