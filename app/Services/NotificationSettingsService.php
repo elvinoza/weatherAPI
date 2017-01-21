@@ -102,7 +102,7 @@ class NotificationSettingsService implements INotificationSettingsService
                 break;
             case ClsfWeatherParameters::Pressure:
                 if ($this->compare($setting->value, $data->pressure, $setting->compare_operator))
-                    return Helper::FormatNotificationMessage($stationName, $data->pressure, "pressure", "Pa");
+                    return Helper::FormatNotificationMessage($stationName, $data->pressure, "pressure", "mmHg");
 
                 break;
             case ClsfWeatherParameters::SoilTemperature:
