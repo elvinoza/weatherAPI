@@ -10,6 +10,12 @@
 
         $scope.stations = [];
 
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
         $scope.getUserStations = function(id){
             ApiService.getUserStations(id).success(function(data) {
                 $scope.stations = data;

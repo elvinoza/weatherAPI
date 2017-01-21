@@ -102666,6 +102666,12 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.stations = [];
 
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
         $scope.getUserStations = function(id){
             ApiService.getUserStations(id).success(function(data) {
                 $scope.stations = data;
@@ -102726,7 +102732,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $scope.station = data;
                 $rootScope.displayToast('Station updated!');
             }).error(function(error) {
-                flash.error = error;
             });
         };
 
@@ -103451,7 +103456,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.update = function() {
             $scope.settings = angular.toJson($scope.settings);
-            console.log($scope.settings);
+
             ApiService.updateSettings($scope.settings).success(function(data) {
                 $scope.settings = data;
                 $rootScope.displayToast('Notifications settings saved!');
