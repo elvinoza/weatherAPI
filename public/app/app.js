@@ -88,6 +88,11 @@
                     templateUrl: '../Views/StationViews/AllSystemStationsForAdmin.html',
                     controller: 'AllSystemStationsForAdminController as allSystemStationsForAdmin'
                 })
+                .state('allSystemDiseaseModelsForAdmin', {
+                    url: '/diseaseModels',
+                    templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
+                    controller: 'AllSystemDiseaseModelsForAdminController as allSystemDiseaseModelsFroAdmin'
+                })
                 .state('allForecasts', {
                     url: '/forecasts',
                     templateUrl: '../Views/ForecastViews/Forecast.html',

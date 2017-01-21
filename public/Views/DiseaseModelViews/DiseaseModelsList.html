@@ -1,7 +1,7 @@
 <div>
     <md-fab-speed-dial md-open="true" class="md-fab-bottom-right">
         <md-fab-trigger>
-            <md-button aria-label="menu" class="md-fab md-warn md-fab-bottom-right" ng-click="diseaseModels.create()">
+            <md-button aria-label="menu" class="md-fab md-warn md-fab-bottom-right" ng-click="create()">
                 <md-icon class="material-icons">add</md-icon>
             </md-button>
         </md-fab-trigger>
@@ -14,7 +14,7 @@
             <div class="md-toolbar-tools">
                 <span>Disease Models</span>
                 <div flex></div>
-                <md-button class="md-icon-button" ng-click="getModels(1)">
+                <md-button class="md-icon-button" ng-click="getModels()">
                     <md-icon>refresh</md-icon>
                 </md-button>
             </div>
@@ -31,21 +31,21 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="diseaseModel" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, diseaseModel) in diseaseModels.models | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr md-row md-select="diseaseModel" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, diseaseModel) in models | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{index + 1}}</td>
                     <td md-cell>{{diseaseModel.name}}</td>
                     <td md-cell>{{diseaseModel.description}}</td>
                     <td md-cell>{{diseaseModel.created_at}}</td>
-                    <td md-cell ng-click="diseaseModels.editModel($event, diseaseModel)">
+                    <td md-cell ng-click="editModel($event, diseaseModel)">
                         <md-icon>edit</md-icon>
                     </td>
-                    <td md-cell ng-click="diseaseModels.showStations($event, diseaseModel.id, diseaseModel.has_conditions)">
+                    <td md-cell ng-click="showStations($event, diseaseModel.id, diseaseModel.has_conditions)">
                         <md-icon>more_horiz</md-icon>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </md-table-container>
-        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{diseaseModels.models.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
+        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{models.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
     </md-card>
 </md-content>

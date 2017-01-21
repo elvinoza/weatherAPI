@@ -42,6 +42,9 @@
                         <md-menu-item>
                             <md-button ng-click="goToState('requests')">Requests</md-button>
                         </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="goToState('allSystemDiseaseModelsForAdmin')">Disease Models</md-button>
+                        </md-menu-item>
                     </md-menu-content>
                 </md-menu>
 

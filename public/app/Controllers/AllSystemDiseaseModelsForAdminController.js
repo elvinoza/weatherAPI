@@ -4,9 +4,9 @@
 
     angular
         .module('app')
-        .controller('DiseaseModelsController', DiseaseModelsController);
+        .controller('AllSystemDiseaseModelsForAdminController', AllSystemDiseaseModelsForAdminController);
 
-    function DiseaseModelsController($state, $scope, $stateParams, ApiService, $mdDialog) {
+    function AllSystemDiseaseModelsForAdminController($state, $scope, ApiService, $mdDialog) {
 
         $scope.models = [];
 
@@ -16,8 +16,8 @@
             page: 1
         };
 
-        $scope.getModels = function(id){
-            ApiService.getUserDiseaseModels(id).success(function(data) {
+        $scope.getModels = function(){
+            ApiService.getAllDiseaseModels().success(function(data) {
                 $scope.models = data;
             }).error(function(error) {
 
@@ -62,7 +62,7 @@
                         title: "Set Follow Stations",
                         message: "This model can't be assigned, because it hasn't any condition."
                     },
-                    fullscreen: true // Only for -xs, -sm breakpoints.
+                    fullscreen: true
                 })
                 .then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
@@ -72,7 +72,7 @@
             }
         };
 
-        $scope.getModels($stateParams.id);
+        $scope.getModels();
     }
 })();
 

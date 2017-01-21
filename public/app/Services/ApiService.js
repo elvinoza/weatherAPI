@@ -114,6 +114,10 @@
             return $http.get(baseURL + 'follow/stations/' + $userId + '/' + $modelId);
         };
 
+        this.getAllDiseaseModels = function(){
+            return $http.get(baseURL + 'diseases');
+        };
+
         //Forecast
 
         this.getForecasts = function(userId, startDate, endDate){

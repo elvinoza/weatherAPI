@@ -39,7 +39,6 @@
 
         $scope.getDiseaseModel = function($id) {
             ApiService.getDiseaseModelById($id).success(function(data) {
-                console.log(data);
                 $scope.model = data;
 
                 if ($scope.model.conditions == null)

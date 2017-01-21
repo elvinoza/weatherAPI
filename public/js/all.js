@@ -102177,6 +102177,11 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     templateUrl: '../Views/StationViews/AllSystemStationsForAdmin.html',
                     controller: 'AllSystemStationsForAdminController as allSystemStationsForAdmin'
                 })
+                .state('allSystemDiseaseModelsForAdmin', {
+                    url: '/diseaseModels',
+                    templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
+                    controller: 'AllSystemDiseaseModelsForAdminController as allSystemDiseaseModelsFroAdmin'
+                })
                 .state('allForecasts', {
                     url: '/forecasts',
                     templateUrl: '../Views/ForecastViews/Forecast.html',
@@ -102448,6 +102453,10 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         this.getModelUserStations = function($userId, $modelId){
             return $http.get(baseURL + 'follow/stations/' + $userId + '/' + $modelId);
+        };
+
+        this.getAllDiseaseModels = function(){
+            return $http.get(baseURL + 'diseases');
         };
 
         //Forecast
@@ -102844,9 +102853,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
     function DiseaseModelsController($state, $scope, $stateParams, ApiService, $mdDialog) {
 
-        var vm = this;
-
-        vm.models;
+        $scope.models = [];
 
         $scope.query = {
             order: 'name',
@@ -102854,23 +102861,23 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             page: 1
         };
 
-        vm.getModels = function(id){
+        $scope.getModels = function(id){
             ApiService.getUserDiseaseModels(id).success(function(data) {
-                vm.models = data;
+                $scope.models = data;
             }).error(function(error) {
 
             });
         };
 
-        vm.create = function(){
+        $scope.create = function(){
             $state.go('createDiseaseModel');
         };
 
-        vm.editModel = function(event, item) {
+        $scope.editModel = function(event, item) {
             $state.go('editDiseaseModel', { id: item.id });
         };
 
-        vm.showStations = function(ev, id, hasConditions) {
+        $scope.showStations = function(ev, id, hasConditions) {
 
             if(hasConditions){
                 $mdDialog.show({
@@ -102910,7 +102917,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             }
         };
 
-        vm.getModels($stateParams.id);
+        $scope.getModels($stateParams.id);
     }
 })();
 
@@ -103045,7 +103052,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.getDiseaseModel = function($id) {
             ApiService.getDiseaseModelById($id).success(function(data) {
-                console.log(data);
                 $scope.model = data;
 
                 if ($scope.model.conditions == null)
@@ -103375,6 +103381,85 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
     angular
         .module('app')
+        .controller('AllSystemDiseaseModelsForAdminController', AllSystemDiseaseModelsForAdminController);
+
+    function AllSystemDiseaseModelsForAdminController($state, $scope, ApiService, $mdDialog) {
+
+        $scope.models = [];
+
+        $scope.query = {
+            order: 'name',
+            limit: 10,
+            page: 1
+        };
+
+        $scope.getModels = function(){
+            ApiService.getAllDiseaseModels().success(function(data) {
+                $scope.models = data;
+            }).error(function(error) {
+
+            });
+        };
+
+        $scope.create = function(){
+            $state.go('createDiseaseModel');
+        };
+
+        $scope.editModel = function(event, item) {
+            $state.go('editDiseaseModel', { id: item.id });
+        };
+
+        $scope.showStations = function(ev, id, hasConditions) {
+
+            if(hasConditions){
+                $mdDialog.show({
+                    controller: 'FollowController',
+                    templateUrl: '../../Views/DiseaseModelViews/FollowPopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    locals: {
+                        modelId: id
+                    },
+                    fullscreen: true
+                })
+                .then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            } else {
+                $mdDialog.show({
+                    controller: 'MessagePopupController',
+                    templateUrl: '../../Views/Shared/MessagePopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    locals: {
+                        title: "Set Follow Stations",
+                        message: "This model can't be assigned, because it hasn't any condition."
+                    },
+                    fullscreen: true
+                })
+                .then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            }
+        };
+
+        $scope.getModels();
+    }
+})();
+
+
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
         .controller('RequestsController', RequestsController);
 
     function RequestsController($scope, ApiService) {
@@ -103560,7 +103645,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     }
                 },
                 labels: {
-                    format: '{value} Pa',
+                    format: '{value} mmHg',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
@@ -103570,7 +103655,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             }, { // 4 yAxis
                 gridLineWidth: 0,
                 title: {
-                    text: 'Soil temperature',
+                    text: 'Soil Temperature',
                     style: {
                         color: Highcharts.getOptions().colors[3]
                     }

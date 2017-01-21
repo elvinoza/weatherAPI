@@ -54,6 +54,6 @@ class DiseaseModelController extends Controller
 
     public function tryNot($stationId)
     {
-        return $this->diseaseModelCorrectnessService->checkDiseasesModels($stationId);
+        $this->diseaseModelCorrectnessService->checkDiseasesModels($stationId);
     }
 }
