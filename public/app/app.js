@@ -84,7 +84,7 @@
                     controller: 'AllStationsController as allStations'
                 })
                 .state('allSystemStationsForAdmin', {
-                    url: '/stations',
+                    url: '/systemStations',
                     templateUrl: '../Views/StationViews/AllSystemStationsForAdmin.html',
                     controller: 'AllSystemStationsForAdminController as allSystemStationsForAdmin'
                 })

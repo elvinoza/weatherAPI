@@ -102173,7 +102173,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     controller: 'AllStationsController as allStations'
                 })
                 .state('allSystemStationsForAdmin', {
-                    url: '/stations',
+                    url: '/systemStations',
                     templateUrl: '../Views/StationViews/AllSystemStationsForAdmin.html',
                     controller: 'AllSystemStationsForAdminController as allSystemStationsForAdmin'
                 })
@@ -103375,20 +103375,17 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
     function RequestsController($scope, ApiService) {
 
-        $scope.requests = null;
+        $scope.logs = [];
 
         $scope.query = {
-            order: ['ip'],
+            order: 'ip',
             limit: 20,
             page: 1
         };
 
-
-        $scope.limitOptions = [5, 10, 15, 20];
-
         $scope.getAllLogs = function() {
             ApiService.getLogs().success(function(data) {
-                $scope.requests = data;
+                $scope.logs = data;
             }).error(function(error) {
 
             });
@@ -103399,7 +103396,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         };
 
         $scope.getAllLogs();
-    };
+    }
 })();
 
 

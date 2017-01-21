@@ -8,20 +8,17 @@
 
     function RequestsController($scope, ApiService) {
 
-        $scope.requests = null;
+        $scope.logs = [];
 
         $scope.query = {
-            order: ['ip'],
+            order: 'ip',
             limit: 20,
             page: 1
         };
 
-
-        $scope.limitOptions = [5, 10, 15, 20];
-
         $scope.getAllLogs = function() {
             ApiService.getLogs().success(function(data) {
-                $scope.requests = data;
+                $scope.logs = data;
             }).error(function(error) {
 
             });
@@ -32,6 +29,6 @@
         };
 
         $scope.getAllLogs();
-    };
+    }
 })();
 

@@ -1,6 +1,6 @@
 <md-content laout="column" flex>
     <md-card>
-        <md-toolbar class="md-table-toolbar md-default">
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
             <div class="md-toolbar-tools">
                 <span>Requests</span>
                 <div flex></div>
@@ -11,25 +11,25 @@
         </md-toolbar>
 
         <md-table-container>
-            <table md-table md-progress="promise">
-                <thead md-head md-on-reorder="logOrder">
+            <table md-table  md-progress="promise">
+                <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
                 <tr md-row>
                     <th md-column numeric><span>#</span></th>
-                    <th md-column md-order-by="ip"><span>Ip</span></th>
-                    <th md-column md-order-by="uri"><span>Uri</span></th>
-                    <th md-column md-order-by="created_at" md-desc><span>Create Time</span></th>
+                    <th md-column md-order-by="ip" md-desc><span>Ip</span></th>
+                    <th md-column md-order-by="uri" md-desc><span>Uri</span></th>
+                    <th md-column md-order-by="created_at" md-desc><span>Request Time</span></th>
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="request" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, request) in requests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr md-row md-select="log" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, log) in logs | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{index + 1}}</td>
-                    <td md-cell>{{request.ip}}</td>
-                    <td md-cell>{{request.uri}}</td>
-                    <td md-cell>{{request.created_at}}</td>
+                    <td md-cell>{{log.ip}}</td>
+                    <td md-cell>{{log.uri}}</td>
+                    <td md-cell>{{log.created_at}}</td>
                 </tr>
                 </tbody>
             </table>
         </md-table-container>
-        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{requests.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
+        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{logs.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
     </md-card>
 </md-content>
