@@ -6,6 +6,7 @@ use App\Enums\ClsfWeatherParameters;
 use App\Enums\CompareOperators;
 use App\Helpers\Helper;
 use App\Models\NotificationSettings;
+use App\Models\Station;
 
 interface INotificationSettingsService
 {
@@ -16,15 +17,18 @@ interface INotificationSettingsService
 
 class NotificationSettingsService implements INotificationSettingsService
 {
+    protected $station;
     protected $notifyService;
     protected $stationService;
     protected $notificationSettings;
 
     public function __construct(
+        Station $station,
         NotifyService $notifyService,
         StationService $stationService,
         NotificationSettings $notificationSettings)
     {
+        $this->station = $station;
         $this->notifyService = $notifyService;
         $this->stationService = $stationService;
         $this->notificationSettings = $notificationSettings;
@@ -37,36 +41,27 @@ class NotificationSettingsService implements INotificationSettingsService
 
     public function update($data)
     {
-        $id = 0;
+
         $settings = json_decode($data->getContent());
+
+        if (count($settings) == 0) return null;
+
+        $stationId = $settings[0]->station_id;
+        $this->station->find($stationId)->settings()->delete();
 
         foreach($settings as $setting)
         {
-            $id = $setting->station_id;
-            $notificationSetting = $this->notificationSettings->find($setting->id);
-
-            if ($notificationSetting != null) {
-
-                $notificationSetting->station_id = $setting->station_id;
-                $notificationSetting->clsf_weather_parameter = $setting->clsf_weather_parameter;
-                $notificationSetting->compare_operator = $setting->compare_operator;
-                $notificationSetting->value = $setting->value;
-                $notificationSetting->is_active = $setting->is_active;
-                $notificationSetting->is_valid = $setting->is_valid;
-                $notificationSetting->save();
-            } else {
-                $notificationSetting = new NotificationSettings();
-                $notificationSetting->station_id = $setting->station_id;
-                $notificationSetting->clsf_weather_parameter = $setting->clsf_weather_parameter;
-                $notificationSetting->compare_operator = $setting->compare_operator;
-                $notificationSetting->value = $setting->value;
-                $notificationSetting->is_active = $setting->is_active;
-                $notificationSetting->is_valid = $setting->is_valid;
-                $notificationSetting->save();
-            }
+            $notificationSetting = new NotificationSettings();
+            $notificationSetting->station_id = $setting->station_id;
+            $notificationSetting->clsf_weather_parameter = $setting->clsf_weather_parameter;
+            $notificationSetting->compare_operator = $setting->compare_operator;
+            $notificationSetting->value = $setting->value;
+            $notificationSetting->is_active = $setting->is_active;
+            $notificationSetting->is_valid = $setting->is_valid;
+            $notificationSetting->save();
         }
 
-        return $this->getSettings($id);
+        return $this->getSettings($stationId);
     }
 
     public function checkForNotifications($data)

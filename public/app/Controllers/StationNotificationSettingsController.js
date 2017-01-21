@@ -51,7 +51,7 @@
 
         $scope.update = function() {
             $scope.settings = angular.toJson($scope.settings);
-            console.log($scope.settings);
+
             ApiService.updateSettings($scope.settings).success(function(data) {
                 $scope.settings = data;
                 $rootScope.displayToast('Notifications settings saved!');
