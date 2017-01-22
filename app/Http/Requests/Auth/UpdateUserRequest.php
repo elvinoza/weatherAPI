@@ -21,7 +21,6 @@ class UpdateUserRequest extends Request {
             $email_id = Auth::user()->id;
         else $email_id = null;
 
-
         return [
             'name' => 'required|min:3|unique:users,name,' . $name_id,
             'email' => 'required|email|unique:users,email,' . $email_id
@@ -49,12 +48,12 @@ class UpdateUserRequest extends Request {
      */
     public function messages(){
         return array(
-            'name.unique' => 'Toks stotelės varadas jau egzistuoja. Pabandykite kita!',
-            'name.required' => 'butina ivesti varda',
-            'name.min' => 'vardas ne trupmesnis nei 3 simb',
-            'email.required' => 'Butina ivesti elektornini pastą.',
-            'email.email' => 'Neteisingas elektroninis paštas. Turi būti example@pvz.lt',
-            'email.unique' => 'Tokiu elektroniniu parstu jau yra uzregistruota stotele.'
+            'name.unique' => 'The name must be unique.',
+            'name.required' => 'The name is required.',
+            'name.min' => 'The name has to be more than 3 characters long.',
+            'email.required' => 'The email is required.',
+            'email.email' => 'Your email must look like an e-mail address.',
+            'email.unique' => 'Your email must be unique. Try another.'
         );
     }
 }

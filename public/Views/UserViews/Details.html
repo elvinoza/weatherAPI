@@ -6,12 +6,13 @@
                 <md-input-container class="md-block">
                     <label>Name</label>
                     <input type="text" ng-model="user.name">
+                    <div class="text-danger" ng-repeat="name_error in error.name" > {{ name_error }}</div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Email</label>
                     <input type="email" ng-model="user.email">
+                    <div class="text-danger" ng-repeat="email_error in error.email" > {{ email_error }}</div>
                 </md-input-container>
-
                 <div layout="row" layout-align="center center" style="padding-top:20px;">
                     <md-button style="width: 100%" class="md-raised md-primary" ng-click="userDetails.update()">Update</md-button>
                 </div>
@@ -26,14 +27,17 @@
                 <md-input-container class="md-block">
                     <label>Current Password</label>
                     <input type="password" ng-model="password.current_password">
+                    <div class="text-danger" ng-repeat="current_password_error in error.current_password" > {{ current_password_error }}</div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>New Password</label>
                     <input type="password" ng-model="password.new_password">
+                    <div class="text-danger" ng-repeat="new_password_error in error.new_password" > {{ new_password_error }}</div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>New Password Confirmation</label>
                     <input type="password" ng-model="password.new_password_confirmation">
+                    <div class="text-danger" ng-repeat="new_password_confirmation_error in error.new_password_confirmation" > {{ new_password_confirmation_error }}</div>
                 </md-input-container>
 
                 <div layout="row" layout-align="center center" style="padding-top:20px;">

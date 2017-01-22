@@ -12,7 +12,7 @@
 
         $scope.password = {};
 
-        vm.error;
+        $scope.error = {};
 
         vm.getUser = function(id){
             ApiService.getUser(id).success(function(data) {
@@ -27,7 +27,7 @@
                 $scope.user = data;
                 $rootScope.displayToast('User data updated!');
             }).error(function(error) {
-                console.log(error);
+                $scope.error = error;
             });
         };
 
@@ -38,11 +38,10 @@
                 $scope.password = {};
                 $rootScope.displayToast('User password updated!');
             }).error(function(error) {
-                console.log(error);
+                $scope.error = error;
             });
         };
 
         vm.getUser($stateParams.id);
     }
-
 })();

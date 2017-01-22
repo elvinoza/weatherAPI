@@ -36,11 +36,11 @@ class ChangeUserPasswordRequest extends Request
      */
     public function messages(){
         return array(
-            'current_password.required' => 'Būtina įvesti seną slaptažodį norint jį pakeisti.',
-            'current_password.min' => 'Slaptažodis turi būti ilgesnis nei 5 simboliai.',
-            'new_password.required' => 'Būtina įvesti naują slaptažodį norint pakeisti senajį.',
-            'new_password.min' => 'Naujas slaptažodis turi būti ilgesnis nei 5 simboliai.',
-            'new_password.confirmed' => 'Naujas slaptažodis pakartotas neteisingai.'
+            'current_password.required' => 'Current password is required.',
+            'current_password.min' => 'The password has to be more than 5 characters long.',
+            'new_password.required' => 'New password is required.',
+            'new_password.min' => 'The new password has to be more than 5 characters long.',
+            'new_password.confirmed' => 'The new password not confirmed.'
         );
     }
 }

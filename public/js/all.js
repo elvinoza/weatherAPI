@@ -102580,7 +102580,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $scope.selectedTab = 0;
                 $rootScope.displayToast("Registration Successful!");
             }).error(function(error) {
-                console.log(error);
                 $scope.regError = error;
             });
         };
@@ -102635,7 +102634,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.password = {};
 
-        vm.error;
+        $scope.error = {};
 
         vm.getUser = function(id){
             ApiService.getUser(id).success(function(data) {
@@ -102650,7 +102649,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $scope.user = data;
                 $rootScope.displayToast('User data updated!');
             }).error(function(error) {
-                console.log(error);
+                $scope.error = error;
             });
         };
 
@@ -102661,13 +102660,12 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $scope.password = {};
                 $rootScope.displayToast('User password updated!');
             }).error(function(error) {
-                console.log(error);
+                $scope.error = error;
             });
         };
 
         vm.getUser($stateParams.id);
     }
-
 })();
 (function() {
 
