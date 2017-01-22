@@ -102540,12 +102540,13 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('AuthController', AuthController);
 
-
-    function AuthController($auth, $state, $http, $rootScope, flash, ApiService, $scope) {
+    function AuthController($auth, $state, $http, $rootScope, ApiService, $scope) {
 
         $scope.register = {};
         $scope.selectedTab = 0;
-
+        $scope.errors = 0;
+        $scope.error = {};
+        $scope.regError = {};
         var vm = this;
 
         vm.login = function() {
@@ -102557,19 +102558,19 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
             $auth.login(credentials).then(function() {
 
-                // Return an $http request for the now authenticated
-                // user so that we can flatten the promise chain
                 return $http.get('api/authenticate/user');
 
             }, function(error) {
-                flash.error = error.data.error;
+                $scope.errors = 1;
+                $scope.error = error;
             }).then(function(response) {
-
-                var user = JSON.stringify(response.data.user);
-                localStorage.setItem('user', user);
-                $rootScope.authenticated = true;
-                $rootScope.currentUser = response.data.user;
-                $state.go('latestData');
+                if (response) {
+                    var user = JSON.stringify(response.data.user);
+                    localStorage.setItem('user', user);
+                    $rootScope.authenticated = true;
+                    $rootScope.currentUser = response.data.user;
+                    $state.go('latestData');
+                }
             });
         };
 
@@ -102577,12 +102578,13 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             ApiService.signUp($scope.register).success(function(data) {
                 $scope.register = {};
                 $scope.selectedTab = 0;
+                $rootScope.displayToast("Registration Successful!");
             }).error(function(error) {
-                //flash.error = error;
+                console.log(error);
+                $scope.regError = error;
             });
         };
-    };
-
+    }
 })();
 
 (function() {

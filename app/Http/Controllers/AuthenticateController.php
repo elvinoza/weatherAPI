@@ -27,7 +27,7 @@ class AuthenticateController extends Controller
         try {
             // verify the credentials and create a token for the user
             if (! $token = \JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'Blogi prisijungimo duomenys.'], 401);
+                return response()->json(['error' => 'Bad credentials. Try again.'], 401);
             }
         } catch (JWTException $e) {
             // something went wrong

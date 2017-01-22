@@ -1,9 +1,16 @@
 <div class="container">
     <md-tabs md-selected="selectedTab" md-dynamic-height md-border-bottom md-center-tabs>
         <md-tab label="Sign In">
+            <md-toolbar ng-if="errors" style="margin-top: 10px" class="md-warn">
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">
+                        {{ error.data.error }}
+                    </h2>
+                </div>
+            </md-toolbar>
             <md-content layout="column" class="md-padding">
                 <md-input-container>
-                    <label>EmailAddress</label>
+                    <label>Email Address</label>
                     <input type="email" ng-model="auth.email"/>
                 </md-input-container>
                 <md-input-container>
@@ -21,18 +28,22 @@
             <md-content layout="column" class="md-padding">
                 <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
-                        <label>First name</label>
+                        <label class="md-warn">First name</label>
                         <input ng-model="register.name">
+                        <div class="text-danger" ng-repeat="name_error in regError.name" > {{ name_error }}</div>
+
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Email</label>
                         <input type="email" ng-model="register.email">
+                        <div class="text-danger" ng-repeat="email_error in regError.email" > {{ email_error }}</div>
                     </md-input-container>
                 </div>
                 <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Password</label>
                         <input type="password" ng-model="register.password">
+                        <div class="text-danger" ng-repeat="password_error in regError.password" > {{ password_error }}</div>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Password Confirmation</label>

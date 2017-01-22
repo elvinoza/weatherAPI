@@ -36,14 +36,14 @@ class CreateUserRequest extends Request {
      */
     public function messages(){
         return array(
-            'name.required' => 'Varda butina ivesti',
-            'name.min' => 'Vardo ilgis turi būti ilgesnis, nei 3 simboliai.',
-            'email.required' => 'Būtina įvesti elektorninį paštą.',
-            'email.email' => 'Neteisingas elektroninis paštas. Turi būti example@pvz.lt',
-            'email.unique' => 'Tokiu elektroniniu parštu jau yra užregistruota stotelė.',
-            'password.required' => 'Būtina įvesti slaptažodį.',
-            'password.confirmed' => 'Slaptažodis turi būti patvirtintas.',
-            'password.min' => 'Slaptažodis turi būti ilgesnis, nei 5 simboliai.',
+            'name.required' => 'The name is required.',
+            'name.min' => 'The name has to be more than 3 characters long.',
+            'email.required' => 'The email is required.',
+            'email.email' => 'Your email must look like an e-mail address.',
+            'email.unique' => 'Your email must be unique.',
+            'password.required' => 'The password is required.',
+            'password.confirmed' => 'The password must be confirmed.',
+            'password.min' => 'The password has to be more than 3 characters long.',
         );
     }
 }
