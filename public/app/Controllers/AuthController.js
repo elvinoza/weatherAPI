@@ -46,7 +46,6 @@
                 $scope.selectedTab = 0;
                 $rootScope.displayToast("Registration Successful!");
             }).error(function(error) {
-                console.log(error);
                 $scope.regError = error;
             });
         };
