@@ -13,12 +13,7 @@
         <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
             <div class="md-toolbar-tools">
                 <span>Disease Models</span>
-
                 <div flex></div>
-                <md-select ng-model="modelsFilter" ng-change="getModels()">
-                    <md-option ng-value="1" ng-selected="true">My Models</md-option>
-                    <md-option ng-value="0" >All Models</md-option>
-                </md-select>
                 <md-button class="md-icon-button" ng-click="getModels()">
                     <md-icon>refresh</md-icon>
                 </md-button>
@@ -41,11 +36,8 @@
                     <td md-cell>{{diseaseModel.name}}</td>
                     <td md-cell>{{diseaseModel.description}}</td>
                     <td md-cell>{{diseaseModel.created_at}}</td>
-                    <td ng-if="user_id == diseaseModel.user_id" md-cell ng-click="editModel($event, diseaseModel)">
+                    <td md-cell ng-click="editModel($event, diseaseModel)">
                         <md-icon>edit</md-icon>
-                    </td>
-                    <td ng-if="user_id != diseaseModel.user_id" md-cell>
-                        <md-icon class="md-warn md-hue-5">do_not_disturb</md-icon>
                     </td>
                     <td md-cell ng-click="showStations($event, diseaseModel.id, diseaseModel.has_conditions)">
                         <md-icon>more_horiz</md-icon>

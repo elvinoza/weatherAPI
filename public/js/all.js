@@ -102179,7 +102179,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 })
                 .state('allSystemDiseaseModelsForAdmin', {
                     url: '/diseaseModels',
-                    templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
+                    templateUrl: '../Views/AdminViews/DiseaseModels.html',
                     controller: 'AllSystemDiseaseModelsForAdminController as allSystemDiseaseModelsFroAdmin'
                 })
                 .state('allForecasts', {
@@ -102853,6 +102853,10 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
     function DiseaseModelsController($state, $scope, $stateParams, ApiService, $mdDialog) {
 
+        $scope.user_id = $stateParams.id;
+
+        $scope.modelsFilter = 1;
+
         $scope.models = [];
 
         $scope.query = {
@@ -102861,12 +102865,22 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             page: 1
         };
 
-        $scope.getModels = function(id){
-            ApiService.getUserDiseaseModels(id).success(function(data) {
-                $scope.models = data;
-            }).error(function(error) {
+        $scope.getModels = function(){
 
-            });
+            if ($scope.modelsFilter == 1)
+            {
+                ApiService.getUserDiseaseModels($stateParams.id).success(function(data) {
+                    $scope.models = data;
+                }).error(function(error) {
+
+                });
+            } else {
+                ApiService.getAllDiseaseModels().success(function(data) {
+                    $scope.models = data;
+                }).error(function(error) {
+
+                });
+            }
         };
 
         $scope.create = function(){
@@ -102917,7 +102931,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             }
         };
 
-        $scope.getModels($stateParams.id);
+        $scope.getModels();
     }
 })();
 

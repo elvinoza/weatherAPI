@@ -8,6 +8,10 @@
 
     function DiseaseModelsController($state, $scope, $stateParams, ApiService, $mdDialog) {
 
+        $scope.user_id = $stateParams.id;
+
+        $scope.modelsFilter = 1;
+
         $scope.models = [];
 
         $scope.query = {
@@ -16,12 +20,22 @@
             page: 1
         };
 
-        $scope.getModels = function(id){
-            ApiService.getUserDiseaseModels(id).success(function(data) {
-                $scope.models = data;
-            }).error(function(error) {
+        $scope.getModels = function(){
 
-            });
+            if ($scope.modelsFilter == 1)
+            {
+                ApiService.getUserDiseaseModels($stateParams.id).success(function(data) {
+                    $scope.models = data;
+                }).error(function(error) {
+
+                });
+            } else {
+                ApiService.getAllDiseaseModels().success(function(data) {
+                    $scope.models = data;
+                }).error(function(error) {
+
+                });
+            }
         };
 
         $scope.create = function(){
@@ -72,7 +86,7 @@
             }
         };
 
-        $scope.getModels($stateParams.id);
+        $scope.getModels();
     }
 })();
 

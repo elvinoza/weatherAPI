@@ -90,7 +90,7 @@
                 })
                 .state('allSystemDiseaseModelsForAdmin', {
                     url: '/diseaseModels',
-                    templateUrl: '../Views/DiseaseModelViews/DiseaseModelsList.html',
+                    templateUrl: '../Views/AdminViews/DiseaseModels.html',
                     controller: 'AllSystemDiseaseModelsForAdminController as allSystemDiseaseModelsFroAdmin'
                 })
                 .state('allForecasts', {
