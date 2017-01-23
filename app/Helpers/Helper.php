@@ -99,12 +99,12 @@ class Helper
         return "Now in " . $stationName ." " . $parameter . " is " . $value. " " . $unit . ".";
     }
 
-    public static function CompareDatesForNotification($notificationDate)
+    public static function CompareDateFromNow($date, $hours)
     {
-        if ($notificationDate != null)
+        if ($date != null)
         {
-            $hourDiff = round((strtotime(date("Y-m-d H:m:s")) - strtotime($notificationDate))/3600, 1);
-            if ($hourDiff > 24)
+            $hourDiff = round((strtotime(date("Y-m-d H:m:s")) - strtotime($date))/3600, 1);
+            if ($hourDiff > $hours)
                 return true;
 
             return false;

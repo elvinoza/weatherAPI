@@ -74,7 +74,7 @@ class NotificationSettingsService implements INotificationSettingsService
         {
             $message = $this->checkParameter($setting, $data, $station->name);
 
-            if ($message != null && ($setting->last_notification_date == null || Helper::CompareDatesForNotification($setting->last_notification_date))) {
+            if ($message != null && ($setting->last_notification_date == null || Helper::CompareDateFromNow($setting->last_notification_date, 24))) {
                 $this->notifyService->crateNotification($stationUser->id, 0, "Detected comparison by station(" . $station->name . ") settings", $message);
                 $this->updateSettingLastNotificationDate($setting->id);
             }

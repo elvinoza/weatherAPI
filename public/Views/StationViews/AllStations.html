@@ -21,6 +21,7 @@
                     <th md-column md-numeric md-order-by="updated_at" md-desc><span>Last Update Time</span></th>
                     <th md-column ><span>Charts</span></th>
                     <th md-column ><span>Weathers</span></th>
+                    <th md-column ><span></span></th>
                 </tr>
                 </thead>
                 <tbody md-body>
@@ -35,6 +36,9 @@
                     </td>
                     <td md-cell ng-click="weathers(station.id)">
                         <md-icon>more_horiz</md-icon>
+                    </td>
+                    <td md-cell>
+                        <i ng-class="{{station.is_active}} ? 'material-icons active-station' : 'material-icons inactive-station'">lens</i>
                     </td>
                 </tr>
                 </tbody>

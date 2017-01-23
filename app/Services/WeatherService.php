@@ -50,6 +50,7 @@ class WeatherService implements IWeatherService
         $weather->rain = $data->rain;
         $weather->save();
 
+        $this->updateLastStationDataTime($data->station_id);
         $this->diseaseModelCorrectnessService->checkDiseasesModels($data->station_id);
         $this->notificationSettingsService->checkForNotifications($data);
 
@@ -88,7 +89,6 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->humidity;
-
         });
     }
 
@@ -96,7 +96,6 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->pressure;
-
         });
     }
 
@@ -104,7 +103,6 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->soil_temperature;
-
         });
     }
 
@@ -112,7 +110,6 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->soil_humidity;
-
         });
     }
 
@@ -120,7 +117,6 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->wind_speed;
-
         });
     }
 
@@ -128,7 +124,6 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->wind_direction;
-
         });
     }
 
@@ -136,7 +131,6 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->rain;
-
         });
     }
 
@@ -144,7 +138,12 @@ class WeatherService implements IWeatherService
     {
         return $data->map(function($weather) {
             return $weather->created_at->toDateTimeString();
-
         });
+    }
+
+    private function updateLastStationDataTime($stationId){
+        $station = $this->station->find($stationId);
+        $station->last_data_time = date("Y-m-d H:m:s");
+        $station->save();
     }
 }

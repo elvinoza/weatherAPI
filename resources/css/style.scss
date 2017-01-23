@@ -1860,3 +1860,14 @@ $icon-color: #c1004d;
   font-size: small;
   border-top: 1px solid #ddd;
 }
+
+//status indicators
+.active-station {
+  font-size: 15px !important;
+  color: greenyellow;
+}
+
+.inactive-station {
+  font-size: 15px !important;
+  color: grey;
+}

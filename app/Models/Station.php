@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
 class Station extends Model {
+
+    /**
+     * The custom attributes.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'is_active',
+    ];
 
     /**
      * The database table used by the model.
@@ -47,5 +57,10 @@ class Station extends Model {
     public function settings()
     {
         return $this->hasMany('App\Models\NotificationSettings');
+    }
+
+    public function getIsActiveAttribute()
+    {
+        return !Helper::CompareDateFromNow($this->last_data_time, 24);
     }
 }

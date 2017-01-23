@@ -6610,6 +6610,14 @@ img#logo:focus {
   font-size: small;
   border-top: 1px solid #ddd; }
 
+.active-station {
+  font-size: 15px !important;
+  color: greenyellow; }
+
+.inactive-station {
+  font-size: 15px !important;
+  color: grey; }
+
 html, body {
   height: 100%;
   position: relative; }
