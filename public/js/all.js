@@ -102196,10 +102196,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     url: '/station/settings/:id',
                     templateUrl: '../Views/SettingsViews/Settings.html',
                     controller: 'StationNotificationSettingsController as stationNotificationSettings'
-                })
-                .state('apiDocumentation', {
-                    url: '/doc',
-                    templateUrl: '../Views/Shared/ApiDocumentation.html'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {

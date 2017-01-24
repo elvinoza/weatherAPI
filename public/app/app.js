@@ -107,10 +107,6 @@
                     url: '/station/settings/:id',
                     templateUrl: '../Views/SettingsViews/Settings.html',
                     controller: 'StationNotificationSettingsController as stationNotificationSettings'
-                })
-                .state('apiDocumentation', {
-                    url: '/doc',
-                    templateUrl: '../Views/Shared/ApiDocumentation.html'
                 });
 
             function redirectWhenLoggedOut($q, $injector) {

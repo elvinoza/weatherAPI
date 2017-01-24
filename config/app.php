@@ -159,7 +159,8 @@ return [
         App\Providers\StationServiceProvider::class,
 
 
-        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
 
     ],
 
