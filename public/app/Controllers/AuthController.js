@@ -6,7 +6,7 @@
         .module('app')
         .controller('AuthController', AuthController);
 
-    function AuthController($auth, $state, $http, $rootScope, ApiService, $scope) {
+    function AuthController($auth, $state, $http, $rootScope, ApiService, $scope, $mdDialog) {
 
         $scope.register = {};
         $scope.selectedTab = 0;
@@ -47,6 +47,22 @@
                 $rootScope.displayToast("Registration Successful!");
             }).error(function(error) {
                 $scope.regError = error;
+            });
+        };
+
+        vm.forgotPassword = function(ev){
+            $mdDialog.show({
+                controller: 'RememberPasswordController',
+                templateUrl: '../../Views/Shared/RememberPasswordForm.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: true
+            })
+            .then(function(answer) {
+                //$scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                //$scope.status = 'You cancelled the dialog.';
             });
         };
     }

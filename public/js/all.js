@@ -102536,7 +102536,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('AuthController', AuthController);
 
-    function AuthController($auth, $state, $http, $rootScope, ApiService, $scope) {
+    function AuthController($auth, $state, $http, $rootScope, ApiService, $scope, $mdDialog) {
 
         $scope.register = {};
         $scope.selectedTab = 0;
@@ -102577,6 +102577,22 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $rootScope.displayToast("Registration Successful!");
             }).error(function(error) {
                 $scope.regError = error;
+            });
+        };
+
+        vm.forgotPassword = function(ev){
+            $mdDialog.show({
+                controller: 'RememberPasswordController',
+                templateUrl: '../../Views/Shared/RememberPasswordForm.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: true
+            })
+            .then(function(answer) {
+                //$scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                //$scope.status = 'You cancelled the dialog.';
             });
         };
     }
@@ -103572,6 +103588,35 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         $scope.getSettings($stateParams.id);
     }
 })();
+(function() {
+
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('RememberPasswordController', RememberPasswordController);
+
+    function RememberPasswordController($mdDialog, $rootScope, $scope) {
+
+        $scope.email = null;
+
+        $scope.newPassword = function(){
+            if ($scope.email != null){
+                $rootScope.displayToast('New password link sent to your email!');
+                $mdDialog.hide();
+            }
+        };
+
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+    }
+})();
+
 (function() {
 
     'use strict';
