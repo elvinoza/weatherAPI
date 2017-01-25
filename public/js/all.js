@@ -102742,13 +102742,13 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         var vm = this;
         vm.googleMapsUrl = $rootScope.googleMapsUrl;
 
-        vm.error;
+        $scope.error = {};
 
         vm.getStation = function(id){
             ApiService.getStation(id).success(function(data) {
                 $scope.station = data;
             }).error(function(error) {
-                vm.error = error;
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
@@ -102757,6 +102757,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $scope.station = data;
                 $rootScope.displayToast('Station updated!');
             }).error(function(error) {
+                $scope.error = error;
             });
         };
 
@@ -102765,7 +102766,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $state.go('userStations', { id: $rootScope.currentUser.id});
                 $rootScope.displayToast('Station deleted!');
             }).error(function(error) {
-                //flash.error = error;
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
@@ -102796,6 +102797,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         $scope.station = {};
         $scope.station.lat = null;
         $scope.station.lng = null;
+        $scope.error = {};
 
         vm.create = function(){
             $scope.station.user_id = $rootScope.currentUser.id;
@@ -102804,7 +102806,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $rootScope.displayToast('Station created!');
                 $state.go('userStations', { id: data.user_id });
             }).error(function(error) {
-                $rootScope.displayToast(error);
+                $scope.error = error;
             });
         };
 
@@ -103357,7 +103359,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $scope.forecasts[index].favorite = data.favorite;
                 $scope.forecasts[index].is_confirmed = data.is_confirmed;
                 $rootScope.displayToast('Thanks for your response!');
-                //parodyt ta popupa virsuje
             }).error(function(error) {
                 $rootScope.displayToast('Ups.. Try again!');
             });

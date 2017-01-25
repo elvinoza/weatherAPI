@@ -15,7 +15,7 @@ class UpdateStationRequest extends Request {
     {
         return [
             'name' => 'required|min:3|unique:stations,name,' . $this->input('id'),
-            'location' => 'max:255',
+            'location' => 'required|max:255',
             'update_time' => 'required|integer'
         ];
     }
@@ -41,12 +41,13 @@ class UpdateStationRequest extends Request {
      */
     public function messages(){
         return array(
-            'name.unique' => 'Toks stotelės varadas jau egzistuoja. Pabandykite kita!',
-            'name.required' => 'butina ivesti varda',
-            'name.min' => 'vardas ne trupmesnis nei 3 simb',
-            'location.max' => 'Per ilgas pavadinimas',
-            'update_time.required' => 'Butinas atnaujinimo laikas',
-            'update_time.integer' => 'Tik sveikas skaicius.'
+            'name.unique' => 'Station name must be unique.',
+            'name.required' => 'Station name is required.',
+            'name.min' => 'Station name must be more than 3 char.',
+            'location.required' => 'Station location is required.',
+            'location.max' => 'Station location is too long.',
+            'update_time.required' => 'Update time is required.',
+            'update_time.integer' => 'Update time must be integer.'
         );
     }
 }

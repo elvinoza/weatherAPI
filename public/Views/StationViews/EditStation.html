@@ -14,15 +14,18 @@
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Station Name</label>
                         <input ng-model="station.name">
+                        <div class="text-danger" ng-repeat="name_error in error.name" > {{ name_error }}</div>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
-                        <label>Station Update Time In Minutes</label>
+                        <label>Station Data Update Time In Minutes</label>
                         <input numeric ng-model="station.update_time">
+                        <div class="text-danger" ng-repeat="update_time_error in error.update_time" > {{ update_time_error }}</div>
                     </md-input-container>
                 </div>
                 <md-input-container class="md-block">
-                    <label>Location</label>
+                    <label>Location Description</label>
                     <input ng-model="station.location">
+                    <div class="text-danger" ng-repeat="location_error in error.location" > {{ location_error }}</div>
                 </md-input-container>
 
                 <md-input-container class="md-block">

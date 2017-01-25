@@ -11,13 +11,13 @@
         var vm = this;
         vm.googleMapsUrl = $rootScope.googleMapsUrl;
 
-        vm.error;
+        $scope.error = {};
 
         vm.getStation = function(id){
             ApiService.getStation(id).success(function(data) {
                 $scope.station = data;
             }).error(function(error) {
-                vm.error = error;
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
@@ -26,6 +26,7 @@
                 $scope.station = data;
                 $rootScope.displayToast('Station updated!');
             }).error(function(error) {
+                $scope.error = error;
             });
         };
 
@@ -34,7 +35,7 @@
                 $state.go('userStations', { id: $rootScope.currentUser.id});
                 $rootScope.displayToast('Station deleted!');
             }).error(function(error) {
-                //flash.error = error;
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 

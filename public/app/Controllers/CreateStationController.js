@@ -11,6 +11,7 @@
         $scope.station = {};
         $scope.station.lat = null;
         $scope.station.lng = null;
+        $scope.error = {};
 
         vm.create = function(){
             $scope.station.user_id = $rootScope.currentUser.id;
@@ -19,7 +20,7 @@
                 $rootScope.displayToast('Station created!');
                 $state.go('userStations', { id: data.user_id });
             }).error(function(error) {
-                $rootScope.displayToast(error);
+                $scope.error = error;
             });
         };
 
