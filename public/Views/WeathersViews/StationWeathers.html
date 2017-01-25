@@ -21,6 +21,7 @@
                     <th md-column md-numeric md-order-by="soil_temperature" md-desc><span>Soil Temperature &#8451;</span></th>
                     <th md-column md-numeric md-order-by="soil_humidity" md-desc><span>Soil Humidity %</span></th>
                     <th md-column md-numeric md-order-by="wind_speed" md-desc><span>Wind Speed m/s</span></th>
+                    <th md-column md-numeric md-order-by="wind_direction_name" md-desc><span>Wind Direction</span></th>
                     <th md-column md-numeric md-order-by="rain" md-desc><span>Rain mm</span></th>
                     <th md-column md-order-by="created_at" md-desc><span>Time</span></th>
                 </tr>
@@ -34,6 +35,7 @@
                     <td md-cell>{{weather.soil_temperature | number: 2}}</td>
                     <td md-cell>{{weather.soil_humidity | number: 2}}</td>
                     <td md-cell>{{weather.wind_speed | number: 2}}</td>
+                    <td md-cell>{{weather.wind_direction_name}}</td>
                     <td md-cell>{{weather.rain | number: 2}}</td>
                     <td md-cell>{{weather.created_at}}</td>
                 </tr>

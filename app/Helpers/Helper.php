@@ -146,4 +146,34 @@ class Helper
                 break;
         }
     }
+
+    public static function GetWindDirectionNameByDegree($degree)
+    {
+        switch($degree){
+            case $degree <= 22.5 || $degree >= 337.5:
+                return "N";
+                break;
+            case $degree > 22.5 && $degree <=  67.5:
+                return "NE";
+                break;
+            case $degree > 67.5 && $degree <= 112.5:
+                return "E";
+                break;
+            case $degree > 112.5 && $degree <= 157.5:
+                return "SE";
+                break;
+            case $degree > 157.5 && $degree <= 202.5:
+                return "S";
+                break;
+            case $degree > 202.5 && $degree <= 247.5:
+                return "SW";
+                break;
+            case $degree > 247.5 && $degree <= 292.5:
+                return "W";
+                break;
+            case $degree > 292.5 && $degree <= 337.5:
+                return "NW";
+                break;
+        }
+    }
 }

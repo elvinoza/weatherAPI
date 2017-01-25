@@ -3,8 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Helper;
 
 class Weather extends Model {
+
+    /**
+     * The custom attributes.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'wind_direction_name'
+    ];
 
     /**
      * The database table used by the model.
@@ -32,5 +42,10 @@ class Weather extends Model {
     public function station()
     {
         return $this->belongsTo("App\Models\Station");
+    }
+
+    public function getWindDirectionNameAttribute()
+    {
+        return Helper::GetWindDirectionNameByDegree($this->wind_direction);
     }
 }
