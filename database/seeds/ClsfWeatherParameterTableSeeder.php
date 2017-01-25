@@ -15,7 +15,7 @@ class ClsfWeatherParameterTableSeeder extends Seeder
     {
         Model::unguard();
 
-        DB::table('clsf_weather_parameter')->delete();
+        DB::table('clsf_weather_parameter')->truncate();
 
         $parameters = array(
             ['name' => 'Temperature'],
