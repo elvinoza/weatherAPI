@@ -141,7 +141,7 @@
                     }
                 },
                 labels: {
-                    format: '{value} km/h',
+                    format: '{value} m/s',
                     style: {
                         color: Highcharts.getOptions().colors[6]
                     }
@@ -185,7 +185,7 @@
                 },
                 dashStyle: 'shortdot',
                 tooltip: {
-                    valueSuffix: ' Pa'
+                    valueSuffix: ' mmHg'
                 }
             }, {
                 name: 'Soil temperature',
@@ -217,7 +217,7 @@
                 yAxis: 6,
                 data: [],
                 tooltip: {
-                    valueSuffix: ' km/h'
+                    valueSuffix: ' m/s'
                 }
             }]
         };

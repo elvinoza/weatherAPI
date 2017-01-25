@@ -103760,7 +103760,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     }
                 },
                 labels: {
-                    format: '{value} km/h',
+                    format: '{value} m/s',
                     style: {
                         color: Highcharts.getOptions().colors[6]
                     }
@@ -103804,7 +103804,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 },
                 dashStyle: 'shortdot',
                 tooltip: {
-                    valueSuffix: ' Pa'
+                    valueSuffix: ' mmHg'
                 }
             }, {
                 name: 'Soil temperature',
@@ -103836,7 +103836,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 yAxis: 6,
                 data: [],
                 tooltip: {
-                    valueSuffix: ' km/h'
+                    valueSuffix: ' m/s'
                 }
             }]
         };
