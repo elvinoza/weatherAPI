@@ -75,8 +75,8 @@ class CreateDiseaseModelConditionRequest extends Request {
             '*.constant.numeric' => 'Constant must be numeric.',
             '*.operator.required' => 'Compare operator is required.',
             '*.operator.boolean' => 'Compare operator must be boolean.',
-            '*.time.required' => 'Time is required.',
-            '*.time.integer' => 'Time must be integer.'
+            '*.time.required' => 'Interval in days is required.',
+            '*.time.integer' => 'Interval in days must be integer.'
         );
     }
 }

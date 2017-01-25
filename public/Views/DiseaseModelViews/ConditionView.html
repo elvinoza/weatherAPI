@@ -33,14 +33,14 @@
 
      <div layout-gt-xs="row" ng-if="!condition.date_range">
          <md-input-container class="md-block" flex-gt-sm>
-             <label>Fixed</label>
+             <label>Compare Operator</label>
              <md-select ng-model="condition.operator" placeholder="Select Operator">
                  <md-option ng-value="operator.value" ng-repeat="operator in operators">{{ operator.name }}</md-option>
              </md-select>
          </md-input-container>
 
          <md-input-container class="md-block" flex-gt-sm>
-             <label>Fixed</label>
+             <label>Constant</label>
              <input numeric ng-model="condition.constant">
              <div class="text-danger" ng-repeat="constant_error in conditionError[index].constant" > {{ constant_error }} </div>
          </md-input-container>
