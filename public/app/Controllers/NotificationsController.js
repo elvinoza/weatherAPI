@@ -15,13 +15,13 @@
         };
 
         $scope.limitOptions = [5, 10, 15, 20];
-        $scope.notifications = [];
+        $scope.allNotifications = [];
 
 
         $scope.getAllNotifications = function(id) {
 
             ApiService.getAllUserNotifications(id).success(function(data) {
-                $scope.notifications = data;
+                $scope.allNotifications = data;
             }).error(function(error) {
 
             });

@@ -21,7 +21,7 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="notification" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, notification) in notifications | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr md-row md-select="notification" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="(index, notification) in allNotifications | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{index + 1}}</td>
                     <td md-cell>{{notification.short_message}}</td>
                     <td md-cell>{{notification.is_read == 1 ? 'Yes' : 'No'}}</td>
@@ -33,6 +33,6 @@
                 </tbody>
             </table>
         </md-table-container>
-        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{notifications.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
+        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{allNotifications.length}}" md-page-select="true" md-boundary-links="true" md-on-paginate="logPagination"></md-table-pagination>
     </md-card>
 </md-content>
