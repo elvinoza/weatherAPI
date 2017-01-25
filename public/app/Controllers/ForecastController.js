@@ -6,7 +6,7 @@
         .module('app')
         .controller('ForecastController', ForecastController);
 
-    function ForecastController($scope, $state, $stateParams, ApiService) {
+    function ForecastController($rootScope, $scope, $state, $stateParams, ApiService) {
 
         $scope.forecasts = [];
         $scope.date = moment().format('YYYY-MM-DD') + ' ' + moment().format('YYYY-MM-DD');
@@ -18,7 +18,7 @@
             ApiService.getForecasts($stateParams.id, dates[0], dates[1]).success(function(data) {
                 $scope.forecasts = data;
             }).error(function(error) {
-                //TODO: handle error's
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
@@ -36,9 +36,10 @@
             ApiService.confirmForecast(id).success(function(data) {
                 $scope.forecasts[index].favorite = data.favorite;
                 $scope.forecasts[index].is_confirmed = data.is_confirmed;
+                $rootScope.displayToast('Thanks for your response!');
                 //parodyt ta popupa virsuje
             }).error(function(error) {
-                //TODO: handle error's
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
