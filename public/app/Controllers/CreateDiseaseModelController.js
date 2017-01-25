@@ -6,11 +6,14 @@
         .module('app')
         .controller('CreateDiseaseModelController', CreateDiseaseModelController);
 
-    function CreateDiseaseModelController($rootScope, $state, $scope, flash, ApiService) {
+    function CreateDiseaseModelController($rootScope, $state, $scope, ApiService) {
 
         $scope.clsfWeatherParams = [];
-        $scope.model = null;
+        $scope.model = {};
         $scope.conditionNr = 1;
+        $scope.modelError = {};
+
+        $scope.conditionError = [];
 
         $scope.operators = [{
             value: true,
@@ -65,7 +68,7 @@
 
                 $rootScope.displayToast('Disease model created!');
             }).error(function(error) {
-                flash.error = error;
+                $scope.modelError = error;
             });
         };
 
@@ -77,13 +80,26 @@
                 $state.go('userModels', { id: $scope.model.user_id });
                 $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
-                flash.error = error;
+                $rootScope.displayToast('Disease model not valid. Check errors and try again!');
+                $scope.setErrors(error);
             });
         };
 
         $scope.delete = function(condition){
             $scope.conditions.splice($scope.conditions.indexOf(condition),1);
-            console.log($scope.conditions);
+        };
+
+        $scope.setErrors = function(error){
+            $scope.conditionError = [];
+            var i = 0;
+            for(var name in error) {
+                var value = error[name];
+
+                if (typeof $scope.conditionError[parseInt(name.substr(11, 1))] === 'undefined')
+                    $scope.conditionError[parseInt(name.substr(11, 1))] = [];
+                $scope.conditionError[parseInt(name.substr(11, 1))].push([name.substr(name.lastIndexOf('.')+1)]);
+                $scope.conditionError[parseInt(name.substr(11, 1))][name.substr(name.lastIndexOf('.')+1)] = value;
+            }
         };
     }
 })();

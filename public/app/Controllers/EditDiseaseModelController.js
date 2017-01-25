@@ -9,6 +9,9 @@
     function EditDiseaseModelController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.model = null;
+        $scope.modelSend = null;
+        $scope.modelError = {};
+        $scope.conditionError = [];
 
         $scope.operators = [{
             value: 1,
@@ -47,17 +50,19 @@
                     $scope.conditionNr = $scope.model.conditions.length;
 
             }).error(function(error) {
-                //display some error's
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
         $scope.update = function() {
-            $scope.model = angular.toJson($scope.model);
-            ApiService.updateDiseaseModel($scope.model).success(function(data) {
+            $scope.modelSend = angular.toJson($scope.model);
+            ApiService.updateDiseaseModel($scope.modelSend).success(function(data) {
                 $scope.model = data;
                 $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
-                //display some error's
+                $scope.modelError = error;
+                $rootScope.displayToast('Disease model not valid. Check errors and try again!');
+                $scope.setErrors(error);
             });
         };
 
@@ -67,6 +72,21 @@
 
         $scope.delete = function(condition){
             $scope.model.conditions.splice($scope.model.conditions.indexOf(condition), 1);
+        };
+
+        $scope.setErrors = function(error){
+            $scope.conditionError = [];
+            for(var name in error) {
+                if (name.match( new RegExp('\\.','g')) != null && name.match( new RegExp('\\.','g') ).length > 1)
+                {
+                    var value = error[name];
+
+                    if (typeof $scope.conditionError[parseInt(name.substr(11, 1))] === 'undefined')
+                        $scope.conditionError[parseInt(name.substr(11, 1))] = [];
+                    $scope.conditionError[parseInt(name.substr(11, 1))].push([name.substr(name.lastIndexOf('.')+1)]);
+                    $scope.conditionError[parseInt(name.substr(11, 1))][name.substr(name.lastIndexOf('.')+1)] = value;
+                }
+            }
         };
 
         $scope.getDiseaseModel($stateParams.id);

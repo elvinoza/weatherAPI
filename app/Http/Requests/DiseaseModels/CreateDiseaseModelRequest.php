@@ -16,6 +16,7 @@ class CreateDiseaseModelRequest extends Request {
         return [
             'name' => 'required|min:3|unique:disease_models,name',
             'description' => 'required|max:255',
+            'solution' => 'required|max:255',
             'user_id' => 'required|integer'
         ];
     }
@@ -41,11 +42,13 @@ class CreateDiseaseModelRequest extends Request {
      */
     public function messages(){
         return array(
-            'name.unique' => 'Station name must be unique.',
-            'name.required' => 'Station name is required.',
-            'name.min' => 'Station name must be more than 3 char.',
+            'name.unique' => 'Disease model name must be unique.',
+            'name.required' => 'Disease model name is required.',
+            'name.min' => 'Disease model name must be more than 3 char.',
             'description.required' => 'Description is required.',
             'description.max' => 'Description is too long.',
+            'solution.required' => 'Solution is required.',
+            'solution.max' => 'Solution is too long.',
             'user_id.required' => 'User id is required.',
             'user_id.integer' => 'User id must be integer.'
         );

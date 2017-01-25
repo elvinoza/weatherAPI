@@ -11,14 +11,17 @@
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Disease Model Name</label>
                         <input ng-model="model.name">
+                        <div class="text-danger" ng-repeat="name_error in modelError.name" > {{ name_error }}</div>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Description</label>
                         <input ng-model="model.description">
+                        <div class="text-danger" ng-repeat="description_error in modelError.description" > {{ description_error }}</div>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Solution</label>
                         <input ng-model="model.solution">
+                        <div class="text-danger" ng-repeat="solution_error in modelError.solution" > {{ solution_error }}</div>
                     </md-input-container>
                 </div>
 
@@ -27,7 +30,7 @@
                         <md-button style="width: 100%" class="md-raised md-primary" ng-click="add()">Add New Condition</md-button>
                     </div>
 
-                    <div ng-repeat="condition in model.conditions" ng-include="getView()">
+                    <div ng-repeat="(index, condition) in model.conditions" ng-include="getView()">
                     </div>
                 </div>
 

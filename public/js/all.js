@@ -102958,11 +102958,14 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         .module('app')
         .controller('CreateDiseaseModelController', CreateDiseaseModelController);
 
-    function CreateDiseaseModelController($rootScope, $state, $scope, flash, ApiService) {
+    function CreateDiseaseModelController($rootScope, $state, $scope, ApiService) {
 
         $scope.clsfWeatherParams = [];
-        $scope.model = null;
+        $scope.model = {};
         $scope.conditionNr = 1;
+        $scope.modelError = {};
+
+        $scope.conditionError = [];
 
         $scope.operators = [{
             value: true,
@@ -103017,7 +103020,7 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
                 $rootScope.displayToast('Disease model created!');
             }).error(function(error) {
-                flash.error = error;
+                $scope.modelError = error;
             });
         };
 
@@ -103029,13 +103032,26 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $state.go('userModels', { id: $scope.model.user_id });
                 $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
-                flash.error = error;
+                $rootScope.displayToast('Disease model not valid. Check errors and try again!');
+                $scope.setErrors(error);
             });
         };
 
         $scope.delete = function(condition){
             $scope.conditions.splice($scope.conditions.indexOf(condition),1);
-            console.log($scope.conditions);
+        };
+
+        $scope.setErrors = function(error){
+            $scope.conditionError = [];
+            var i = 0;
+            for(var name in error) {
+                var value = error[name];
+
+                if (typeof $scope.conditionError[parseInt(name.substr(11, 1))] === 'undefined')
+                    $scope.conditionError[parseInt(name.substr(11, 1))] = [];
+                $scope.conditionError[parseInt(name.substr(11, 1))].push([name.substr(name.lastIndexOf('.')+1)]);
+                $scope.conditionError[parseInt(name.substr(11, 1))][name.substr(name.lastIndexOf('.')+1)] = value;
+            }
         };
     }
 })();
@@ -103050,6 +103066,9 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
     function EditDiseaseModelController($rootScope, $stateParams, $scope, ApiService) {
 
         $scope.model = null;
+        $scope.modelSend = null;
+        $scope.modelError = {};
+        $scope.conditionError = [];
 
         $scope.operators = [{
             value: 1,
@@ -103088,17 +103107,19 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     $scope.conditionNr = $scope.model.conditions.length;
 
             }).error(function(error) {
-                //display some error's
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
         $scope.update = function() {
-            $scope.model = angular.toJson($scope.model);
-            ApiService.updateDiseaseModel($scope.model).success(function(data) {
+            $scope.modelSend = angular.toJson($scope.model);
+            ApiService.updateDiseaseModel($scope.modelSend).success(function(data) {
                 $scope.model = data;
                 $rootScope.displayToast('Disease model updated!');
             }).error(function(error) {
-                //display some error's
+                $scope.modelError = error;
+                $rootScope.displayToast('Disease model not valid. Check errors and try again!');
+                $scope.setErrors(error);
             });
         };
 
@@ -103108,6 +103129,21 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
 
         $scope.delete = function(condition){
             $scope.model.conditions.splice($scope.model.conditions.indexOf(condition), 1);
+        };
+
+        $scope.setErrors = function(error){
+            $scope.conditionError = [];
+            for(var name in error) {
+                if (name.match( new RegExp('\\.','g')) != null && name.match( new RegExp('\\.','g') ).length > 1)
+                {
+                    var value = error[name];
+
+                    if (typeof $scope.conditionError[parseInt(name.substr(11, 1))] === 'undefined')
+                        $scope.conditionError[parseInt(name.substr(11, 1))] = [];
+                    $scope.conditionError[parseInt(name.substr(11, 1))].push([name.substr(name.lastIndexOf('.')+1)]);
+                    $scope.conditionError[parseInt(name.substr(11, 1))][name.substr(name.lastIndexOf('.')+1)] = value;
+                }
+            }
         };
 
         $scope.getDiseaseModel($stateParams.id);
@@ -103551,9 +103587,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
         }];
 
         $scope.error = [];
-        $scope.test = []; $scope.test[0] = []; $scope.test[1] = [];
-        $scope.test[0]['id'] = ['asd', 'asd1'];
-        $scope.test[1]['id'] = ['dsa', 'dsa1'];
 
         ApiService.getClsfParams().success(function(data) {
             $scope.clsfWeatherParams = data;
@@ -103594,8 +103627,6 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                 $rootScope.displayToast('Notifications settings saved!');
             }).error(function(error) {
                 $scope.setErrors(error);
-                //$scope.error = error;
-                console.log($scope.error);
             });
         };
 
