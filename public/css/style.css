@@ -5292,7 +5292,7 @@ table.md-table .md-table-progress th md-progress-linear > .md-container > .md-ba
 
 table.md-table th.md-column {
   color: rgba(0, 0, 0, 0.54);
-  font-size: 12px;
+  font-size: medium;
   font-weight: bold;
   white-space: nowrap; }
 
