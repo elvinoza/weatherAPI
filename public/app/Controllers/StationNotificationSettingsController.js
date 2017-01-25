@@ -19,9 +19,6 @@
         }];
 
         $scope.error = [];
-        $scope.test = []; $scope.test[0] = []; $scope.test[1] = [];
-        $scope.test[0]['id'] = ['asd', 'asd1'];
-        $scope.test[1]['id'] = ['dsa', 'dsa1'];
 
         ApiService.getClsfParams().success(function(data) {
             $scope.clsfWeatherParams = data;
@@ -62,8 +59,6 @@
                 $rootScope.displayToast('Notifications settings saved!');
             }).error(function(error) {
                 $scope.setErrors(error);
-                //$scope.error = error;
-                console.log($scope.error);
             });
         };
 
