@@ -5,6 +5,7 @@
             <md-select ng-model="setting.clsf_weather_parameter" placeholder="Select a parameter">
                 <md-option ng-value="param.id" ng-repeat="param in clsfWeatherParams">{{ param.name }}</md-option>
             </md-select>
+            <div class="text-danger" ng-repeat="clsf_weather_parameter_error in error[index].clsf_weather_parameter" > {{ clsf_weather_parameter_error }}</div>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
@@ -12,12 +13,14 @@
             <md-select ng-model="setting.compare_operator" placeholder="Select Operator">
                 <md-option ng-value="operator.value" ng-repeat="operator in operators">{{ operator.name }}</md-option>
             </md-select>
+            <div class="text-danger" ng-repeat="compare_operator_error in error[index].compare_operator" > {{ compare_operator_error }}</div>
         </md-input-container>
 
         <div layout-gt-xs="row">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Value</label>
                 <input numeric ng-model="setting.value">
+                <div class="text-danger" ng-repeat="value_error in error[index].value" > {{ value_error }}</div>
             </md-input-container>
         </div>
         <md-switch class="md-secondary" ng-model="setting.is_active" ng-true-value="1" ng-false-value="0"></md-switch>

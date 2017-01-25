@@ -103550,6 +103550,11 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
             name: 'Lest than'
         }];
 
+        $scope.error = [];
+        $scope.test = []; $scope.test[0] = []; $scope.test[1] = [];
+        $scope.test[0]['id'] = ['asd', 'asd1'];
+        $scope.test[1]['id'] = ['dsa', 'dsa1'];
+
         ApiService.getClsfParams().success(function(data) {
             $scope.clsfWeatherParams = data;
         });
@@ -103577,19 +103582,34 @@ return angular.module("ngMap",[]),function(){"use strict";var e,t=function(t,n,o
                     $scope.settingsNr = $scope.settings.length;
 
             }).error(function(error) {
-                //display some error's
+                $rootScope.displayToast('Ups.. Try again!');
             });
         };
 
         $scope.update = function() {
-            $scope.settings = angular.toJson($scope.settings);
+            $scope.settingsToSend = angular.toJson($scope.settings);
 
-            ApiService.updateSettings($scope.settings).success(function(data) {
+            ApiService.updateSettings($scope.settingsToSend).success(function(data) {
                 $scope.settings = data;
                 $rootScope.displayToast('Notifications settings saved!');
             }).error(function(error) {
-                //display some error's
+                $scope.setErrors(error);
+                //$scope.error = error;
+                console.log($scope.error);
             });
+        };
+
+        $scope.setErrors = function(error){
+            $scope.error = [];
+            var i = 0;
+            for(var name in error) {
+                var value = error[name];
+
+                if (typeof $scope.error[parseInt(name.substr(0,name.indexOf('.')))] === 'undefined')
+                    $scope.error[parseInt(name.substr(0,name.indexOf('.')))] = [];
+                $scope.error[name.substr(0,name.indexOf('.'))].push([name.substr(name.indexOf('.')+1)]);
+                $scope.error[name.substr(0,name.indexOf('.'))][name.substr(name.indexOf('.')+1)] = value;
+            }
         };
 
         $scope.getView = function(){

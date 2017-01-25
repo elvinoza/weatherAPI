@@ -56,8 +56,12 @@ class UpdateNotificationsSettingsRequest extends Request
             '*.id.integer' => 'Id must be integer.',
             '*.station_id.required' => 'station_id is required.',
             '*.station_id.integer' => 'station_id must be integer.',
-            '*.clsf_weather_parameter.required' => 'clsf_weather_parameter is required.',
-            '*.clsf_weather_parameter.integer' => 'clsf_weather_parameter must be integer.',
+            '*.clsf_weather_parameter.integer' => 'Parameter is required.',
+            '*.clsf_weather_parameter.required' => 'Parameter is required.',
+            '*.compare_operator.integer' => 'Compare operator is required.',
+            '*.compare_operator.required' => 'Compare operator is required.',
+            '*.value.numeric' => 'The value must be numeric.',
+            '*.value.required' => 'The value is required.'
         );
     }
 }
