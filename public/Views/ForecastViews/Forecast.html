@@ -3,7 +3,7 @@
 
     <div layout="row" class="asd">
         <sm-range-picker-input
-                fname="chartRange"
+                fname="forecastRange"
                 label="Select data range"
                 value="date"
                 form="empForm"
@@ -13,7 +13,10 @@
                 week-start-day="Monday">
         </sm-range-picker-input>
         <span flex></span>
-        <md-button ng-click="getForecasts()" class="md-raised md-primary">Get</md-button>
+    </div>
+
+    <div layout="row" layout-align="center center" style="padding-top:20px;">
+        <md-button style="width: 100%" class="md-raised md-primary" ng-click="getForecasts()">Get Forecasts</md-button>
     </div>
 
     <md-content ng-repeat="(index, forecast) in forecasts" class="md-padding" layout-xs="column" layout="row">

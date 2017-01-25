@@ -37,7 +37,6 @@
                 $scope.forecasts[index].favorite = data.favorite;
                 $scope.forecasts[index].is_confirmed = data.is_confirmed;
                 $rootScope.displayToast('Thanks for your response!');
-                //parodyt ta popupa virsuje
             }).error(function(error) {
                 $rootScope.displayToast('Ups.. Try again!');
             });
